@@ -162,5 +162,8 @@
   "create-react-native-library": {
     "type": "library",
     "version": "0.38.2"
+  },
+  "dependencies": {
+    "@shopify/restyle": "^2.4.4"
   }
 }
