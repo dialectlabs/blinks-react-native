@@ -10,7 +10,6 @@ npm install @dialectlabs/blinks-native
 
 ## Usage
 
-
 ```js
 import { multiply } from '@dialectlabs/blinks-native';
 
@@ -18,7 +17,6 @@ import { multiply } from '@dialectlabs/blinks-native';
 
 const result = await multiply(3, 7);
 ```
-
 
 ## Contributing
 
