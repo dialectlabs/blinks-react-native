@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Dimensions, Image } from 'react-native';
+import { Dimensions } from 'react-native';
 import { Box, Text } from '../index';
-import { Link } from '../components';
 import { ActionButton } from './ActionButton';
 import { ActionInput } from './ActionInput';
 import { ActionForm } from './ActionForm';
@@ -9,6 +8,7 @@ import { Header } from './Header';
 import { DisclaimerBlock } from './DisclaimerBlock';
 import type { LayoutProps } from './types';
 import { DisclaimerType } from './types';
+import { ActionImage } from './ActionImage';
 
 const ActionLayout = ({
   title,
@@ -35,21 +35,7 @@ const ActionLayout = ({
         backgroundColor="bg-primary"
         // className="shadow-action" TODO shadow?
       >
-        {image && (
-          <Link url={websiteUrl}>
-            <Image
-              style={{
-                width: '100%',
-                aspectRatio: 1,
-              }}
-              resizeMode="cover"
-              aspectRatio={1} //TODO actual ratio
-              source={{
-                uri: image,
-              }}
-            />
-          </Link>
-        )}
+        {image && <ActionImage imageUrl={image} websiteUrl={websiteUrl} />}
         <Box flexDirection="column" p={4}>
           <Header
             websiteText={websiteText}
