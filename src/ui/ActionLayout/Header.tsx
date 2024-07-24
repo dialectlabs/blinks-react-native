@@ -15,26 +15,27 @@ export const Header = ({
   type: ActionType;
 }) => {
   return (
-    <Box flexDirection={'row'} gap={4} alignItems="center" mb={1}>
-      {websiteUrl && (
-        <Link
-          flex={1}
-          flexDirection="row"
-          url={websiteUrl}
-          gap={1}
-          alignItems="center"
-        >
-          <LinkIcon color={theme.colors['icon-primary']} mr={2} />
+    <Box flexDirection="row" alignItems="center" mb={1} gap={1}>
+      <Box flexShrink={1}>
+        {websiteUrl && (
+          <Link
+            flexDirection="row"
+            url={websiteUrl}
+            gap={1}
+            alignItems="center"
+          >
+            <LinkIcon color={theme.colors['icon-primary']} mr={2} />
+            <Text color="text-link" variant="subtext" numberOfLines={1}>
+              {websiteText ?? websiteUrl}
+            </Text>
+          </Link>
+        )}
+        {websiteText && !websiteUrl && (
           <Text color="text-link" variant="subtext" numberOfLines={1}>
-            {websiteText ?? websiteUrl}
+            {websiteText}
           </Text>
-        </Link>
-      )}
-      {websiteText && !websiteUrl && (
-        <Text color="text-link" variant="subtext" numberOfLines={1}>
-          {websiteText}
-        </Text>
-      )}
+        )}
+      </Box>
       <Link
         flexDirection="row"
         alignItems="center"

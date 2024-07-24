@@ -164,7 +164,9 @@
     "version": "0.38.2"
   },
   "dependencies": {
+    "@dialectlabs/blinks": "^0.5.1",
     "@shopify/restyle": "^2.4.4",
+    "@solana/web3.js": "^1.95.1",
     "react-native-svg": "^15.4.0"
   }
 }

@@ -1,13 +1,13 @@
 import { ThemeProvider } from '@shopify/restyle';
-import { Box, Text } from './ui';
 import theme from './ui/theme';
+import ActionLayout from './ui/ActionLayout';
+import React, { ComponentProps } from 'react';
+import { Blink as BlinkReact } from '@dialectlabs/blinks';
 
-export const Blink = () => {
+export const Blink = (props: ComponentProps<typeof BlinkReact>) => {
   return (
     <ThemeProvider theme={theme}>
-      <Box>
-        <Text variant="header">I am blink!</Text>
-      </Box>
+      <BlinkReact {...props} Experimental__ActionLayout={ActionLayout} />
     </ThemeProvider>
   );
 };

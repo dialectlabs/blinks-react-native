@@ -1,5 +1,5 @@
-import React from 'react';
-import { Image } from 'react-native';
+import React, { useState } from 'react';
+import { Dimensions, Image } from 'react-native';
 import { Box, Text } from '../index';
 import { Link } from '../components';
 import { ActionButton } from './ActionButton';
@@ -43,7 +43,7 @@ const ActionLayout = ({
                 aspectRatio: 1,
               }}
               resizeMode="cover"
-              aspectRatio={1}
+              aspectRatio={1} //TODO actual ratio
               source={{
                 uri: image,
               }}
@@ -63,7 +63,7 @@ const ActionLayout = ({
             {description}
           </Text>
 
-          {disclaimer && ( //TODO ???
+          {disclaimer && (
             <Box mb={3}>
               <DisclaimerBlock
                 type={disclaimer.type}
@@ -113,6 +113,9 @@ const ActionContent = ({
   inputs,
   buttons,
 }: Pick<LayoutProps, 'form' | 'buttons' | 'inputs'>) => {
+  const [maxWidth, setMaxWidth] = useState<number>(
+    Dimensions.get('window').width / 4 - 8
+  );
   if (form) {
     return <ActionForm form={form} />;
   }
@@ -120,14 +123,15 @@ const ActionContent = ({
   return (
     <Box flexDirection="column" gap={3}>
       {buttons && buttons.length > 0 && (
-        <Box flexDirection="row" flexWrap="wrap" alignItems="center" gap={2}>
+        <Box
+          flexDirection="row"
+          flexWrap="wrap"
+          alignItems="center"
+          gap={2}
+          onLayout={(it) => setMaxWidth(it.nativeEvent.layout.width / 3 - 8)}
+        >
           {buttons?.map((it, index) => (
-            <Box
-              key={index}
-              flexGrow={1}
-              flexBasis={'27%'} //TODO calculate width
-              // className="flex flex-grow basis-[calc(33.333%-2*4px)]"
-            >
+            <Box key={index} flexGrow={1} flexBasis={maxWidth}>
               <ActionButton {...it} />
             </Box>
           ))}
