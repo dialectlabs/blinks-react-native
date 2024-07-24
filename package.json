@@ -164,6 +164,7 @@
     "version": "0.38.2"
   },
   "dependencies": {
-    "@shopify/restyle": "^2.4.4"
+    "@shopify/restyle": "^2.4.4",
+    "react-native-svg": "^15.4.0"
   }
 }
