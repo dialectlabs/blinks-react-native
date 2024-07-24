@@ -18,7 +18,7 @@ export const Button = ({
     if (variant === 'success') return 'button-success';
   }
   return (
-    <Pressable disabled={disabled} onClick={onClick}>
+    <Pressable disabled={disabled} onPress={onClick}>
       <Box
         width="100%"
         flexDirection="row"

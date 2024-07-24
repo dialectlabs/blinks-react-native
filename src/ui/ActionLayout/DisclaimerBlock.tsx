@@ -1,7 +1,7 @@
 import { Link, Snackbar } from '../components';
 import { Box, Text } from '../index';
 import React from 'react';
-import { Button as NativeButton } from 'react-native';
+import { Pressable } from 'react-native';
 import { DisclaimerType } from './types';
 
 export const DisclaimerBlock = ({
@@ -31,11 +31,11 @@ export const DisclaimerBlock = ({
         </Text>
         {ignorable && onSkip && (
           <Box mt={3}>
-            <NativeButton onClick={onSkip} title={'Ignore warning & proceed'}>
+            <Pressable onPress={onSkip}>
               <Text fontWeight={600} variant="subtext" color="text-error">
                 Ignore warning & proceed
               </Text>
-            </NativeButton>
+            </Pressable>
           </Box>
         )}
       </Snackbar>

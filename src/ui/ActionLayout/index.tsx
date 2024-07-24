@@ -25,70 +25,58 @@ const ActionLayout = ({
   success,
 }: LayoutProps) => {
   return (
-    <Box>
-      <Box
-        overflow="hidden"
-        width="100%"
-        borderWidth={1}
-        borderRadius="2xl"
-        borderColor="stroke-primary"
-        backgroundColor="bg-primary"
-        // className="shadow-action" TODO shadow?
-      >
-        {image && <ActionImage imageUrl={image} websiteUrl={websiteUrl} />}
-        <Box flexDirection="column" p={4}>
-          <Header
-            websiteText={websiteText}
-            websiteUrl={websiteUrl}
-            type={type}
-          />
-          <Text mb={0.5} variant="text" fontWeight="600" color="text-primary">
-            {title}
-          </Text>
-          <Text mb={3} variant="subtext" color="text-secondary">
-            {description}
-          </Text>
+    <Box
+      overflow="hidden"
+      width="100%"
+      borderWidth={1}
+      borderRadius="2xl"
+      borderColor="stroke-primary"
+      backgroundColor="bg-primary"
+    >
+      {image && <ActionImage imageUrl={image} websiteUrl={websiteUrl} />}
+      <Box flexDirection="column" p={4}>
+        <Header websiteText={websiteText} websiteUrl={websiteUrl} type={type} />
+        <Text mb={0.5} variant="text" fontWeight="600" color="text-primary">
+          {title}
+        </Text>
+        <Text mb={3} variant="subtext" color="text-secondary">
+          {description}
+        </Text>
 
-          {disclaimer && (
-            <Box mb={3}>
-              <DisclaimerBlock
-                type={disclaimer.type}
-                ignorable={disclaimer.ignorable}
-                hidden={
-                  disclaimer.type === DisclaimerType.BLOCKED
-                    ? disclaimer.hidden
-                    : false
-                }
-                onSkip={
-                  disclaimer.type === DisclaimerType.BLOCKED
-                    ? disclaimer.onSkip
-                    : undefined
-                }
-              />
-            </Box>
-          )}
-          <ActionContent form={form} inputs={inputs} buttons={buttons} />
-          {success && (
-            <Text
-              mt={3}
-              color="text-success"
-              variant="caption"
-              textAlign="center"
-            >
-              {success}
-            </Text>
-          )}
-          {error && !success && (
-            <Text
-              mt={3}
-              color="text-error"
-              variant="caption"
-              textAlign="center"
-            >
-              {error}
-            </Text>
-          )}
-        </Box>
+        {disclaimer && (
+          <Box mb={3}>
+            <DisclaimerBlock
+              type={disclaimer.type}
+              ignorable={disclaimer.ignorable}
+              hidden={
+                disclaimer.type === DisclaimerType.BLOCKED
+                  ? disclaimer.hidden
+                  : false
+              }
+              onSkip={
+                disclaimer.type === DisclaimerType.BLOCKED
+                  ? disclaimer.onSkip
+                  : undefined
+              }
+            />
+          </Box>
+        )}
+        <ActionContent form={form} inputs={inputs} buttons={buttons} />
+        {success && (
+          <Text
+            mt={3}
+            color="text-success"
+            variant="caption"
+            textAlign="center"
+          >
+            {success}
+          </Text>
+        )}
+        {error && !success && (
+          <Text mt={3} color="text-error" variant="caption" textAlign="center">
+            {error}
+          </Text>
+        )}
       </Box>
     </Box>
   );
