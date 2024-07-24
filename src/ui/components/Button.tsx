@@ -13,9 +13,9 @@ export const Button = ({
   variant?: 'success' | 'error' | 'default';
 } & ComponentProps<typeof Pressable>) => {
   function getBgColor() {
-    if (disabled && variant !== 'success') return 'button-disabled';
+    if (disabled && variant !== 'success') return 'buttonDisabled';
     if (!disabled && variant !== 'success') return 'button';
-    if (variant === 'success') return 'button-success';
+    if (variant === 'success') return 'buttonSuccess';
   }
   return (
     <Pressable disabled={disabled} onPress={onClick}>

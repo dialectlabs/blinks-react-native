@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { Box } from '../index';
 import { ActionButton } from './ActionButton';
-import theme from '../theme';
+import { useTheme } from '../theme';
 import type { InputProps } from './types';
 
 export const ActionInput = ({
@@ -17,6 +17,7 @@ export const ActionInput = ({
   onChange: extOnChange,
   required,
 }: InputProps & { onChange?: (value: string) => void }) => {
+  const theme = useTheme();
   const [value, onChange] = useState('');
 
   const extendedChange = (
@@ -34,19 +35,19 @@ export const ActionInput = ({
       borderRadius="input"
       borderWidth={1}
       p={1.5}
-      borderColor="input-stroke"
-      backgroundColor="input-bg"
+      borderColor="inputStroke"
+      backgroundColor="inputBg"
     >
       <TextInput
         style={{
           paddingVertical: 8,
           paddingHorizontal: 4,
           color: disabled
-            ? theme.colors['text-input-disabled']
-            : theme.colors['text-input'],
+            ? theme.colors.textInputDisabled
+            : theme.colors.textInput,
           outlineStyle: 'none',
         }}
-        placeholderTextColor={theme.colors['text-input-placeholder']}
+        placeholderTextColor={theme.colors.textInputPlaceholder}
         placeholder={placeholderWithRequired}
         value={value}
         disabled={disabled}

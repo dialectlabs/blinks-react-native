@@ -18,16 +18,16 @@ interface VariantClassNames {
 
 const variantClasses: Record<BadgeVariant, VariantClassNames> = {
   error: {
-    container: { backgroundColor: 'transparent-error' },
-    text: { color: 'text-error' },
+    container: { backgroundColor: 'transparentError' },
+    text: { color: 'textError' },
   },
   warning: {
-    container: { backgroundColor: 'transparent-warning' },
-    text: { color: 'text-warning' },
+    container: { backgroundColor: 'transparentWarning' },
+    text: { color: 'textWarning' },
   },
   default: {
-    container: { backgroundColor: 'transparent-grey' },
-    text: { color: 'text-primary' },
+    container: { backgroundColor: 'transparentGrey' },
+    text: { color: 'textPrimary' },
   },
 };
 

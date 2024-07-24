@@ -30,16 +30,16 @@ const ActionLayout = ({
       width="100%"
       borderWidth={1}
       borderRadius="2xl"
-      borderColor="stroke-primary"
-      backgroundColor="bg-primary"
+      borderColor="strokePrimary"
+      backgroundColor="bgPrimary"
     >
       {image && <ActionImage imageUrl={image} websiteUrl={websiteUrl} />}
       <Box flexDirection="column" p={4}>
         <Header websiteText={websiteText} websiteUrl={websiteUrl} type={type} />
-        <Text mb={0.5} variant="text" fontWeight="600" color="text-primary">
+        <Text mb={0.5} variant="text" fontWeight="600" color="textPrimary">
           {title}
         </Text>
-        <Text mb={3} variant="subtext" color="text-secondary">
+        <Text mb={3} variant="subtext" color="textSecondary">
           {description}
         </Text>
 
@@ -63,17 +63,12 @@ const ActionLayout = ({
         )}
         <ActionContent form={form} inputs={inputs} buttons={buttons} />
         {success && (
-          <Text
-            mt={3}
-            color="text-success"
-            variant="caption"
-            textAlign="center"
-          >
+          <Text mt={3} color="textSuccess" variant="caption" textAlign="center">
             {success}
           </Text>
         )}
         {error && !success && (
-          <Text mt={3} color="text-error" variant="caption" textAlign="center">
+          <Text mt={3} color="textError" variant="caption" textAlign="center">
             {error}
           </Text>
         )}

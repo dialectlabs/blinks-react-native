@@ -1,21 +1,22 @@
 import { Box, Text } from '../index';
 import { ActivityIndicator } from 'react-native';
-import theme from '../theme';
 import { CheckIcon } from '../icons';
 import { Button } from '../components';
 import React from 'react';
 import type { ButtonProps } from './types';
+import { useTheme } from '../theme';
 
 const ButtonContent = ({ text, variant, loading, disabled }) => {
+  const theme = useTheme();
   const getTextColor = () => {
     if (disabled && variant !== 'success') {
-      return 'text-button-disabled';
+      return 'textButtonDisabled';
     }
     if (!disabled && variant !== 'success') {
-      return 'text-button';
+      return 'textButton';
     }
     if (variant === 'success') {
-      return 'text-button-success';
+      return 'textButtonSuccess';
     }
   };
 

@@ -1,44 +1,31 @@
-import { createTheme } from '@shopify/restyle';
+import { createTheme, useTheme as useRestyleTheme } from '@shopify/restyle';
 import { spacing } from './theme/spacing';
-import { light } from './theme/colors';
+import { toThemeVars } from './theme/util';
+import { dialLight } from './theme/dialLight';
+import { textVariants } from './theme/textVariants';
 
-const theme = createTheme({
-  colors: light,
-  spacing: spacing,
+export const getTheme = (themeVars) =>
+  createTheme({
+    colors: themeVars.colors,
+    borderRadii: {
+      ...themeVars.borderRadii,
+      full: 9999,
+    },
+    spacing: spacing,
+    textVariants: textVariants,
+  });
+
+const defaultThemeVars = toThemeVars(dialLight);
+
+const defaultTheme = createTheme({
+  colors: defaultThemeVars.colors,
   borderRadii: {
-    'lg': 4,
-    'xl': 8,
-    '2xl': 16,
-    'button': 8,
-    'input': 8,
-    'full': 9999,
+    ...defaultThemeVars.borderRadii,
+    full: 9999,
   },
-  textVariants: {
-    text: {
-      fontSize: 15,
-      lineHeight: 18,
-    },
-    subtext: {
-      fontSize: 13,
-      lineHeight: 16,
-    },
-    caption: {
-      fontSize: 11,
-      lineHeight: 14,
-    },
-    header: {
-      fontWeight: 'bold',
-      fontSize: 34,
-    },
-    body: {
-      fontSize: 16,
-      lineHeight: 24,
-    },
-    defaults: {
-      // We can define a default text variant here.
-    },
-  },
+  spacing: spacing,
+  textVariants: textVariants,
 });
 
-export type Theme = typeof theme;
-export default theme;
+export type Theme = typeof defaultTheme;
+export const useTheme = () => useRestyleTheme<Theme>();

@@ -15,9 +15,9 @@ export const Snackbar = ({ variant = 'warning', children }: Props) => {
       borderWidth={1}
       p={3}
       backgroundColor={
-        variant === 'error' ? 'transparent-error' : 'transparent-warning'
+        variant === 'error' ? 'transparentError' : 'transparentWarning'
       }
-      borderColor={variant === 'error' ? 'stroke-error' : 'stroke-warning'}
+      borderColor={variant === 'error' ? 'strokeError' : 'strokeWarning'}
     >
       {children}
     </Box>
