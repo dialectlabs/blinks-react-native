@@ -1,5 +1,5 @@
 {
-  "name": "@dialectlabs/blinks-native-example",
+  "name": "@dialectlabs/blinks-react-native-example",
   "version": "1.0.0",
   "main": "expo/AppEntry.js",
   "scripts": {

@@ -1746,9 +1746,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dialectlabs/blinks-native-example@workspace:example":
+"@dialectlabs/blinks-react-native-example@workspace:example":
   version: 0.0.0-use.local
-  resolution: "@dialectlabs/blinks-native-example@workspace:example"
+  resolution: "@dialectlabs/blinks-react-native-example@workspace:example"
   dependencies:
     "@babel/core": ^7.20.0
     "@expo/metro-runtime": ~3.2.1
@@ -1762,9 +1762,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@dialectlabs/blinks-native@workspace:.":
+"@dialectlabs/blinks-react-native@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@dialectlabs/blinks-native@workspace:."
+  resolution: "@dialectlabs/blinks-react-native@workspace:."
   dependencies:
     "@dialectlabs/blinks": ^0.5.1
     "@react-native/eslint-config": ^0.74.85

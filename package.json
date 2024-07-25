@@ -1,5 +1,5 @@
 {
-  "name": "@dialectlabs/blinks-native",
+  "name": "@dialectlabs/blinks-react-native",
   "version": "0.1.0",
   "description": "native support for solana actions",
   "source": "./src/index.tsx",
@@ -32,7 +32,7 @@
     "!**/.*"
   ],
   "scripts": {
-    "example": "yarn workspace @dialectlabs/blinks-native-example",
+    "example": "yarn workspace @dialectlabs/blinks-react-native-example",
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",

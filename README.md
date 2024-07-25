@@ -1,17 +1,17 @@
-# @dialectlabs/blinks-native
+# @dialectlabs/blinks-react-native
 
 native support for solana actions
 
 ## Installation
 
 ```sh
-npm install @dialectlabs/blinks-native
+npm install @dialectlabs/blinks-react-native
 ```
 
 ## Usage
 
 ```js
-import { multiply } from '@dialectlabs/blinks-native';
+import { multiply } from '@dialectlabs/blinks-react-native';
 
 // ...
 
