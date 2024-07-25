@@ -1766,7 +1766,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@dialectlabs/blinks-react-native@workspace:."
   dependencies:
-    "@dialectlabs/blinks": ^0.5.1
+    "@dialectlabs/blinks": 0.5.1-react-native.0
     "@react-native/eslint-config": ^0.74.85
     "@shopify/restyle": ^2.4.4
     "@solana/web3.js": ^1.95.1
@@ -1790,9 +1790,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@dialectlabs/blinks@npm:^0.5.1":
-  version: 0.5.1
-  resolution: "@dialectlabs/blinks@npm:0.5.1"
+"@dialectlabs/blinks@npm:0.5.1-react-native.0":
+  version: 0.5.1-react-native.0
+  resolution: "@dialectlabs/blinks@npm:0.5.1-react-native.0"
   dependencies:
     clsx: ^2.1.1
   peerDependencies:
@@ -1801,7 +1801,7 @@ __metadata:
     "@solana/web3.js": ^1.95.1
     react: ">=18"
     react-dom: ">=18"
-  checksum: 185580570db56c28d7a804fd15be6d0a137f4339d0ac54b731b6e9ebf38e5e06c3af8cc663d45d5d1fe849431986175d687c5cb30f0063b32d9995a539d0e324
+  checksum: e26c2534ec0a8e3233ec1792a433eb7993c764406bb6931bde943ad77a4b6e66e99db0d9e7489aa769e2efa15e8998d308fa37fa1580ecd23030a94a1cc5ad38
   languageName: node
   linkType: hard
 
