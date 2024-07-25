@@ -1,7 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import { Blink } from '@dialectlabs/blinks-react-native';
-import { useEffect, useState } from 'react';
-import { Action } from '@dialectlabs/blinks';
+import { BlinkInTheWalletIntegrationExample } from './Example';
 // import { useActionsRegistryInterval } from '@dialectlabs/blinks/dist/react';
 
 const actionUrls = {
@@ -11,31 +9,32 @@ const actionUrls = {
 };
 
 export default function App() {
-  const { isRegistryLoaded } = useActionsRegistryInterval();
-  const [action, setAction] = useState<Action | null>(null);
+  // const { isRegistryLoaded } = useActionsRegistryInterval();
+  // const [action, setAction] = useState<Action | null>(null);
 
-  useEffect(() => {
-    setAction(null);
-    if (!isRegistryLoaded) {
-      return;
-    }
-    Action.fetch(actionUrls.actionUrl)
-      .then(setAction)
-      .catch((e) => {
-        console.error('Failed to fetch action', e);
-        setAction(null);
-      });
-  }, [isRegistryLoaded]);
-  if (!action) return;
+  // useEffect(() => {
+  //   setAction(null);
+  //   if (!isRegistryLoaded) {
+  //     return;
+  //   }
+  //   Action.fetch(actionUrls.actionUrl)
+  //     .then(setAction)
+  //     .catch((e) => {
+  //       console.error('Failed to fetch action', e);
+  //       setAction(null);
+  //     });
+  // }, [isRegistryLoaded]);
+  // if (!action) return;
 
   return (
     <View style={styles.container}>
       <View style={styles.box}>
-        <Blink
+        <BlinkInTheWalletIntegrationExample url={actionUrls.actionUrl} />
+        {/* <Blink
           action={action}
           websiteUrl={actionUrls.websiteUrl}
           websiteText={actionUrls.websiteText}
-        />
+        /> */}
       </View>
     </View>
   );
