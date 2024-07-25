@@ -2,13 +2,7 @@ import Svg, { ClipPath, Defs, G, Path, type SvgProps } from 'react-native-svg';
 
 const SvgComponent = (props: SvgProps) => {
   return (
-    <Svg
-      width={10}
-      height={10}
-      viewBox="0 0 10 10"
-      fill="none"
-      {...props}
-    >
+    <Svg width={10} height={10} viewBox="0 0 10 10" fill="none" {...props}>
       <G clipPath="url(#clip0_16_1715)">
         <Path
           fillRule="evenodd"

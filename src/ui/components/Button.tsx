@@ -1,3 +1,4 @@
+import React from 'react';
 import { Pressable } from 'react-native';
 import { Box } from '../index';
 
@@ -10,7 +11,7 @@ export const Button = ({
   onClick: () => void;
   disabled?: boolean;
   variant?: 'success' | 'error' | 'default';
-} & React.PropsWithChildren ) => {
+} & React.PropsWithChildren) => {
   function getBgColor() {
     if (variant === 'success') return 'buttonSuccess';
     if (disabled) return 'buttonDisabled';

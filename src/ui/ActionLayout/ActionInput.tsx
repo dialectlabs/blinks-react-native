@@ -40,8 +40,8 @@ export const ActionInput = ({
     >
       <TextInput
         style={{
-          paddingVertical: 8,
-          paddingHorizontal: 4,
+          paddingVertical: theme.spacing[2],
+          paddingHorizontal: theme.spacing[1],
           color: disabled
             ? theme.colors.textInputDisabled
             : theme.colors.textInput,

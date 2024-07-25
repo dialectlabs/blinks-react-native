@@ -1,6 +1,6 @@
-import { Link } from '../components';
-import { Image } from 'react-native';
 import { useEffect, useState } from 'react';
+import { Image, StyleSheet } from 'react-native';
+import { Link } from '../components';
 
 export const ActionImage = ({
   imageUrl,
@@ -18,12 +18,9 @@ export const ActionImage = ({
   }, [imageUrl]);
 
   return (
-    <Link url={websiteUrl} width='100%' aspectRatio={aspectRatio}>
+    <Link url={websiteUrl} width="100%" aspectRatio={aspectRatio}>
       <Image
-        style={{
-          width: '100%',
-          height: '100%',
-        }}
+        style={styles.image}
         resizeMode="cover"
         source={{
           uri: imageUrl,
@@ -32,3 +29,10 @@ export const ActionImage = ({
     </Link>
   );
 };
+
+const styles = StyleSheet.create({
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+});
