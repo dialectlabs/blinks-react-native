@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Dimensions } from 'react-native';
 import { Box, Text } from '../index';
 import { ActionButton } from './ActionButton';
-import { ActionInput } from './ActionInput';
 import { ActionForm } from './ActionForm';
-import { Header } from './Header';
+import { ActionImage } from './ActionImage';
+import { ActionInput } from './ActionInput';
 import { DisclaimerBlock } from './DisclaimerBlock';
+import { Header } from './Header';
 import type { LayoutProps } from './types';
 import { DisclaimerType } from './types';
-import { ActionImage } from './ActionImage';
 
 const ActionLayout = ({
   title,
@@ -83,7 +83,7 @@ const ActionContent = ({
   buttons,
 }: Pick<LayoutProps, 'form' | 'buttons' | 'inputs'>) => {
   const [maxWidth, setMaxWidth] = useState<number>(
-    Dimensions.get('window').width / 4 - 8
+    Dimensions.get('window').width / 4 - 8,
   );
   if (form) {
     return <ActionForm form={form} />;

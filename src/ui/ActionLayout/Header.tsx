@@ -1,8 +1,7 @@
-import { Box, Text } from '../index';
-import { ExclamationShieldIcon, InfoShieldIcon, LinkIcon } from '../icons';
-import { useTheme } from '../theme';
 import { Badge, Link } from '../components';
-import React from 'react';
+import { ExclamationShieldIcon, InfoShieldIcon, LinkIcon } from '../icons';
+import { Box, Text } from '../index';
+import { useTheme } from '../theme';
 import type { ActionType } from './types';
 
 export const Header = ({
@@ -25,7 +24,7 @@ export const Header = ({
             gap={1}
             alignItems="center"
           >
-            <LinkIcon color={theme.colors.iconPrimary} mr={2} />
+            <LinkIcon color={theme.colors.iconPrimary} />
             <Text color="textLink" variant="subtext" numberOfLines={1}>
               {websiteText ?? websiteUrl}
             </Text>

@@ -2,22 +2,19 @@ import { Box, Text } from '../index';
 import { ActivityIndicator } from 'react-native';
 import { CheckIcon } from '../icons';
 import { Button } from '../components';
-import React from 'react';
 import type { ButtonProps } from './types';
 import { useTheme } from '../theme';
 
-const ButtonContent = ({ text, variant, loading, disabled }) => {
+const ButtonContent = ({ text, variant, loading, disabled }: Omit<ButtonProps, 'onClick'>) => {
   const theme = useTheme();
   const getTextColor = () => {
-    if (disabled && variant !== 'success') {
-      return 'textButtonDisabled';
-    }
-    if (!disabled && variant !== 'success') {
-      return 'textButton';
-    }
     if (variant === 'success') {
       return 'textButtonSuccess';
     }
+    if (disabled) {
+      return 'textButtonDisabled';
+    }
+    return 'textButton';
   };
 
   const textColor = getTextColor();
@@ -28,7 +25,7 @@ const ButtonContent = ({ text, variant, loading, disabled }) => {
       alignItems="center"
       gap={2}
     >
-      <Text variant="text" color={textColor} fontWeight={600} numberOfLines={1}>
+      <Text variant="text" color={textColor} fontWeight={600} numberOfLines={1} textAlign='center'>
         {text}
       </Text>
       {
@@ -48,7 +45,7 @@ export const ActionButton = ({
 }: ButtonProps) => {
   return (
     <Button onClick={onClick} disabled={disabled} variant={variant}>
-      <ButtonContent text={text} loading={loading} variant={variant} />
+      <ButtonContent text={text} loading={loading} variant={variant} disabled={disabled}/>
     </Button>
   );
 };

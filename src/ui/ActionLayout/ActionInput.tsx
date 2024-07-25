@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
-  NativeSyntheticEvent,
+  type NativeSyntheticEvent,
   TextInput,
-  TextInputChangeEventData,
+  type TextInputChangeEventData,
 } from 'react-native';
 import { Box } from '../index';
 import { ActionButton } from './ActionButton';
@@ -45,12 +45,11 @@ export const ActionInput = ({
           color: disabled
             ? theme.colors.textInputDisabled
             : theme.colors.textInput,
-          outlineStyle: 'none',
         }}
         placeholderTextColor={theme.colors.textInputPlaceholder}
         placeholder={placeholderWithRequired}
         value={value}
-        disabled={disabled}
+        editable={!disabled}
         onChange={extendedChange}
       />
       {button && (

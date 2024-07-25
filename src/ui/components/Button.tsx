@@ -1,5 +1,4 @@
 import { Pressable } from 'react-native';
-import type { ComponentProps } from 'react';
 import { Box } from '../index';
 
 export const Button = ({
@@ -11,11 +10,11 @@ export const Button = ({
   onClick: () => void;
   disabled?: boolean;
   variant?: 'success' | 'error' | 'default';
-} & ComponentProps<typeof Pressable>) => {
+} & React.PropsWithChildren ) => {
   function getBgColor() {
-    if (disabled && variant !== 'success') return 'buttonDisabled';
-    if (!disabled && variant !== 'success') return 'button';
     if (variant === 'success') return 'buttonSuccess';
+    if (disabled) return 'buttonDisabled';
+    return 'button';
   }
   return (
     <Pressable disabled={disabled} onPress={onClick}>

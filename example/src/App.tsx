@@ -11,21 +11,21 @@ const actionUrls = {
 };
 
 export default function App() {
-  const { isRegistryLoaded } = useActionsRegistryInterval();
+  // const { isRegistryLoaded } = useActionsRegistryInterval();
   const [action, setAction] = useState<Action | null>(null);
 
   useEffect(() => {
     setAction(null);
-    if (!isRegistryLoaded) {
-      return;
-    }
+    // if (!isRegistryLoaded) {
+    //   return;
+    // }
     Action.fetch(actionUrls.actionUrl)
       .then(setAction)
       .catch((e) => {
         console.error('Failed to fetch action', e);
         setAction(null);
       });
-  }, [isRegistryLoaded]);
+  }, []);
   if (!action) return;
 
   return (

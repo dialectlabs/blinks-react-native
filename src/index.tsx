@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@shopify/restyle';
 import { getTheme } from './ui/theme';
 import ActionLayout from './ui/ActionLayout';
-import React, { ComponentProps } from 'react';
+import { type ComponentProps } from 'react';
 import { Blink as BlinkReact } from '@dialectlabs/blinks';
 import { toThemeVars } from './ui/theme/util';
 import { dialLight } from './ui/theme/dialLight';

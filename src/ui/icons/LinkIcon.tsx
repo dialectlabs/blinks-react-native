@@ -1,14 +1,12 @@
-import * as React from 'react';
-import Svg, { G, Path, Defs, ClipPath } from 'react-native-svg';
+import Svg, { ClipPath, Defs, G, Path, type SvgProps } from 'react-native-svg';
 
-function SvgComponent(props) {
+const SvgComponent = (props: SvgProps) => {
   return (
     <Svg
       width={14}
       height={14}
       viewBox="0 0 14 14"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <G clipPath="url(#clip0_16_1708)" fill="currentColor">
@@ -22,6 +20,6 @@ function SvgComponent(props) {
       </Defs>
     </Svg>
   );
-}
+};
 
 export default SvgComponent;

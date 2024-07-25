@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Box } from '../index';
 import { ActionButton } from './ActionButton';
 import type { FormProps } from './types';
