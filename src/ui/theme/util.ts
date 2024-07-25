@@ -1,4 +1,13 @@
-export function toThemeVars(vars) {
+import { dialLight } from './dialLight';
+
+export const defaultVars = dialLight;
+const defaultThemeVars = toThemeVars(dialLight);
+
+type RawVars = typeof defaultVars;
+export type ColorVars = typeof defaultThemeVars.colors;
+export type BorderRadiiVars = typeof defaultThemeVars.borderRadii;
+
+export function toThemeVars(vars: RawVars) {
   return {
     colors: {
       bgPrimary: vars['--blink-bg-primary'],
@@ -43,11 +52,11 @@ export function toThemeVars(vars) {
       transparentWarning: vars['--blink-transparent-warning'],
     },
     borderRadii: {
-      'lg': vars['--blink-border-radius-rounded-lg'],
-      'xl': vars['--blink-border-radius-rounded-xl'],
+      lg: vars['--blink-border-radius-rounded-lg'],
+      xl: vars['--blink-border-radius-rounded-xl'],
       '2xl': vars['--blink-border-radius-rounded-2xl'],
-      'button': vars['--blink-border-radius-rounded-button'],
-      'input': vars['--blink-border-radius-rounded-input'],
+      button: vars['--blink-border-radius-rounded-button'],
+      input: vars['--blink-border-radius-rounded-input'],
     },
   };
 }

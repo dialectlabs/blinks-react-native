@@ -34,6 +34,10 @@ export const BlinkInTheWalletIntegrationExample: React.FC<{
   const actionUrl = new URL(url);
   return (
     <Blink
+      theme={{
+        '--blink-button': '#1D9BF0',
+        '--blink-border-radius-rounded-button': 9999,
+      }}
       action={action}
       websiteUrl={actionUrl.href}
       websiteText={actionUrl.hostname}

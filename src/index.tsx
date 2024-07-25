@@ -1,19 +1,15 @@
-import { ThemeProvider } from '@shopify/restyle';
-import { getTheme } from './ui/theme';
-import ActionLayout from './ui/ActionLayout';
-import { type ComponentProps } from 'react';
 import { Blink as BlinkReact } from '@dialectlabs/blinks';
-import { toThemeVars } from './ui/theme/util';
-import { dialLight } from './ui/theme/dialLight';
+import { ThemeProvider } from '@shopify/restyle';
+import { type ComponentProps } from 'react';
+import ActionLayout from './ui/ActionLayout';
+import { getTheme } from './ui/theme';
 
 export type ThemeVars = Record<string, string | number>;
 export const Blink = (
-  props: ComponentProps<typeof BlinkReact> & { theme?: ThemeVars }
+  props: ComponentProps<typeof BlinkReact> & { theme?: ThemeVars },
 ) => {
   return (
-    <ThemeProvider
-      theme={getTheme(toThemeVars({ ...dialLight, ...props.theme }))}
-    >
+    <ThemeProvider theme={getTheme(props.theme)}>
       <BlinkReact {...props} Experimental__ActionLayout={ActionLayout} />
     </ThemeProvider>
   );
