@@ -1,7 +1,7 @@
-import { Box, BoxProps } from '../index';
-import { Theme } from '../theme';
 import React from 'react';
 import { Linking, Pressable } from 'react-native';
+import { Box, type BoxProps } from '../index';
+import type { Theme } from '../theme';
 
 interface LinkProps {
   url?: string | null;

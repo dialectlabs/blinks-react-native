@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import { Blink } from '@dialectlabs/blinks-react-native';
 import { useEffect, useState } from 'react';
 import { Action } from '@dialectlabs/blinks';
-import { useActionsRegistryInterval } from '@dialectlabs/blinks/dist/react';
+// import { useActionsRegistryInterval } from '@dialectlabs/blinks/dist/react';
 
 const actionUrls = {
   actionUrl: 'https://dial.to/api/donate',
