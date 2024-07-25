@@ -1,14 +1,13 @@
-import { useState } from 'react';
-import { Dimensions } from 'react-native';
 import { Box, Text } from '../index';
-import { ActionButton } from './ActionButton';
+import { ActionContent } from './ActionContent';
 import { ActionForm } from './ActionForm';
 import { ActionImage } from './ActionImage';
-import { ActionInput } from './ActionInput';
 import { DisclaimerBlock } from './DisclaimerBlock';
 import { Header } from './Header';
 import type { LayoutProps } from './types';
 import { DisclaimerType } from './types';
+
+export const SOFT_LIMIT_TITLE_LENGTH = 80;
 
 const ActionLayout = ({
   title,
@@ -34,10 +33,12 @@ const ActionLayout = ({
       backgroundColor="bgPrimary"
     >
       {image && <ActionImage imageUrl={image} websiteUrl={websiteUrl} />}
+
       <Box flexDirection="column" p={4}>
         <Header websiteText={websiteText} websiteUrl={websiteUrl} type={type} />
+
         <Text mb={0.5} variant="text" fontWeight="600" color="textPrimary">
-          {title}
+          {title.substring(0, SOFT_LIMIT_TITLE_LENGTH)}
         </Text>
         <Text mb={3} variant="subtext" color="textSecondary">
           {description}
@@ -61,7 +62,13 @@ const ActionLayout = ({
             />
           </Box>
         )}
-        <ActionContent form={form} inputs={inputs} buttons={buttons} />
+
+        {form ? (
+          <ActionForm form={form} />
+        ) : (
+          <ActionContent inputs={inputs} buttons={buttons} />
+        )}
+
         {success && (
           <Text mt={3} color="textSuccess" variant="caption" textAlign="center">
             {success}
@@ -73,40 +80,6 @@ const ActionLayout = ({
           </Text>
         )}
       </Box>
-    </Box>
-  );
-};
-
-const ActionContent = ({
-  form,
-  inputs,
-  buttons,
-}: Pick<LayoutProps, 'form' | 'buttons' | 'inputs'>) => {
-  const [maxWidth, setMaxWidth] = useState<number>(
-    Dimensions.get('window').width / 4 - 8,
-  );
-  if (form) {
-    return <ActionForm form={form} />;
-  }
-
-  return (
-    <Box flexDirection="column" gap={3}>
-      {buttons && buttons.length > 0 && (
-        <Box
-          flexDirection="row"
-          flexWrap="wrap"
-          alignItems="center"
-          gap={2}
-          onLayout={(it) => setMaxWidth(it.nativeEvent.layout.width / 3 - 8)}
-        >
-          {buttons?.map((it, index) => (
-            <Box key={index} flexGrow={1} flexBasis={maxWidth}>
-              <ActionButton {...it} />
-            </Box>
-          ))}
-        </Box>
-      )}
-      {inputs?.map((input) => <ActionInput key={input.name} {...input} />)}
     </Box>
   );
 };

@@ -1,49 +1,30 @@
-import { StyleSheet, View } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import { BlinkInTheWalletIntegrationExample } from './Example';
-// import { useActionsRegistryInterval } from '@dialectlabs/blinks/dist/react';
 
-const actionUrls = {
-  actionUrl: 'https://dial.to/api/donate',
-  websiteUrl: 'https://dial.to/donate',
-  websiteText: 'dial.to',
-};
+const actionUrl = 'https://dial.to/donate';
 
 export default function App() {
-  // const { isRegistryLoaded } = useActionsRegistryInterval();
-  // const [action, setAction] = useState<Action | null>(null);
-
-  // useEffect(() => {
-  //   setAction(null);
-  //   if (!isRegistryLoaded) {
-  //     return;
-  //   }
-  //   Action.fetch(actionUrls.actionUrl)
-  //     .then(setAction)
-  //     .catch((e) => {
-  //       console.error('Failed to fetch action', e);
-  //       setAction(null);
-  //     });
-  // }, [isRegistryLoaded]);
-  // if (!action) return;
-
   return (
-    <View style={styles.container}>
-      <View style={styles.box}>
-        <BlinkInTheWalletIntegrationExample url={actionUrls.actionUrl} />
-        {/* <Blink
-          action={action}
-          websiteUrl={actionUrls.websiteUrl}
-          websiteText={actionUrls.websiteText}
-        /> */}
-      </View>
-    </View>
+    <SafeAreaView>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.container}
+      >
+        <View style={styles.box}>
+          <BlinkInTheWalletIntegrationExample url={actionUrl} />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollView: {
+    height: '100%',
+    paddingHorizontal: 12,
+  },
   container: {
-    flex: 1,
-    padding: 16,
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -6,17 +6,17 @@ import { ActivityIndicator } from 'react-native';
 
 function getWalletAdapter(): ActionAdapter {
   return {
-    connect: async (context) => {
+    connect: async (_context) => {
       console.log('connect');
       return PublicKey.default.toString();
     },
-    signTransaction: async (tx, context) => {
+    signTransaction: async (_tx, _context) => {
       console.log('signTransaction');
       return {
         signature: 'signature',
       };
     },
-    confirmTransaction: async (signature, context) => {
+    confirmTransaction: async (_signature, _context) => {
       console.log('confirmTransaction');
     },
   };
@@ -31,6 +31,12 @@ export const BlinkInTheWalletIntegrationExample: React.FC<{
   if (!action) {
     return <ActivityIndicator />;
   }
-
-  return <Blink action={action} websiteUrl={url} />;
+  const actionUrl = new URL(url);
+  return (
+    <Blink
+      action={action}
+      websiteUrl={actionUrl.href}
+      websiteText={actionUrl.hostname}
+    />
+  );
 };

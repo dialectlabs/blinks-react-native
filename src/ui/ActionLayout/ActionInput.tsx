@@ -5,8 +5,8 @@ import {
   type TextInputChangeEventData,
 } from 'react-native';
 import { Box } from '../index';
-import { ActionButton } from './ActionButton';
 import { useTheme } from '../theme';
+import { ActionButton } from './ActionButton';
 import type { InputProps } from './types';
 
 export const ActionInput = ({
@@ -21,7 +21,7 @@ export const ActionInput = ({
   const [value, onChange] = useState('');
 
   const extendedChange = (
-    e: NativeSyntheticEvent<TextInputChangeEventData>
+    e: NativeSyntheticEvent<TextInputChangeEventData>,
   ) => {
     onChange(e.nativeEvent.text);
     extOnChange?.(e.nativeEvent.text);
@@ -49,7 +49,7 @@ export const ActionInput = ({
         placeholderTextColor={theme.colors.textInputPlaceholder}
         placeholder={placeholderWithRequired}
         value={value}
-        editable={!disabled}
+        readOnly={disabled}
         onChange={extendedChange}
       />
       {button && (

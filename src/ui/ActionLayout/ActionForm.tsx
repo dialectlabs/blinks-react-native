@@ -1,23 +1,26 @@
 import { useState } from 'react';
 import { Box } from '../index';
 import { ActionButton } from './ActionButton';
-import type { FormProps } from './types';
 import { ActionInput } from './ActionInput';
+import type { FormProps } from './types';
+
+export const SOFT_LIMIT_FORM_INPUTS = 8;
 
 export const ActionForm = ({ form }: { form: FormProps }) => {
+  const inputs = form.inputs.slice(0, SOFT_LIMIT_FORM_INPUTS);
   const [values, setValues] = useState(
-    Object.fromEntries(form.inputs.map((i) => [i.name, '']))
+    Object.fromEntries(inputs.map((i) => [i.name, ''])),
   );
 
   const onChange = (name: string, value: string) => {
     setValues((prev) => ({ ...prev, [name]: value }));
   };
 
-  const disabled = form.inputs.some((i) => i.required && values[i.name] === '');
+  const disabled = inputs.some((i) => i.required && values[i.name] === '');
 
   return (
-    <Box flex={1} flexDirection="column" gap={3}>
-      {form.inputs.map((input) => (
+    <Box flexDirection="column" gap={3}>
+      {inputs.map((input) => (
         <ActionInput
           key={input.name}
           {...input}
