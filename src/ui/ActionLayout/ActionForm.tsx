@@ -4,7 +4,7 @@ import { ActionButton } from './ActionButton';
 import { ActionInput } from './ActionInput';
 import type { FormProps } from './types';
 
-export const SOFT_LIMIT_FORM_INPUTS = 8;
+export const SOFT_LIMIT_FORM_INPUTS = 10;
 
 export const ActionForm = ({ form }: { form: FormProps }) => {
   const inputs = form.inputs.slice(0, SOFT_LIMIT_FORM_INPUTS);
