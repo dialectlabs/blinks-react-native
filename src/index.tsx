@@ -3,10 +3,10 @@ import { ThemeProvider } from '@shopify/restyle';
 import { type ComponentProps } from 'react';
 import ActionLayout from './ui/ActionLayout';
 import { getTheme } from './ui/theme';
+import type { ThemeVars } from './ui/theme/types';
 
-export type ThemeVars = Record<string, string | number>;
 export const Blink = (
-  props: ComponentProps<typeof BlinkReact> & { theme?: ThemeVars },
+  props: ComponentProps<typeof BlinkReact> & { theme?: Partial<ThemeVars> },
 ) => {
   return (
     <ThemeProvider theme={getTheme(props.theme)}>

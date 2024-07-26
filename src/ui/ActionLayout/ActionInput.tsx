@@ -29,16 +29,19 @@ export const ActionInput = ({
 
   const placeholderWithRequired =
     (placeholder || 'Type here...') + (required ? '*' : '');
+  const [isFocused, setIsFocused] = useState(false);
 
   return (
     <Box
       borderRadius="input"
       borderWidth={1}
       p={1.5}
-      borderColor="inputStroke"
+      borderColor={isFocused ? 'inputStrokeSelected' : 'inputStroke'}
       backgroundColor="inputBg"
     >
       <TextInput
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
         style={{
           paddingVertical: theme.spacing[2],
           paddingHorizontal: theme.spacing[1],
