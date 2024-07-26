@@ -47,14 +47,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dialectlabs/blinks-native.git"
+    "url": "git+https://github.com/dialectlabs/blinks-react-native.git"
   },
   "author": "Dialect Labs inc. <nick@dialect.to> (https://github.com/dialectlabs)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dialectlabs/blinks-native/issues"
+    "url": "https://github.com/dialectlabs/blinks-react-native/issues"
   },
-  "homepage": "https://github.com/dialectlabs/blinks-native#readme",
+  "homepage": "https://github.com/dialectlabs/blinks-react-native#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
