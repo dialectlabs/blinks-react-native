@@ -57,7 +57,8 @@
   },
   "homepage": "https://github.com/dialectlabs/blinks-react-native#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "devDependencies": {
     "@react-native/eslint-config": "^0.74.85",
@@ -105,7 +106,7 @@
       "publish": true
     },
     "github": {
-      "release": true
+      "release": false
     }
   },
   "eslintConfig": {
