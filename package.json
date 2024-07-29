@@ -1,6 +1,6 @@
 {
   "name": "@dialectlabs/blinks-react-native",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "description": "react native support for solana actions",
   "source": "./src/index.tsx",
