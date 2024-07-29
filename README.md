@@ -120,7 +120,4 @@ The blink styles can be customized by passing a `theme` prop to the `Blink` comp
     --blink-border-radius-rounded-2xl: 1.125rem;
     --blink-border-radius-rounded-button: 624.9375rem;
     --blink-border-radius-rounded-input: 624.9375rem;
-    
-    /* box-shadow */
-    --blink-shadow-container: 0px 2px 8px 0px rgba(59, 176, 255, 0.22), 0px 1px 48px 0px rgba(29, 155, 240, 0.24);
 ```
