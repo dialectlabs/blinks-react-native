@@ -78,8 +78,10 @@
     "@types/react": "^18.2.44"
   },
   "peerDependencies": {
+    "@solana/web3.js": "*",
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-svg": "*"
   },
   "workspaces": [
     "example"
@@ -148,8 +150,6 @@
   },
   "dependencies": {
     "@dialectlabs/blinks": "0.6.0-beta.0",
-    "@shopify/restyle": "^2.4.4",
-    "@solana/web3.js": "^1.95.1",
-    "react-native-svg": "^15.4.0"
+    "@shopify/restyle": "^2.4.4"
   }
 }

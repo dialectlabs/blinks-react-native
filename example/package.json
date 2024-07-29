@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "@expo/metro-runtime": "~3.2.1",
+    "@solana/web3.js": "^1.95.2",
     "expo": "~51.0.22",
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.74.3",
+    "react-native-svg": "15.2.0",
     "react-native-web": "~0.19.10"
   },
   "devDependencies": {
