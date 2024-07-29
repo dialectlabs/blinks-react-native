@@ -43,7 +43,7 @@ export const ActionInput = ({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         style={{
-          paddingVertical: theme.spacing[2],
+          paddingVertical: button ? 10 : 5,
           paddingHorizontal: theme.spacing[1],
           color: disabled
             ? theme.colors.textInputDisabled

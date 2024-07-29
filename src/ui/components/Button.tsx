@@ -20,12 +20,12 @@ export const Button = ({
   return (
     <TouchableOpacity activeOpacity={0.7} disabled={disabled} onPress={onClick}>
       <Box
+        style={{ paddingVertical: 11 }}
+        px={4}
         width="100%"
         flexDirection="row"
         alignItems="center"
         justifyContent="center"
-        px={4}
-        py={3}
         borderRadius="button"
         backgroundColor={getBgColor()}
       >
