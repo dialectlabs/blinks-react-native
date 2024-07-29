@@ -13,14 +13,12 @@ const actionUrl = 'https://dial.to/donate';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={[styles.full, styles.safeArea]}>
       <KeyboardAvoidingView
+        style={styles.full}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        <ScrollView
-          style={styles.scrollView}
-          contentContainerStyle={styles.container}
-        >
+        <ScrollView contentContainerStyle={styles.container}>
           <View style={styles.box}>
             <BlinkInTheWalletIntegrationExample url={actionUrl} />
           </View>
@@ -31,24 +29,23 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  full: {
+    width: '100%',
+    height: '100%',
+  },
   safeArea:
     Platform.OS === 'android'
       ? {
           paddingTop: StatusBar.currentHeight,
-          paddingBottom: 12,
         }
       : {},
-  scrollView: {
-    height: '100%',
-    paddingHorizontal: 12,
-  },
   container: {
+    padding: 12,
     flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
   box: {
-    width: '100%',
     maxWidth: 400,
   },
 });
