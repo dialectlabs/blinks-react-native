@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Box } from '../index';
 
 export const Button = ({
@@ -18,7 +18,7 @@ export const Button = ({
     return 'button';
   }
   return (
-    <Pressable disabled={disabled} onPress={onClick}>
+    <TouchableOpacity activeOpacity={0.7} disabled={disabled} onPress={onClick}>
       <Box
         width="100%"
         flexDirection="row"
@@ -31,6 +31,6 @@ export const Button = ({
       >
         {children}
       </Box>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
