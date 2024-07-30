@@ -4,7 +4,7 @@ React Native SDK for rendering blinks for Solana Actions on mobile dApps. Check 
 
 ## Installation
 
-```bash
+```console
 # npm 
 npm i @dialectlabs/blinks @dialectlabs/blinks-react-native
 
