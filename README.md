@@ -4,7 +4,7 @@ React Native SDK for rendering blinks for Solana Actions on mobile dApps. Check 
 
 ## Installation
 
-```
+```bash
 # npm 
 npm i @dialectlabs/blinks @dialectlabs/blinks-react-native
 
@@ -28,7 +28,7 @@ After that, the `Blink` component can be used in the React Native dApp to render
 
 An [example](/example/src/Example.tsx) of this is:
 
-```
+```js
     import { useAction, type ActionAdapter } from '@dialectlabs/blinks';
     import { Blink } from '@dialectlabs/blinks-react-native';
     import { PublicKey } from '@solana/web3.js';
@@ -81,7 +81,7 @@ An [example](/example/src/Example.tsx) of this is:
 
 The blink styles can be customized by passing a `theme` prop to the `Blink` component. The theme object can contain any of the following properties:
 
-```
+```css
     --blink-bg-primary: #202327;
     --blink-button: #1d9bf0;
     --blink-button-disabled: #2f3336;
