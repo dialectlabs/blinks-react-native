@@ -26,7 +26,7 @@ After that, the `Blink` component can be used in the React Native dApp to render
 - `website` - the complete URL of the Action
 - `websiteText` - The domain name of the Action URL
 
-An (example)[/example/src/Example.tsx] of this is:
+An [example](/example/src/Example.tsx) of this is:
 
 ```
     import { useAction, type ActionAdapter } from '@dialectlabs/blinks';
