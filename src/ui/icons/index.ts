@@ -1,3 +1,4 @@
+export { default as CheckBoxIcon } from './CheckBoxIcon';
 export { default as CheckIcon } from './CheckIcon';
 export { default as ExclamationShieldIcon } from './ExclamationShieldIcon';
 export { default as InfoShieldIcon } from './InfoShieldIcon';

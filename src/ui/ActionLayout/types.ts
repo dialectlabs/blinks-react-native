@@ -26,11 +26,29 @@ export interface ButtonProps {
   onClick: (params?: Record<string, string>) => void;
 }
 
+export type TextParameterType =
+  | 'text'
+  | 'email'
+  | 'number'
+  | 'url'
+  | 'textarea';
+export type GeneralParameterType =
+  | TextParameterType
+  | 'date'
+  | 'datetime-local';
+export type SelectableParameterType = 'select' | 'radio' | 'checkbox';
+export type InputType = GeneralParameterType | SelectableParameterType;
+
 export interface InputProps {
+  type: InputType;
   placeholder?: string;
   name: string;
   disabled: boolean;
   required?: boolean;
+  min?: number | string;
+  max?: number | string;
+  pattern?: string;
+  description?: string;
   button?: ButtonProps;
 }
 
