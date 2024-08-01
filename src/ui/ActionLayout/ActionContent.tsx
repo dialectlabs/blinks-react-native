@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Dimensions } from 'react-native';
 import { Box } from '../index';
 import { ActionButton } from './ActionButton';
-import { ActionInput } from './ActionInput';
+import { ActionTextInput } from './ActionTextInput';
 import { type LayoutProps } from './types';
 
 export const SOFT_LIMIT_BUTTONS = 10;
@@ -35,7 +35,7 @@ export const ActionContent = ({
       )}
       {inputs
         ?.slice(0, SOFT_LIMIT_INPUTS)
-        .map((input) => <ActionInput key={input.name} {...input} />)}
+        .map((input) => <ActionTextInput key={input.name} {...input} />)}
     </Box>
   );
 };
