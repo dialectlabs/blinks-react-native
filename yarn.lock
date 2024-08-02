@@ -1778,6 +1778,7 @@ __metadata:
   resolution: "@dialectlabs/blinks-react-native@workspace:."
   dependencies:
     "@dialectlabs/blinks": 0.6.0-beta.0
+    "@react-native-community/datetimepicker": ^8.2.0
     "@react-native/eslint-config": ^0.74.85
     "@shopify/restyle": ^2.4.4
     "@types/jest": ^29.5.5
@@ -1791,6 +1792,7 @@ __metadata:
     react: 18.2.0
     react-native: 0.74.3
     react-native-builder-bob: ^0.26.0
+    react-native-modal-datetime-picker: ^17.1.0
     react-native-svg: ^15.4.0
     release-it: ^15.0.0
     typescript: ^5.5.3
@@ -3094,6 +3096,25 @@ __metadata:
   bin:
     rnc-cli: build/bin.js
   checksum: 5e997b50fd687b4f3fcdde6a1fd36317ffee5536649fb16e87f6e3bb1bd56a279daad57b7d904d0442425106f048a114e3987f9a0fc8dc3fadd0a784dcb83a40
+  languageName: node
+  linkType: hard
+
+"@react-native-community/datetimepicker@npm:^8.2.0":
+  version: 8.2.0
+  resolution: "@react-native-community/datetimepicker@npm:8.2.0"
+  dependencies:
+    invariant: ^2.2.4
+  peerDependencies:
+    expo: ">=50.0.0"
+    react: "*"
+    react-native: "*"
+    react-native-windows: "*"
+  peerDependenciesMeta:
+    expo:
+      optional: true
+    react-native-windows:
+      optional: true
+  checksum: 3adc9346f8948abed246da3bfa3a223e44c2c5903070178a82e583ce6f8273607fe5a542af834b3a27aff81980c555e5f72bf0e87c85e3f00856a0de21525374
   languageName: node
   linkType: hard
 
@@ -11842,7 +11863,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.8.1":
+"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -12052,6 +12073,18 @@ __metadata:
   bin:
     bob: bin/bob
   checksum: 60b720ce74b5571ec293a10d00b26dc923d62a0c07222548499b90878e72be3ddd77fb33b62144ab0a0f405049a3747376742b9499cb73f9e851da0ce0e17204
+  languageName: node
+  linkType: hard
+
+"react-native-modal-datetime-picker@npm:^17.1.0":
+  version: 17.1.0
+  resolution: "react-native-modal-datetime-picker@npm:17.1.0"
+  dependencies:
+    prop-types: ^15.7.2
+  peerDependencies:
+    "@react-native-community/datetimepicker": ">=6.7.0"
+    react-native: ">=0.65.0"
+  checksum: 8a5bb21167799cc5410c0fb6c39bb3495fbaa463ef57d8f90c65429697c2b02b2e4e046e3e91c6246e1f4bd187c5fbcd30f61a6449b8d68808e68715b1332779
   languageName: node
   linkType: hard
 

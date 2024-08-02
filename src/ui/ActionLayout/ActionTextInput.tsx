@@ -4,6 +4,7 @@ import {
   TextInput,
   type TextInputChangeEventData,
 } from 'react-native';
+import { InputContainer } from '../components';
 import { AtSignIcon, LinkIcon } from '../icons';
 import { Box } from '../index';
 import { useTheme } from '../theme';
@@ -72,11 +73,7 @@ export const ActionTextInput = ({
   }
 
   return (
-    <Box
-      borderRadius="input"
-      borderWidth={1}
-      minHeight={40}
-      p={1.5}
+    <InputContainer
       borderColor={
         isFocused
           ? 'inputStrokeSelected'
@@ -84,8 +81,6 @@ export const ActionTextInput = ({
             ? 'inputStroke'
             : 'inputStrokeError'
       }
-      backgroundColor="inputBg"
-      justifyContent="center"
     >
       <Box
         alignItems="center"
@@ -122,6 +117,6 @@ export const ActionTextInput = ({
           />
         </Box>
       )}
-    </Box>
+    </InputContainer>
   );
 };
