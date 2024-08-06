@@ -4,6 +4,7 @@ import { InputContainer } from '../../components';
 import { CheckBoxIcon } from '../../icons';
 import { Box, Text } from '../../index';
 import { useTheme } from '../../theme';
+import { ActionButton } from '../ActionButton';
 import type { InputProps } from '../types';
 
 const Checkbox = ({ selected }: { selected?: boolean }) => {
@@ -17,7 +18,7 @@ const Checkbox = ({ selected }: { selected?: boolean }) => {
       style={{ borderRadius: 3 }}
       borderWidth={selected ? 0 : 1}
       borderColor="inputStroke"
-      backgroundColor={selected ? 'inputStrokeSelected' : 'inputBg'} //TODO bg token
+      backgroundColor={selected ? 'inputBgSelected' : 'inputBg'}
     >
       {selected && <CheckBoxIcon color={theme.colors.inputBg} />}
     </Box>
@@ -50,10 +51,10 @@ const defaultDescription = ({ min, max }: { min?: number; max?: number }) => {
 };
 export const ActionCheckboxGroup = ({
   placeholder: label,
+  name,
   button,
   disabled,
   onChange,
-  onValidityChange,
   min,
   max,
   description,
@@ -61,7 +62,6 @@ export const ActionCheckboxGroup = ({
   required,
 }: Omit<InputProps, 'type'> & {
   onChange?: (value: string[]) => void;
-  onValidityChange?: (state: boolean) => void;
 }) => {
   const minChoices = min as number;
   const maxChoices = max as number;
@@ -87,7 +87,6 @@ export const ActionCheckboxGroup = ({
     [value],
   );
   const [isValid, setValid] = useState(!isStandalone || !required);
-  const [touched, setTouched] = useState(false);
 
   useEffect(() => {
     onChange?.(normalizedValue);
@@ -101,18 +100,25 @@ export const ActionCheckboxGroup = ({
     });
 
     setValid(validity);
-    onValidityChange?.(validity);
-  }, [isStandalone, maxChoices, minChoices, normalizedValue, onValidityChange]);
+  }, [isStandalone, maxChoices, minChoices, normalizedValue]);
 
   const extendedChange = useCallback((name: string, value: boolean) => {
     setValue((prev) => ({ ...prev, [name]: value }));
-    setTouched(true);
   }, []);
 
+  const standaloneProps = isStandalone
+    ? { backgroundColor: 'bgSecondary', padding: 2, borderRadius: 'xl' }
+    : {};
   return (
-    <Box flexDirection="column" gap={3}>
+    <Box flexDirection="column" gap={3} {...standaloneProps}>
       {label && (
-        <Text variant="subtext" fontWeight="600" color="textPrimary">
+        <Text
+          variant={isStandalone ? 'text' : 'subtext'}
+          fontWeight="600"
+          color="textPrimary"
+          p={isStandalone ? 2 : 0}
+          pb={0}
+        >
           {label}
           {required ? '*' : ''}
         </Text>
@@ -135,15 +141,23 @@ export const ActionCheckboxGroup = ({
           </TouchableOpacity>
         </InputContainer>
       ))}
+      {button && (
+        <ActionButton
+          {...button}
+          onClick={() => button.onClick({ [name]: normalizedValue })}
+          disabled={button.disabled || !normalizedValue.length}
+        />
+      )}
       {finalDescription && (
         <Text
-          color={touched && !isValid ? 'textError' : 'textSecondary'}
+          color={!isValid ? 'textError' : 'textSecondary'}
           variant="caption"
+          pt={0}
+          p={isStandalone ? 2 : 0}
         >
           {finalDescription}
         </Text>
       )}
     </Box>
-    //TODO add button
   );
 };

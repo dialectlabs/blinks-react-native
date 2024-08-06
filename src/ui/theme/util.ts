@@ -4,6 +4,7 @@ export function toThemeVars(vars: ThemeVars) {
   return {
     colors: {
       bgPrimary: vars['--blink-bg-primary'],
+      bgSecondary: vars['--blink-bg-secondary'],
       button: vars['--blink-button'],
       buttonDisabled: vars['--blink-button-disabled'],
       buttonSuccess: vars['--blink-button-success'],
@@ -11,6 +12,7 @@ export function toThemeVars(vars: ThemeVars) {
       iconPrimary: vars['--blink-icon-primary'],
       iconWarning: vars['--blink-icon-warning'],
       inputBg: vars['--blink-input-bg'],
+      inputBgSelected: vars['--blink-input-bg-selected'],
       inputStroke: vars['--blink-input-stroke'],
       inputStrokeDisabled: vars['--blink-input-stroke-disabled'],
       inputStrokeError: vars['--blink-input-stroke-error'],

@@ -3,6 +3,7 @@ import { textVariants } from './textVariants';
 
 export interface ThemeVars {
   '--blink-bg-primary': string;
+  '--blink-bg-secondary': string;
   '--blink-button': string;
   '--blink-button-disabled': string;
   '--blink-button-success': string;
@@ -10,6 +11,7 @@ export interface ThemeVars {
   '--blink-icon-primary': string;
   '--blink-icon-warning': string;
   '--blink-input-bg': string;
+  '--blink-input-bg-selected': string;
   '--blink-input-stroke': string;
   '--blink-input-stroke-disabled': string;
   '--blink-input-stroke-error': string;
@@ -44,6 +46,7 @@ export interface ThemeVars {
 
 export type ColorVars = {
   bgPrimary: string;
+  bgSecondary: string;
   button: string;
   buttonDisabled: string;
   buttonSuccess: string;
@@ -51,6 +54,7 @@ export type ColorVars = {
   iconPrimary: string;
   iconWarning: string;
   inputBg: string;
+  inputBgSelected: string;
   inputStroke: string;
   inputStrokeDisabled: string;
   inputStrokeError: string;

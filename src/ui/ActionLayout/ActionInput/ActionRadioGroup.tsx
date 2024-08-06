@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { InputContainer } from '../../components';
 import { Box, Text } from '../../index';
+import { ActionButton } from '../ActionButton';
 import type { InputProps } from '../types';
 
 const RadioButton = ({ selected }: { selected?: boolean }) => {
@@ -13,7 +14,7 @@ const RadioButton = ({ selected }: { selected?: boolean }) => {
       borderRadius="full"
       borderWidth={selected ? 0 : 1}
       borderColor="inputStroke"
-      backgroundColor={selected ? 'inputStrokeSelected' : 'inputBg'} //TODO bg token
+      backgroundColor={selected ? 'inputBgSelected' : 'inputBg'}
     >
       {selected && (
         <Box
@@ -29,43 +30,45 @@ const RadioButton = ({ selected }: { selected?: boolean }) => {
 
 export const ActionRadioGroup = ({
   placeholder: label,
+  name,
   button,
   disabled,
   onChange,
-  onValidityChange,
   description,
   options = [],
   required,
 }: Omit<InputProps, 'type'> & {
   onChange?: (value: string) => void;
-  onValidityChange?: (state: boolean) => void;
 }) => {
-  //TODO add button
-
   const isStandalone = !!button;
 
   const [value, setValue] = useState<string>(
     options.find((option) => option.selected)?.value ?? '',
   );
   const [isValid, setValid] = useState(!isStandalone || !required);
-  const [touched, setTouched] = useState(false);
 
   const extendedChange = useCallback(
     (value: string) => {
       setValue(value);
       setValid(true);
-      setTouched(true);
 
       onChange?.(value);
-      onValidityChange?.(true);
     },
-    [onChange, onValidityChange],
+    [onChange],
   );
-
+  const standaloneProps = isStandalone
+    ? { backgroundColor: 'bgSecondary', padding: 2, borderRadius: 'xl' }
+    : {};
   return (
-    <Box flexDirection="column" gap={3}>
+    <Box flexDirection="column" gap={3} {...standaloneProps}>
       {label && (
-        <Text variant="subtext" fontWeight="600" color="textPrimary">
+        <Text
+          variant={isStandalone ? 'text' : 'subtext'}
+          fontWeight="600"
+          color="textPrimary"
+          p={isStandalone ? 2 : 0}
+          pb={0}
+        >
           {label}
           {required ? '*' : ''}
         </Text>
@@ -84,10 +87,19 @@ export const ActionRadioGroup = ({
           </TouchableOpacity>
         </InputContainer>
       ))}
+      {button && (
+        <ActionButton
+          {...button}
+          onClick={() => button.onClick({ [name]: value })}
+          disabled={button.disabled || !value || !isValid}
+        />
+      )}
       {description && (
         <Text
-          color={touched && !isValid ? 'textError' : 'textSecondary'}
+          color={!isValid ? 'textError' : 'textSecondary'}
           variant="caption"
+          p={isStandalone ? 2 : 0}
+          pt={0}
         >
           {description}
         </Text>

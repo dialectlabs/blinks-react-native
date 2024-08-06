@@ -130,13 +130,11 @@ export const ActionDateTimeInput = ({
     <Box gap={3}>
       {getInputButton()}
       {button && (
-        <Box mt={1.5}>
-          <ActionButton
-            {...button}
-            onClick={() => button.onClick({ [name]: value })}
-            disabled={button.disabled || value === '' || !isValid}
-          />
-        </Box>
+        <ActionButton
+          {...button}
+          onClick={() => button.onClick({ [name]: value })}
+          disabled={button.disabled || value === '' || !isValid}
+        /> //TODO hmmmm ask Sabina
       )}
       <DateTimePickerModal
         isVisible={isOpen}
