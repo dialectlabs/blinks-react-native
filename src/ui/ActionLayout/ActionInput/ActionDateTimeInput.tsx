@@ -34,6 +34,21 @@ const PickerButton = ({
     </InputContainer>
   );
 };
+
+function extractTimeValue(date: Date) {
+  return (
+    date.getHours().toString().padStart(2, '0') +
+    ':' +
+    date.getMinutes().toString().padStart(2, '0')
+  );
+}
+function extractDateValue(date: Date) {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 export const ActionDateTimeInput = ({
   type = 'date',
   placeholder,
@@ -41,7 +56,6 @@ export const ActionDateTimeInput = ({
   button,
   disabled,
   onChange,
-  onValidityChange,
   min,
   max,
   description,
@@ -57,15 +71,24 @@ export const ActionDateTimeInput = ({
   const minDate = min as string | undefined;
   const maxDate = max as string | undefined;
 
-  const [date, setDate] = useState(new Date(1598051730000));
-  const value = date.toISOString(); //TODO
+  const [dateValue, setDateValue] = useState(extractDateValue(new Date()));
+  const [timeValue, setTimeValue] = useState(extractTimeValue(new Date()));
+  const date = new Date(`${dateValue}T${timeValue}`);
+  const value = type === 'date' ? dateValue : `${dateValue}T${timeValue}`;
+
   const [mode, setMode] = useState<Mode>('date');
   const [isOpen, setIsOpen] = useState(false);
 
   const onChangeInternal = (selectedDate: Date) => {
-    const currentDate = selectedDate;
     setIsOpen(false);
-    setDate(currentDate);
+    if (mode === 'date') {
+      setDateValue(extractDateValue(selectedDate));
+    } else if (mode === 'time') {
+      setTimeValue(extractTimeValue(selectedDate));
+    } else {
+      setDateValue(extractDateValue(selectedDate));
+      setTimeValue(extractTimeValue(selectedDate));
+    }
   };
 
   const showPicker = (mode: Mode) => {
@@ -106,8 +129,6 @@ export const ActionDateTimeInput = ({
         />
       );
     }
-
-    //TODO same date
     return (
       <Box gap={2}>
         <PickerButton
