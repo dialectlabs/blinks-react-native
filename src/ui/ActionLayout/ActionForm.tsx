@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box } from '../index';
 import { ActionButton } from './ActionButton';
-import { ActionTextInput } from './ActionTextInput';
+import { ActionInput } from './ActionInput';
 import type { FormProps } from './types';
 
 export const SOFT_LIMIT_FORM_INPUTS = 10;
@@ -21,10 +21,10 @@ export const ActionForm = ({ form }: { form: FormProps }) => {
   return (
     <Box flexDirection="column" gap={3}>
       {inputs.map((input) => (
-        <ActionTextInput
+        <ActionInput
           key={input.name}
           {...input}
-          onChange={(v) => onChange(input.name, v)}
+          // onChange={(v) => onChange(input.name, v)}
         />
       ))}
       <ActionButton

@@ -51,7 +51,7 @@ export const DisclaimerBlock = ({
       <Snackbar variant="warning">
         <Text variant="subtext" color="textWarning">
           This Action has not yet been registered. Only use it if you trust the
-          source. This Action will not unfurl on X until it is registered.
+          source.
           {!ignorable &&
             ' Your action provider blocks execution of this action.'}
         </Text>

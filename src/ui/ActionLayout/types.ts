@@ -1,3 +1,8 @@
+import {
+  type ActionParameterSelectable,
+  type ActionParameterType,
+} from '@dialectlabs/blinks';
+
 export type ActionType = 'trusted' | 'malicious' | 'unknown';
 
 export type StylePreset = 'default' | 'x-dark' | 'x-light' | 'custom';
@@ -26,19 +31,7 @@ export interface ButtonProps {
   onClick: (params?: Record<string, string>) => void;
 }
 
-export type TextParameterType =
-  | 'text'
-  | 'email'
-  | 'number'
-  | 'url'
-  | 'textarea';
-export type GeneralParameterType =
-  | TextParameterType
-  | 'date'
-  | 'datetime-local';
-export type SelectableParameterType = 'select' | 'radio' | 'checkbox';
-export type InputType = GeneralParameterType | SelectableParameterType;
-
+type InputType = ActionParameterType;
 export interface InputProps {
   type: InputType;
   placeholder?: string;
@@ -50,6 +43,9 @@ export interface InputProps {
   pattern?: string;
   description?: string;
   button?: ButtonProps;
+  options?: ActionParameterSelectable<
+    'select' | 'radio' | 'checkbox'
+  >['options'];
 }
 
 export interface FormProps {

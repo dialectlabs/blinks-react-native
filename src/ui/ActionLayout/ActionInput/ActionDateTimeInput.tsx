@@ -1,11 +1,12 @@
 import { type ReactNode, useState } from 'react';
 import { Platform, TouchableOpacity } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { InputContainer } from '../components';
-import { CalendarIcon, ClockIcon } from '../icons';
-import { Box, Text } from '../index';
-import { useTheme } from '../theme';
-import { type InputProps } from './types';
+import { InputContainer } from '../../components';
+import { CalendarIcon, ClockIcon } from '../../icons';
+import { Box, Text } from '../../index';
+import { useTheme } from '../../theme';
+import { ActionButton } from '../ActionButton';
+import type { InputProps } from '../types';
 
 type Mode = 'date' | 'time' | 'datetime';
 const PickerButton = ({
@@ -19,7 +20,7 @@ const PickerButton = ({
   icon: ReactNode;
   value: string;
 }) => {
-  const borderColor = isOpen ? 'inputStrokeSelected' : 'inputStroke';
+  const borderColor = 'inputStroke';
   return (
     <InputContainer borderColor={borderColor}>
       <TouchableOpacity onPress={onPress}>
@@ -34,15 +35,34 @@ const PickerButton = ({
   );
 };
 export const ActionDateTimeInput = ({
-  type,
-}: InputProps & { onChange?: (value: string) => void }) => {
+  type = 'date',
+  placeholder,
+  name,
+  button,
+  disabled,
+  onChange,
+  onValidityChange,
+  min,
+  max,
+  description,
+  required,
+}: Omit<InputProps, 'type'> & {
+  type?: 'date' | 'datetime-local';
+  onChange?: (value: string) => void;
+  onValidityChange?: (state: boolean) => void;
+}) => {
   const theme = useTheme();
+  const [isValid, setValid] = useState(button ? false : !required);
+
+  const minDate = min as string | undefined;
+  const maxDate = max as string | undefined;
 
   const [date, setDate] = useState(new Date(1598051730000));
+  const value = date.toISOString(); //TODO
   const [mode, setMode] = useState<Mode>('date');
   const [isOpen, setIsOpen] = useState(false);
 
-  const onChange = (selectedDate: Date) => {
+  const onChangeInternal = (selectedDate: Date) => {
     const currentDate = selectedDate;
     setIsOpen(false);
     setDate(currentDate);
@@ -107,14 +127,23 @@ export const ActionDateTimeInput = ({
   };
 
   return (
-    <>
+    <Box gap={3}>
       {getInputButton()}
+      {button && (
+        <Box mt={1.5}>
+          <ActionButton
+            {...button}
+            onClick={() => button.onClick({ [name]: value })}
+            disabled={button.disabled || value === '' || !isValid}
+          />
+        </Box>
+      )}
       <DateTimePickerModal
         isVisible={isOpen}
         mode={mode}
-        onConfirm={onChange}
+        onConfirm={onChangeInternal}
         onCancel={() => setIsOpen(false)}
       />
-    </>
+    </Box>
   );
 };
