@@ -2,6 +2,11 @@ import { useCallback, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { InputContainer } from '../../components';
 import { Box, Text } from '../../index';
+import type {
+  BorderRadiiVars,
+  ColorVars,
+  SpacingVars,
+} from '../../theme/types';
 import { ActionButton } from '../ActionButton';
 import type { InputProps } from '../types';
 
@@ -57,7 +62,11 @@ export const ActionRadioGroup = ({
     [onChange],
   );
   const standaloneProps = isStandalone
-    ? { backgroundColor: 'bgSecondary', padding: 2, borderRadius: 'xl' }
+    ? {
+        backgroundColor: 'bgSecondary' as keyof ColorVars,
+        padding: 2 as keyof SpacingVars,
+        borderRadius: 'xl' as keyof BorderRadiiVars,
+      }
     : {};
   return (
     <Box flexDirection="column" gap={3} {...standaloneProps}>

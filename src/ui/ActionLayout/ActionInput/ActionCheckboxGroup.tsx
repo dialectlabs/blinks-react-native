@@ -4,6 +4,11 @@ import { InputContainer } from '../../components';
 import { CheckBoxIcon } from '../../icons';
 import { Box, Text } from '../../index';
 import { useTheme } from '../../theme';
+import type {
+  BorderRadiiVars,
+  ColorVars,
+  SpacingVars,
+} from '../../theme/types';
 import { ActionButton } from '../ActionButton';
 import type { InputProps } from '../types';
 
@@ -107,8 +112,13 @@ export const ActionCheckboxGroup = ({
   }, []);
 
   const standaloneProps = isStandalone
-    ? { backgroundColor: 'bgSecondary', padding: 2, borderRadius: 'xl' }
+    ? {
+        backgroundColor: 'bgSecondary' as keyof ColorVars,
+        padding: 2 as keyof SpacingVars,
+        borderRadius: 'xl' as keyof BorderRadiiVars,
+      }
     : {};
+
   return (
     <Box flexDirection="column" gap={3} {...standaloneProps}>
       {label && (

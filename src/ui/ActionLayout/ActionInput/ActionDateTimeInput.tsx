@@ -1,22 +1,32 @@
 import { type ReactNode, useState } from 'react';
-import { Platform, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { InputContainer } from '../../components';
 import { CalendarIcon, ClockIcon } from '../../icons';
 import { Box, Text } from '../../index';
 import { useTheme } from '../../theme';
+import type {
+  BorderRadiiVars,
+  ColorVars,
+  SpacingVars,
+} from '../../theme/types';
 import { ActionButton } from '../ActionButton';
 import type { InputProps } from '../types';
+import {
+  buildDefaultDateDescription,
+  extractDateValue,
+  extractTimeValue,
+} from './util';
 
-type Mode = 'date' | 'time' | 'datetime';
-const PickerButton = ({
+type Mode = 'date' | 'time';
+const PickerInput = ({
   isOpen,
   onPress,
   icon,
   value,
 }: {
   isOpen: boolean;
-  onPress: () => void;
+  onPress?: () => void;
   icon: ReactNode;
   value: string;
 }) => {
@@ -35,133 +45,125 @@ const PickerButton = ({
   );
 };
 
-function extractTimeValue(date: Date) {
-  return (
-    date.getHours().toString().padStart(2, '0') +
-    ':' +
-    date.getMinutes().toString().padStart(2, '0')
-  );
-}
-function extractDateValue(date: Date) {
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}
-
 export const ActionDateTimeInput = ({
-  type = 'date',
   placeholder,
   name,
   button,
   disabled,
   onChange,
+  onValidityChange,
   min,
   max,
   description,
   required,
 }: Omit<InputProps, 'type'> & {
-  type?: 'date' | 'datetime-local';
   onChange?: (value: string) => void;
   onValidityChange?: (state: boolean) => void;
 }) => {
   const theme = useTheme();
-  const [isValid, setValid] = useState(button ? false : !required);
+  const isStandalone = !!button;
+  const [isValid, setValid] = useState(!isStandalone && !required);
+  const [touched, setTouched] = useState(false);
 
-  const minDate = min as string | undefined;
-  const maxDate = max as string | undefined;
+  const minDate = min ? new Date(min as string) : null;
+  const maxDate = max ? new Date(max as string) : null;
 
-  const [dateValue, setDateValue] = useState(extractDateValue(new Date()));
-  const [timeValue, setTimeValue] = useState(extractTimeValue(new Date()));
+  const [dateValue, setDateValue] = useState('');
+  const [timeValue, setTimeValue] = useState('');
   const date = new Date(`${dateValue}T${timeValue}`);
-  const value = type === 'date' ? dateValue : `${dateValue}T${timeValue}`;
+  const value = `${dateValue}T${timeValue}`;
 
   const [mode, setMode] = useState<Mode>('date');
   const [isOpen, setIsOpen] = useState(false);
 
-  const onChangeInternal = (selectedDate: Date) => {
+  const extendedChange = (selectedDate: Date) => {
     setIsOpen(false);
     if (mode === 'date') {
       setDateValue(extractDateValue(selectedDate));
-    } else if (mode === 'time') {
-      setTimeValue(extractTimeValue(selectedDate));
     } else {
-      setDateValue(extractDateValue(selectedDate));
       setTimeValue(extractTimeValue(selectedDate));
     }
+    //TODO check validity
   };
 
-  const showPicker = (mode: Mode) => {
+  const openPicker = (mode: Mode) => {
     setIsOpen(true);
     setMode(mode);
   };
 
   const showDatePicker = () => {
-    showPicker('date');
+    openPicker('date');
   };
 
   const showTimePicker = () => {
-    showPicker('time');
-  };
-  const showDateTimePicker = () => {
-    showPicker('datetime');
+    openPicker('time');
   };
 
-  const getInputButton = () => {
-    if (type === 'date') {
-      return (
-        <PickerButton
-          isOpen={isOpen}
-          onPress={showDatePicker}
-          icon={<CalendarIcon color={theme.colors.iconPrimary} />}
-          value={date.toDateString()}
-        />
-      );
-    }
-    //TODO do we need single input only for ios?
-    if (Platform.OS === 'ios') {
-      return (
-        <PickerButton
-          isOpen={isOpen}
-          onPress={showDateTimePicker}
-          icon={<CalendarIcon color={theme.colors.iconPrimary} />}
-          value={date.toLocaleString()}
-        />
-      );
-    }
-    return (
-      <Box gap={2}>
-        <PickerButton
-          isOpen={isOpen && mode === 'date'}
-          onPress={showDatePicker}
-          icon={<CalendarIcon color={theme.colors.iconPrimary} />}
-          value={date.toLocaleDateString()}
-        />
-        <PickerButton
-          isOpen={isOpen && mode === 'time'}
-          onPress={showTimePicker}
-          icon={<ClockIcon color={theme.colors.iconPrimary} />}
-          value={date.toLocaleTimeString()}
-        />
-      </Box>
-    );
+  const closePicker = () => {
+    setTouched(true);
+    setIsOpen(false);
   };
+
+  const placeholderWithRequired =
+    (placeholder || 'Enter a date') + (required ? '*' : '');
+  const finalDescription =
+    description ?? buildDefaultDateDescription({ minDate, maxDate });
+
+  const standaloneProps = isStandalone
+    ? {
+        backgroundColor: 'bgSecondary' as keyof ColorVars,
+        padding: 2 as keyof SpacingVars,
+        borderRadius: 'xl' as keyof BorderRadiiVars,
+      }
+    : {};
 
   return (
-    <Box gap={3}>
-      {getInputButton()}
+    <Box gap={3} {...standaloneProps}>
+      <Text
+        variant={isStandalone ? 'text' : 'subtext'}
+        fontWeight="600"
+        color="textPrimary"
+        p={isStandalone ? 2 : 0}
+        pb={0}
+      >
+        {placeholderWithRequired}
+      </Text>
+      <PickerInput
+        isOpen={isOpen && mode === 'date'}
+        onPress={!disabled ? showDatePicker : undefined}
+        icon={<CalendarIcon color={theme.colors.iconPrimary} />}
+        value={dateValue && date.toLocaleDateString()}
+      />
+      <PickerInput
+        isOpen={isOpen && mode === 'time'}
+        onPress={!disabled ? showTimePicker : undefined}
+        icon={<ClockIcon color={theme.colors.iconPrimary} />}
+        value={dateValue && date.toLocaleTimeString()}
+      />
       {button && (
         <ActionButton
           {...button}
           onClick={() => button.onClick({ [name]: value })}
           disabled={button.disabled || value === '' || !isValid}
-        /> //TODO hmmmm ask Sabina
+        />
+      )}
+      {finalDescription && (
+        <Text
+          color={touched && !isValid ? 'textError' : 'textSecondary'}
+          variant="caption"
+          p={isStandalone ? 2 : 0}
+          pt={0}
+        >
+          {finalDescription}
+        </Text>
       )}
       <DateTimePickerModal
+        maximumDate={maxDate ?? undefined}
+        minimumDate={minDate ?? undefined}
         isVisible={isOpen}
         mode={mode}
-        onConfirm={onChangeInternal}
-        onCancel={() => setIsOpen(false)}
+        onConfirm={extendedChange}
+        onCancel={closePicker}
       />
     </Box>
   );
