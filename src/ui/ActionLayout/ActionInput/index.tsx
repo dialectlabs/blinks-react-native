@@ -4,6 +4,7 @@ import { ActionCheckboxGroup } from './ActionCheckboxGroup';
 import { ActionDateInput } from './ActionDateInput';
 import { ActionDateTimeInput } from './ActionDateTimeInput';
 import { ActionRadioGroup } from './ActionRadioGroup';
+import { ActionSelect } from './ActionSelect';
 import { ActionTextInput } from './ActionTextInput';
 
 export const ActionInput = (
@@ -18,9 +19,8 @@ export const ActionInput = (
       return <ActionDateInput {...input} />;
     case 'datetime-local':
       return <ActionDateTimeInput {...input} />;
-    // case 'select':
-    //   return <ActionSelect {...input} />;
-
+    case 'select':
+      return <ActionSelect {...input} />;
     default:
       return <ActionTextInput {...input} />;
   }

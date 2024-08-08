@@ -9,8 +9,6 @@ import { ActionButton } from '../ActionButton';
 import type { InputProps } from '../types';
 import { buildDefaultDateDescription, extractDateValue } from './util';
 
-f;
-
 export const ActionDateInput = ({
   placeholder,
   name,
