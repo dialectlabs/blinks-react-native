@@ -43,7 +43,6 @@ export const ActionDateInput = ({
     //comparing with the start of next day
     maxDate && maxDate.setDate(maxDate.getDate() + 1);
     const rightRange = maxDate ? date < maxDate : true;
-    console.log(minDate, maxDate, date);
     return leftRange && rightRange;
   };
 

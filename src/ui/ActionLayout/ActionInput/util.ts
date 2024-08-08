@@ -1,3 +1,29 @@
+export const buildDefaultTextDescription = ({
+  min,
+  max,
+}: {
+  min?: number;
+  max?: number;
+}) => {
+  if (min && max) return `Type between ${min} and ${max} characters`;
+  if (min) return `Type minimum ${min} characters`;
+  if (max) return `Type maximum ${max} characters`;
+  return null;
+};
+
+export const buildDefaultNumberDescription = ({
+  min,
+  max,
+}: {
+  min?: number;
+  max?: number;
+}) => {
+  if (min && max) return `Enter a number between ${min} and ${max}`;
+  if (min) return `Enter a number greater than ${min}`;
+  if (max) return `Enter a number less than ${max}`;
+  return null;
+};
+
 export const buildDefaultDateDescription = ({
   minDate,
   maxDate,

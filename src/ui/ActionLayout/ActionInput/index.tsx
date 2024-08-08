@@ -3,6 +3,7 @@ import type { InputProps } from '../types';
 import { ActionCheckboxGroup } from './ActionCheckboxGroup';
 import { ActionDateInput } from './ActionDateInput';
 import { ActionDateTimeInput } from './ActionDateTimeInput';
+import { ActionNumberInput } from './ActionNumberInput';
 import { ActionRadioGroup } from './ActionRadioGroup';
 import { ActionSelect } from './ActionSelect';
 import { ActionTextInput } from './ActionTextInput';
@@ -21,6 +22,8 @@ export const ActionInput = (
       return <ActionDateTimeInput {...input} />;
     case 'select':
       return <ActionSelect {...input} />;
+    case 'number':
+      return <ActionNumberInput {...input} />;
     default:
       return <ActionTextInput {...input} />;
   }
