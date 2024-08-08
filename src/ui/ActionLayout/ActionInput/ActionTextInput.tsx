@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
 import { InputContainer } from '../../components';
-import { AtSignIcon, LinkIcon } from '../../icons';
+import { EnvelopeIcon, LinkIcon } from '../../icons';
 import { Box, Text } from '../../index';
 import { useTheme } from '../../theme';
 import { ActionButton } from '../ActionButton';
@@ -25,7 +25,7 @@ const inputVariants: Record<
   email: {
     placeholder: 'hello@example.com',
     keyboardType: 'email-address',
-    icon: AtSignIcon,
+    icon: EnvelopeIcon,
   },
   url: {
     placeholder: 'https://',

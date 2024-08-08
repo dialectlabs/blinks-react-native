@@ -5,6 +5,7 @@ import {
   type TextInputChangeEventData,
 } from 'react-native';
 import { InputContainer } from '../../components';
+import NumberIcon from '../../icons/NumberIcon';
 import { Box, Text } from '../../index';
 import { useTheme } from '../../theme';
 import { ActionButton } from '../ActionButton';
@@ -91,6 +92,7 @@ export const ActionNumberInput = ({
         }
       >
         <Box alignItems="center" flexDirection="row" pl={2} pr={1} gap={1.5}>
+          <NumberIcon width={16} height={16} color={theme.colors.iconPrimary} />
           <TextInput
             keyboardType="numeric"
             onFocus={() => setIsFocused(true)}
