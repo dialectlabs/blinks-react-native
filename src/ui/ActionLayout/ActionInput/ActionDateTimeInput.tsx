@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { InputContainer } from '../../components';
@@ -20,15 +20,17 @@ import {
 
 type Mode = 'date' | 'time';
 const PickerInput = ({
-  isOpen,
+  // isOpen,
   onPress,
   icon,
   value,
+  isSelected,
 }: {
   isOpen: boolean;
   onPress?: () => void;
   icon: ReactNode;
   value: string;
+  isSelected: boolean;
 }) => {
   const borderColor = 'inputStroke';
   return (
@@ -36,7 +38,10 @@ const PickerInput = ({
       <TouchableOpacity onPress={onPress}>
         <Box pl={2} flexDirection="row" alignItems="center" gap={3}>
           {icon}
-          <Text variant="text" color="textInput">
+          <Text
+            variant="text"
+            color={isSelected ? 'textInput' : 'textInputPlaceholder'}
+          >
             {value}
           </Text>
         </Box>
@@ -70,21 +75,52 @@ export const ActionDateTimeInput = ({
 
   const [dateValue, setDateValue] = useState('');
   const [timeValue, setTimeValue] = useState('');
-  const date = new Date(`${dateValue}T${timeValue}`);
-  const value = `${dateValue}T${timeValue}`;
+  const [value, setValue] = useState('');
+
+  const [displayedDate, setDisplayedDate] = useState(
+    maxDate ? new Date(Math.min(Date.now(), maxDate.valueOf())) : new Date(),
+  );
 
   const [mode, setMode] = useState<Mode>('date');
   const [isOpen, setIsOpen] = useState(false);
 
+  const checkValidity = (date: Date) => {
+    if (minDate && date < minDate) return false;
+    if (maxDate && date > maxDate) return false;
+
+    return true;
+  };
+
   const extendedChange = (selectedDate: Date) => {
-    setIsOpen(false);
+    setTouched(true);
+    closePicker();
     if (mode === 'date') {
       setDateValue(extractDateValue(selectedDate));
+      displayedDate.setFullYear(selectedDate.getFullYear());
+      displayedDate.setDate(selectedDate.getDate());
+      displayedDate.setMonth(selectedDate.getMonth());
     } else {
       setTimeValue(extractTimeValue(selectedDate));
+      displayedDate.setHours(
+        selectedDate.getHours(),
+        selectedDate.getMinutes(),
+      );
     }
-    //TODO check validity
+    setDisplayedDate(displayedDate);
   };
+
+  useEffect(() => {
+    if (dateValue && timeValue) {
+      const value = `${dateValue}T${timeValue}`;
+      const validity = checkValidity(new Date(value));
+
+      setValue(value);
+      setValid(validity);
+
+      onChange?.(value);
+      onValidityChange?.(validity);
+    }
+  }, [dateValue, timeValue]);
 
   const openPicker = (mode: Mode) => {
     setIsOpen(true);
@@ -100,7 +136,6 @@ export const ActionDateTimeInput = ({
   };
 
   const closePicker = () => {
-    setTouched(true);
     setIsOpen(false);
   };
 
@@ -132,13 +167,15 @@ export const ActionDateTimeInput = ({
         isOpen={isOpen && mode === 'date'}
         onPress={!disabled ? showDatePicker : undefined}
         icon={<CalendarIcon color={theme.colors.iconPrimary} />}
-        value={dateValue && date.toLocaleDateString()}
+        value={displayedDate.toLocaleDateString()}
+        isSelected={!!dateValue}
       />
       <PickerInput
         isOpen={isOpen && mode === 'time'}
         onPress={!disabled ? showTimePicker : undefined}
         icon={<ClockIcon color={theme.colors.iconPrimary} />}
-        value={dateValue && date.toLocaleTimeString()}
+        value={displayedDate.toLocaleTimeString()}
+        isSelected={!!timeValue}
       />
       {button && (
         <ActionButton
@@ -158,8 +195,9 @@ export const ActionDateTimeInput = ({
         </Text>
       )}
       <DateTimePickerModal
-        maximumDate={maxDate ?? undefined}
-        minimumDate={minDate ?? undefined}
+        date={displayedDate}
+        // maximumDate={maxDate ?? undefined}
+        // minimumDate={minDate ?? undefined}
         isVisible={isOpen}
         mode={mode}
         onConfirm={extendedChange}

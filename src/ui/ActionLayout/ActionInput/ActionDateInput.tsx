@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { InputContainer } from '../../components';
@@ -33,7 +33,9 @@ export const ActionDateInput = ({
   const maxDate = max ? new Date(max as string) : null;
 
   const [value, setValue] = useState('');
-  const date = useMemo(() => (value ? new Date(value) : undefined), [value]);
+  const [displayedDate, setDisplayedDate] = useState(
+    maxDate ? new Date(Math.min(Date.now(), maxDate.valueOf())) : new Date(),
+  );
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -47,12 +49,14 @@ export const ActionDateInput = ({
   };
 
   const extendedChange = (selectedDate: Date) => {
+    setTouched(true);
     closePicker();
 
     const dateValue = extractDateValue(selectedDate);
     const isValid = checkValidity(selectedDate);
 
     setValue(dateValue);
+    setDisplayedDate(selectedDate);
     setValid(isValid);
 
     onChange?.(dateValue);
@@ -63,7 +67,6 @@ export const ActionDateInput = ({
     setIsOpen(true);
   };
   const closePicker = () => {
-    setTouched(true);
     setIsOpen(false);
   };
 
@@ -88,9 +91,11 @@ export const ActionDateInput = ({
             <CalendarIcon color={theme.colors.iconPrimary} />
             <Text
               variant="text"
-              color={date ? 'textInput' : 'textInputPlaceholder'}
+              color={value ? 'textInput' : 'textInputPlaceholder'}
             >
-              {date ? date.toLocaleDateString() : placeholderWithRequired}
+              {value
+                ? displayedDate.toLocaleDateString()
+                : placeholderWithRequired}
             </Text>
           </Box>
         </TouchableOpacity>
@@ -116,8 +121,9 @@ export const ActionDateInput = ({
         minimumDate={minDate ?? undefined}
         maximumDate={maxDate ?? undefined}
         isVisible={isOpen}
+        date={displayedDate}
         mode="date"
-        onConfirm={extendedChange} //TODO find out why if not touched, current date is selected
+        onConfirm={extendedChange}
         onCancel={closePicker}
       />
     </Box>
