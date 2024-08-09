@@ -32,7 +32,7 @@ export const ActionSelect = ({
   );
 
   const [selectedOption, setSelectedOption] = useState(initiallySelectedOption);
-  const value = selectedOption?.value;
+  const value = selectedOption?.value ?? '';
   const [isValid, setValid] = useState(
     isStandalone
       ? !!initiallySelectedOption
@@ -41,10 +41,11 @@ export const ActionSelect = ({
 
   const extendedChange = (value: string) => {
     setSelectedOption(options.find((option) => option.value === value));
-    // setValid(validity);
+    //it's valid as long as it's selected
+    setValid(true);
 
     onChange?.(value);
-    // onValidityChange?.(validity);
+    onValidityChange?.(true);
   };
 
   const pickerRef = useRef<Picker<any>>(null);
@@ -127,7 +128,11 @@ export const ActionSelect = ({
           <Box backgroundColor="inputBg">
             <Picker onValueChange={extendedChange} selectedValue={value}>
               {options.map((it) => (
-                <Picker.Item label={it.label} value={it.value} />
+                <Picker.Item
+                  key={`${it.value}_${it.label}`}
+                  label={it.label}
+                  value={it.value}
+                />
               ))}
             </Picker>
           </Box>

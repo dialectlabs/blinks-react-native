@@ -11,6 +11,7 @@ import type {
 } from '../../theme/types';
 import { ActionButton } from '../ActionButton';
 import type { InputProps } from '../types';
+import { buildDefaultCheckboxGroupDescription } from './util';
 
 const Checkbox = ({ selected }: { selected?: boolean }) => {
   const theme = useTheme();
@@ -48,18 +49,13 @@ const validate = (
   return true;
 };
 
-const defaultDescription = ({ min, max }: { min?: number; max?: number }) => {
-  if (min && max) return `Select between ${min} and ${max} options`;
-  if (min) return `Select minimum ${min} options`;
-  if (max) return `Select maximum ${max} options`;
-  return null;
-};
 export const ActionCheckboxGroup = ({
   placeholder: label,
   name,
   button,
   disabled,
   onChange,
+  onValidityChange,
   min,
   max,
   description,
@@ -67,6 +63,7 @@ export const ActionCheckboxGroup = ({
   required,
 }: Omit<InputProps, 'type'> & {
   onChange?: (value: string[]) => void;
+  onValidityChange?: (state: boolean) => void;
 }) => {
   const minChoices = min as number;
   const maxChoices = max as number;
@@ -74,7 +71,7 @@ export const ActionCheckboxGroup = ({
 
   const finalDescription =
     description ||
-    defaultDescription({
+    buildDefaultCheckboxGroupDescription({
       min: minChoices,
       max: maxChoices,
     });
@@ -93,9 +90,11 @@ export const ActionCheckboxGroup = ({
   );
   const [isValid, setValid] = useState(!isStandalone || !required);
 
-  useEffect(() => {
-    onChange?.(normalizedValue);
-  }, [onChange, normalizedValue]);
+  //TODO
+
+  // useEffect(() => {
+  //   onChange?.(normalizedValue);
+  // }, [onChange, normalizedValue]);
 
   useEffect(() => {
     const validity = validate(normalizedValue, {
@@ -105,6 +104,7 @@ export const ActionCheckboxGroup = ({
     });
 
     setValid(validity);
+    onValidityChange?.(validity);
   }, [isStandalone, maxChoices, minChoices, normalizedValue]);
 
   const extendedChange = useCallback((name: string, value: boolean) => {

@@ -9,7 +9,10 @@ import { ActionSelect } from './ActionSelect';
 import { ActionTextInput } from './ActionTextInput';
 
 export const ActionInput = (
-  input: InputProps & { onChange?: (value: string | string[]) => void },
+  input: InputProps & {
+    onChange?: (value: string | string[]) => void;
+    onValidityChange?: (state: boolean) => void;
+  },
 ) => {
   switch (input.type) {
     case 'checkbox':

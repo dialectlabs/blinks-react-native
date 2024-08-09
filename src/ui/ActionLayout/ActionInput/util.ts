@@ -48,6 +48,19 @@ export const buildDefaultDateDescription = ({
   return null;
 };
 
+export const buildDefaultCheckboxGroupDescription = ({
+  min,
+  max,
+}: {
+  min?: number;
+  max?: number;
+}) => {
+  if (min && max) return `Select between ${min} and ${max} options`;
+  if (min) return `Select minimum ${min} options`;
+  if (max) return `Select maximum ${max} options`;
+  return null;
+};
+
 export const extractTimeValue = (date: Date) => {
   return (
     date.getHours().toString().padStart(2, '0') +

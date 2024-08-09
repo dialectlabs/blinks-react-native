@@ -1,7 +1,4 @@
-import {
-  type ActionParameterSelectable,
-  type ActionParameterType,
-} from '@dialectlabs/blinks';
+import { type ActionParameterType } from '@dialectlabs/blinks';
 
 export type ActionType = 'trusted' | 'malicious' | 'unknown';
 
@@ -28,10 +25,16 @@ export interface ButtonProps {
   loading?: boolean;
   variant?: 'default' | 'success' | 'error';
   disabled?: boolean;
-  onClick: (params?: Record<string, string>) => void;
+  onClick: (params?: Record<string, string | string[]>) => void;
 }
 
 type InputType = ActionParameterType;
+type OptionType = {
+  label: string;
+  value: string;
+  selected?: boolean;
+};
+
 export interface InputProps {
   type: InputType;
   placeholder?: string;
@@ -43,9 +46,7 @@ export interface InputProps {
   pattern?: string;
   description?: string;
   button?: ButtonProps;
-  options?: ActionParameterSelectable<
-    'select' | 'radio' | 'checkbox'
-  >['options'];
+  options?: OptionType[];
 }
 
 export interface FormProps {

@@ -39,11 +39,13 @@ export const ActionRadioGroup = ({
   button,
   disabled,
   onChange,
+  onValidityChange,
   description,
   options = [],
   required,
 }: Omit<InputProps, 'type'> & {
   onChange?: (value: string) => void;
+  onValidityChange?: (state: boolean) => void;
 }) => {
   const isStandalone = !!button;
 
@@ -58,6 +60,7 @@ export const ActionRadioGroup = ({
       setValid(true);
 
       onChange?.(value);
+      onValidityChange?.(true);
     },
     [onChange],
   );
