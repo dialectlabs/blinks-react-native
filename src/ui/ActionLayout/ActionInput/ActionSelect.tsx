@@ -1,7 +1,7 @@
 import { Picker } from '@react-native-picker/picker';
-import { useMemo, useRef, useState } from 'react';
-import { Modal, Platform, Pressable, TouchableOpacity } from 'react-native';
-import { InputContainer } from '../../components';
+import { useCallback, useMemo, useRef, useState } from 'react';
+import { Platform, Pressable } from 'react-native';
+import { InputContainer, PickerModal } from '../../components';
 import { ChevronDownIcon } from '../../icons';
 import { Box, Text } from '../../index';
 import { useTheme } from '../../theme';
@@ -39,25 +39,29 @@ export const ActionSelect = ({
       : !(required && !initiallySelectedOption),
   );
 
-  const extendedChange = (value: string) => {
-    setSelectedOption(options.find((option) => option.value === value));
-    //it's valid as long as it's selected
-    setValid(true);
+  const extendedChange = useCallback(
+    (value: string) => {
+      close();
+      setSelectedOption(options.find((option) => option.value === value));
+      //it's valid as long as it's selected
+      setValid(true);
 
-    onChange?.(value);
-    onValidityChange?.(true);
-  };
+      onChange?.(value);
+      onValidityChange?.(true);
+    },
+    [value],
+  );
 
   const pickerRef = useRef<Picker<any>>(null);
   const [isVisible, setVisible] = useState(false);
 
-  function open() {
+  const open = useCallback(() => {
     Platform.OS === 'android' ? pickerRef.current?.focus() : setVisible(true);
-  }
+  }, []);
 
-  function close() {
+  const close = useCallback(() => {
     Platform.OS === 'android' ? pickerRef.current?.blur() : setVisible(false);
-  }
+  }, []);
   const theme = useTheme();
 
   return (
@@ -120,23 +124,13 @@ export const ActionSelect = ({
         </Picker>
       )}
       {Platform.OS === 'ios' && (
-        <Modal visible={isVisible} transparent>
-          <TouchableOpacity
-            onPress={close}
-            style={{ flex: 1, backgroundColor: 'black', opacity: 0.4 }}
-          />
-          <Box backgroundColor="inputBg">
-            <Picker onValueChange={extendedChange} selectedValue={value}>
-              {options.map((it) => (
-                <Picker.Item
-                  key={`${it.value}_${it.label}`}
-                  label={it.label}
-                  value={it.value}
-                />
-              ))}
-            </Picker>
-          </Box>
-        </Modal>
+        <PickerModal
+          value={value}
+          isVisible={isVisible}
+          onCancel={close}
+          onConfirm={extendedChange}
+          options={options}
+        />
       )}
     </Box>
   );
