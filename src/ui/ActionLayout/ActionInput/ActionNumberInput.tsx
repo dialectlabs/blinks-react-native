@@ -55,7 +55,6 @@ export const ActionNumberInput = ({
       }
       const textNumber = parseFloat(text);
       if (isNaN(textNumber)) return false;
-      console.log(textNumber);
       if (minNumber && textNumber < minNumber) {
         return false;
       }
