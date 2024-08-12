@@ -157,7 +157,11 @@ export const ActionCheckboxGroup = ({
         </Text>
       )}
       {options.map((it) => (
-        <InputContainer key={it.value} borderColor="inputStroke">
+        <InputContainer
+          key={it.value}
+          borderColor="inputStroke"
+          disabled={disabled}
+        >
           <TouchableOpacity
             onPress={
               disabled

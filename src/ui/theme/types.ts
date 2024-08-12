@@ -12,6 +12,7 @@ export interface ThemeVars {
   '--blink-icon-warning': string;
   '--blink-input-bg': string;
   '--blink-input-bg-selected': string;
+  '--blink-input-bg-disabled': string;
   '--blink-input-stroke': string;
   '--blink-input-stroke-disabled': string;
   '--blink-input-stroke-error': string;
@@ -42,6 +43,7 @@ export interface ThemeVars {
   '--blink-border-radius-rounded-2xl': number;
   '--blink-border-radius-rounded-button': number;
   '--blink-border-radius-rounded-input': number;
+  '--blink-border-radius-rounded-input-standalone': number;
 }
 
 export type ColorVars = {
@@ -55,6 +57,7 @@ export type ColorVars = {
   iconWarning: string;
   inputBg: string;
   inputBgSelected: string;
+  inputBgDisabled: string;
   inputStroke: string;
   inputStrokeDisabled: string;
   inputStrokeError: string;
@@ -86,6 +89,7 @@ export type BorderRadiiVars = {
   '2xl': number;
   button: number;
   input: number;
+  inputStandalone: number;
   full: number;
 };
 

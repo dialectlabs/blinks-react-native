@@ -12,6 +12,7 @@ export const dialLight = {
   '--blink-icon-warning': '#d55f00',
   '--blink-icon-warning-hover': '#ef6f08',
   '--blink-input-bg': '#ffffff',
+  '--blink-input-bg-disabled': '#dee1e7',
   '--blink-input-bg-selected': '#08c0b4',
   '--blink-input-stroke': '#c4c6c8',
   '--blink-input-stroke-disabled': '#dee1e7',
@@ -47,4 +48,5 @@ export const dialLight = {
   '--blink-border-radius-rounded-2xl': 16,
   '--blink-border-radius-rounded-button': 8,
   '--blink-border-radius-rounded-input': 8,
+  '--blink-border-radius-rounded-input-standalone': 8,
 };

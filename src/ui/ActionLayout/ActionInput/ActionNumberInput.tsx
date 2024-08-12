@@ -91,6 +91,8 @@ export const ActionNumberInput = ({
   return (
     <Box flexDirection="column" gap={3}>
       <InputContainer
+        standalone={isStandalone}
+        disabled={disabled}
         borderColor={getBorderColor(isValid, isTouched, isFocused)}
       >
         <Box alignItems="center" flexDirection="row" pl={2} pr={1} gap={1.5}>

@@ -28,7 +28,9 @@ const PickerInput = ({
   icon,
   value,
   isSelected,
+  disabled,
 }: {
+  disabled?: boolean;
   isValid: boolean;
   isOpen: boolean;
   onPress?: () => void;
@@ -37,8 +39,11 @@ const PickerInput = ({
   isSelected: boolean;
 }) => {
   return (
-    <InputContainer borderColor={getBorderColor(isValid, isSelected, isOpen)}>
-      <TouchableOpacity onPress={onPress}>
+    <InputContainer
+      disabled={disabled}
+      borderColor={getBorderColor(isValid, isSelected, isOpen)}
+    >
+      <TouchableOpacity onPress={!disabled ? onPress : undefined}>
         <Box pl={2} flexDirection="row" alignItems="center" gap={3}>
           {icon}
           <Text
@@ -171,17 +176,19 @@ export const ActionDateTimeInput = ({
         {placeholderWithRequired}
       </Text>
       <PickerInput
+        disabled={disabled}
         isValid={isValid}
         isOpen={isOpen && mode === 'date'}
-        onPress={!disabled ? showDatePicker : undefined}
+        onPress={showDatePicker}
         icon={<CalendarIcon color={theme.colors.iconPrimary} />}
         value={displayedDate.toLocaleDateString()}
         isSelected={!!dateValue}
       />
       <PickerInput
+        disabled={disabled}
         isValid={isValid}
         isOpen={isOpen && mode === 'time'}
-        onPress={!disabled ? showTimePicker : undefined}
+        onPress={showTimePicker}
         icon={<ClockIcon color={theme.colors.iconPrimary} />}
         value={displayedDate.toLocaleTimeString()}
         isSelected={!!timeValue}

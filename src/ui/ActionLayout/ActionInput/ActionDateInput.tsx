@@ -86,7 +86,11 @@ export const ActionDateInput = ({
 
   return (
     <Box gap={3}>
-      <InputContainer borderColor={getBorderColor(isValid, isTouched, isOpen)}>
+      <InputContainer
+        standalone={isStandalone}
+        disabled={disabled}
+        borderColor={getBorderColor(isValid, isTouched, isOpen)}
+      >
         <TouchableOpacity onPress={disabled ? undefined : openPicker}>
           <Box
             pl={2}

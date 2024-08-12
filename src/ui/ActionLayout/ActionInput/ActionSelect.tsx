@@ -78,6 +78,8 @@ export const ActionSelect = ({
   return (
     <Box gap={3}>
       <InputContainer
+        disabled={disabled}
+        standalone={isStandalone}
         borderColor={getBorderColor(isValid, isTouched, isVisible)}
       >
         <TouchableOpacity onPress={disabled ? undefined : open}>

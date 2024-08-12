@@ -129,6 +129,8 @@ export const ActionTextInput = ({
   return (
     <Box flexDirection="column" gap={3}>
       <InputContainer
+        disabled={disabled}
+        standalone={isStandalone}
         borderColor={getBorderColor(isValid, isTouched, isFocused)}
       >
         <Box
