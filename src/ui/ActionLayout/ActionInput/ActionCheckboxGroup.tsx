@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { InputContainer } from '../../components';
 import { CheckBoxIcon } from '../../icons';
@@ -11,7 +11,10 @@ import type {
 } from '../../theme/types';
 import { ActionButton } from '../ActionButton';
 import type { InputProps } from '../types';
-import { buildDefaultCheckboxGroupDescription } from './util';
+import {
+  buildDefaultCheckboxGroupDescription,
+  getDescriptionColor,
+} from './util';
 
 const Checkbox = ({ selected }: { selected?: boolean }) => {
   const theme = useTheme();
@@ -48,6 +51,11 @@ const validate = (
 
   return true;
 };
+const normalizeValue = (value: Record<string, boolean>) => {
+  return Object.entries(value)
+    .filter(([, v]) => v)
+    .map(([k]) => k);
+};
 
 export const ActionCheckboxGroup = ({
   placeholder: label,
@@ -68,6 +76,10 @@ export const ActionCheckboxGroup = ({
   const minChoices = min as number;
   const maxChoices = max as number;
   const isStandalone = !!button;
+  const hasInitiallySelectedOption = useMemo(
+    () => options.find((option) => option.selected),
+    [options],
+  );
 
   const finalDescription =
     description ||
@@ -76,40 +88,51 @@ export const ActionCheckboxGroup = ({
       max: maxChoices,
     });
 
-  const [value, setValue] = useState<Record<string, boolean>>(
-    Object.fromEntries(
+  const [state, setState] = useState<{
+    value: Record<string, boolean>;
+    valid: boolean;
+  }>({
+    value: Object.fromEntries(
       options.map((option) => [option.value, option.selected ?? false]),
     ),
-  );
-  const normalizedValue = useMemo(
-    () =>
-      Object.entries(value)
-        .filter(([, v]) => v)
-        .map(([k]) => k),
-    [value],
-  );
-  const [isValid, setValid] = useState(!isStandalone || !required);
+    valid: isStandalone
+      ? !!hasInitiallySelectedOption
+      : !(required && !hasInitiallySelectedOption),
+  });
 
-  //TODO
-
-  // useEffect(() => {
-  //   onChange?.(normalizedValue);
-  // }, [onChange, normalizedValue]);
+  const [touched, setTouched] = useState(false);
 
   useEffect(() => {
-    const validity = validate(normalizedValue, {
-      required: isStandalone,
-      min: minChoices,
-      max: maxChoices,
-    });
-
-    setValid(validity);
-    onValidityChange?.(validity);
-  }, [isStandalone, maxChoices, minChoices, normalizedValue]);
-
-  const extendedChange = useCallback((name: string, value: boolean) => {
-    setValue((prev) => ({ ...prev, [name]: value }));
+    onValidityChange?.(state.valid);
   }, []);
+
+  const extendedChange = (name: string, value: boolean) => {
+    setState((prev) => {
+      const newValue = { ...prev.value, [name]: value };
+
+      const normalizedValue = normalizeValue(newValue);
+      onChange?.(normalizedValue);
+
+      const validity = validate(normalizedValue, {
+        required: isStandalone,
+        min: minChoices,
+        max: maxChoices,
+      });
+
+      onValidityChange?.(validity);
+
+      return {
+        value: newValue,
+        valid: validity,
+      };
+    });
+    setTouched(true);
+  };
+
+  const normalizedValue = useMemo(
+    () => normalizeValue(state.value),
+    [state.value],
+  );
 
   const standaloneProps = isStandalone
     ? {
@@ -139,11 +162,11 @@ export const ActionCheckboxGroup = ({
             onPress={
               disabled
                 ? undefined
-                : () => extendedChange(it.value, !value[it.value])
+                : () => extendedChange(it.value, !state.value[it.value])
             }
           >
             <Box pl={2} flexDirection="row" alignItems="center" gap={3}>
-              <Checkbox selected={value[it.value]} />
+              <Checkbox selected={state.value[it.value]} />
               <Text variant="text" color="textInput">
                 {it.label}
               </Text>
@@ -160,7 +183,7 @@ export const ActionCheckboxGroup = ({
       )}
       {finalDescription && (
         <Text
-          color={!isValid ? 'textError' : 'textSecondary'}
+          color={getDescriptionColor(state.valid, touched)}
           variant="caption"
           pt={0}
           p={isStandalone ? 2 : 0}
