@@ -1,4 +1,4 @@
-import { type JSX, useCallback, useState } from 'react';
+import { type JSX, useCallback, useEffect, useState } from 'react';
 import {
   type KeyboardTypeOptions,
   type NativeSyntheticEvent,
@@ -12,7 +12,11 @@ import { Box, Text } from '../../index';
 import { useTheme } from '../../theme';
 import { ActionButton } from '../ActionButton';
 import type { InputProps } from '../types';
-import { buildDefaultTextDescription } from './util';
+import {
+  buildDefaultTextDescription,
+  getBorderColor,
+  getDescriptionColor,
+} from './util';
 
 const inputVariants: Record<
   TextType,
@@ -43,6 +47,7 @@ const inputVariants: Record<
 };
 
 type TextType = 'text' | 'email' | 'url' | 'textarea';
+
 export const ActionTextInput = ({
   placeholder,
   name,
@@ -65,13 +70,17 @@ export const ActionTextInput = ({
 
   const isStandalone = !!button;
   const [value, setValue] = useState('');
-  //TODO default validity
-  // const [isValid, setValid] = useState(!isStandalone && !required);
-  const [isValid, setValid] = useState(true);
+
+  const [isValid, setValid] = useState(!isStandalone && !required);
+  const [isTouched, setTouched] = useState(false);
 
   const regExp = pattern ? new RegExp(pattern) : null;
   const minLength = min as number;
   const maxLength = max as number;
+
+  useEffect(() => {
+    onValidityChange?.(isValid);
+  }, []);
 
   const checkValidity = useCallback(
     (text: string) => {
@@ -91,6 +100,7 @@ export const ActionTextInput = ({
   const extendedChange = (
     e: NativeSyntheticEvent<TextInputChangeEventData>,
   ) => {
+    setTouched(true);
     const value = e.nativeEvent.text;
     const validity = checkValidity(value);
 
@@ -114,13 +124,7 @@ export const ActionTextInput = ({
   return (
     <Box flexDirection="column" gap={3}>
       <InputContainer
-        borderColor={
-          isFocused
-            ? 'inputStrokeSelected'
-            : isValid
-              ? 'inputStroke'
-              : 'inputStrokeError'
-        }
+        borderColor={getBorderColor(isValid, isTouched, isFocused)}
       >
         <Box
           alignItems={type === 'textarea' ? 'flex-start' : 'center'}
@@ -169,10 +173,7 @@ export const ActionTextInput = ({
         )}
       </InputContainer>
       {finalDescription && (
-        <Text
-          color={!isValid ? 'textError' : 'textSecondary'}
-          variant="caption"
-        >
+        <Text color={getDescriptionColor(isValid, isTouched)} variant="caption">
           {finalDescription}
         </Text>
       )}

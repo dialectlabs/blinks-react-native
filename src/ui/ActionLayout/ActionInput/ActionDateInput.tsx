@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { InputContainer } from '../../components';
@@ -7,7 +7,11 @@ import { Box, Text } from '../../index';
 import { useTheme } from '../../theme';
 import { ActionButton } from '../ActionButton';
 import type { InputProps } from '../types';
-import { buildDefaultDateDescription, extractDateValue } from './util';
+import {
+  buildDefaultDateDescription,
+  extractDateValue,
+  getDescriptionColor,
+} from './util';
 
 export const ActionDateInput = ({
   placeholder,
@@ -27,7 +31,7 @@ export const ActionDateInput = ({
   const theme = useTheme();
   const isStandalone = !!button;
   const [isValid, setValid] = useState(!isStandalone && !required);
-  const [touched, setTouched] = useState(false);
+  const [isTouched, setTouched] = useState(false);
 
   const minDate = min ? new Date(min as string) : null;
   const maxDate = max ? new Date(max as string) : null;
@@ -38,6 +42,10 @@ export const ActionDateInput = ({
   );
 
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    onValidityChange?.(isValid);
+  }, []);
 
   const checkValidity = (date: Date) => {
     const leftRange = minDate ? date >= minDate : true;
@@ -110,10 +118,7 @@ export const ActionDateInput = ({
         )}
       </InputContainer>
       {finalDescription && (
-        <Text
-          color={!isValid && touched ? 'textError' : 'textSecondary'}
-          variant="caption"
-        >
+        <Text color={getDescriptionColor(isValid, isTouched)} variant="caption">
           {finalDescription}
         </Text>
       )}

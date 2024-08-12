@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   type NativeSyntheticEvent,
   TextInput,
@@ -10,7 +10,11 @@ import { Box, Text } from '../../index';
 import { useTheme } from '../../theme';
 import { ActionButton } from '../ActionButton';
 import type { InputProps } from '../types';
-import { buildDefaultNumberDescription } from './util';
+import {
+  buildDefaultNumberDescription,
+  getBorderColor,
+  getDescriptionColor,
+} from './util';
 
 export const ActionNumberInput = ({
   placeholder,
@@ -32,12 +36,16 @@ export const ActionNumberInput = ({
 
   const isStandalone = !!button;
   const [value, setValue] = useState('');
-  const [isValid, setValid] = useState(true);
-  // const [isValid, setValid] = useState(!isStandalone && !required);
+  const [isValid, setValid] = useState(!isStandalone && !required);
+  const [isTouched, setTouched] = useState(false);
 
   const regExp = pattern ? new RegExp(pattern) : null;
   const minNumber = min as number;
   const maxNumber = max as number;
+
+  useEffect(() => {
+    onValidityChange?.(isValid);
+  }, []);
 
   const checkValidity = useCallback(
     (text: string) => {
@@ -62,6 +70,7 @@ export const ActionNumberInput = ({
   const extendedChange = (
     e: NativeSyntheticEvent<TextInputChangeEventData>,
   ) => {
+    setTouched(true);
     const value = e.nativeEvent.text;
     const validity = checkValidity(value);
 
@@ -83,13 +92,7 @@ export const ActionNumberInput = ({
   return (
     <Box flexDirection="column" gap={3}>
       <InputContainer
-        borderColor={
-          isFocused
-            ? 'inputStrokeSelected'
-            : isValid
-              ? 'inputStroke'
-              : 'inputStrokeError'
-        }
+        borderColor={getBorderColor(isValid, isTouched, isFocused)}
       >
         <Box alignItems="center" flexDirection="row" pl={2} pr={1} gap={1.5}>
           <NumberIcon width={16} height={16} color={theme.colors.iconPrimary} />
@@ -125,10 +128,7 @@ export const ActionNumberInput = ({
         )}
       </InputContainer>
       {finalDescription && (
-        <Text
-          color={!isValid ? 'textError' : 'textSecondary'}
-          variant="caption"
-        >
+        <Text color={getDescriptionColor(isValid, isTouched)} variant="caption">
           {finalDescription}
         </Text>
       )}

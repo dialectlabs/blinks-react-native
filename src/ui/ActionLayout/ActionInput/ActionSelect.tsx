@@ -1,5 +1,5 @@
 import { Picker } from '@react-native-picker/picker';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Platform, Pressable } from 'react-native';
 import { InputContainer, PickerModal } from '../../components';
 import { ChevronDownIcon } from '../../icons';
@@ -7,6 +7,7 @@ import { Box, Text } from '../../index';
 import { useTheme } from '../../theme';
 import { ActionButton } from '../ActionButton';
 import type { InputProps } from '../types';
+import { getDescriptionColor } from './util';
 
 export const ActionSelect = ({
   placeholder,
@@ -39,8 +40,15 @@ export const ActionSelect = ({
       : !(required && !initiallySelectedOption),
   );
 
+  const [isTouched, setTouched] = useState(false);
+
+  useEffect(() => {
+    onValidityChange?.(isValid);
+  }, []);
+
   const extendedChange = useCallback(
     (value: string) => {
+      setTouched(true);
       close();
       setSelectedOption(options.find((option) => option.value === value));
       //it's valid as long as it's selected
@@ -103,10 +111,7 @@ export const ActionSelect = ({
         )}
       </InputContainer>
       {description && (
-        <Text
-          color={!isValid ? 'textError' : 'textSecondary'}
-          variant="caption"
-        >
+        <Text color={getDescriptionColor(isValid, isTouched)} variant="caption">
           {description}
         </Text>
       )}

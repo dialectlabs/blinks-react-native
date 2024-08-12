@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { InputContainer } from '../../components';
 import { Box, Text } from '../../index';
@@ -54,6 +54,10 @@ export const ActionRadioGroup = ({
   );
   const [isValid, setValid] = useState(!isStandalone || !required);
 
+  useEffect(() => {
+    onValidityChange?.(isValid);
+  }, []);
+
   const extendedChange = useCallback(
     (value: string) => {
       setValue(value);
@@ -64,6 +68,7 @@ export const ActionRadioGroup = ({
     },
     [onChange],
   );
+
   const standaloneProps = isStandalone
     ? {
         backgroundColor: 'bgSecondary' as keyof ColorVars,

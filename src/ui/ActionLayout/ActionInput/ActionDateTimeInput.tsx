@@ -16,6 +16,7 @@ import {
   buildDefaultDateDescription,
   extractDateValue,
   extractTimeValue,
+  getDescriptionColor,
 } from './util';
 
 type Mode = 'date' | 'time';
@@ -68,7 +69,7 @@ export const ActionDateTimeInput = ({
   const theme = useTheme();
   const isStandalone = !!button;
   const [isValid, setValid] = useState(!isStandalone && !required);
-  const [touched, setTouched] = useState(false);
+  const [isTouched, setTouched] = useState(false);
 
   const minDate = min ? new Date(min as string) : null;
   const maxDate = max ? new Date(max as string) : null;
@@ -83,6 +84,10 @@ export const ActionDateTimeInput = ({
 
   const [mode, setMode] = useState<Mode>('date');
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    onValidityChange?.(isValid);
+  }, []);
 
   const checkValidity = (date: Date) => {
     if (minDate && date < minDate) return false;
@@ -186,7 +191,7 @@ export const ActionDateTimeInput = ({
       )}
       {finalDescription && (
         <Text
-          color={touched && !isValid ? 'textError' : 'textSecondary'}
+          color={getDescriptionColor(isValid, isTouched)}
           variant="caption"
           p={isStandalone ? 2 : 0}
           pt={0}
