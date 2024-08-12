@@ -16,26 +16,28 @@ import {
   buildDefaultDateDescription,
   extractDateValue,
   extractTimeValue,
+  getBorderColor,
   getDescriptionColor,
 } from './util';
 
 type Mode = 'date' | 'time';
 const PickerInput = ({
-  // isOpen,
+  isValid,
+  isOpen,
   onPress,
   icon,
   value,
   isSelected,
 }: {
+  isValid: boolean;
   isOpen: boolean;
   onPress?: () => void;
   icon: ReactNode;
   value: string;
   isSelected: boolean;
 }) => {
-  const borderColor = 'inputStroke';
   return (
-    <InputContainer borderColor={borderColor}>
+    <InputContainer borderColor={getBorderColor(isValid, isSelected, isOpen)}>
       <TouchableOpacity onPress={onPress}>
         <Box pl={2} flexDirection="row" alignItems="center" gap={3}>
           {icon}
@@ -169,6 +171,7 @@ export const ActionDateTimeInput = ({
         {placeholderWithRequired}
       </Text>
       <PickerInput
+        isValid={isValid}
         isOpen={isOpen && mode === 'date'}
         onPress={!disabled ? showDatePicker : undefined}
         icon={<CalendarIcon color={theme.colors.iconPrimary} />}
@@ -176,6 +179,7 @@ export const ActionDateTimeInput = ({
         isSelected={!!dateValue}
       />
       <PickerInput
+        isValid={isValid}
         isOpen={isOpen && mode === 'time'}
         onPress={!disabled ? showTimePicker : undefined}
         icon={<ClockIcon color={theme.colors.iconPrimary} />}

@@ -1,6 +1,6 @@
 import { type JSX, useCallback, useEffect, useState } from 'react';
 import {
-  type KeyboardTypeOptions,
+  type InputModeOptions,
   type NativeSyntheticEvent,
   TextInput,
   type TextInputChangeEventData,
@@ -22,27 +22,32 @@ const inputVariants: Record<
   TextType,
   {
     placeholder: string;
-    keyboardType: KeyboardTypeOptions;
+    inputMode: InputModeOptions;
     icon?: (props: SvgProps) => JSX.Element;
+    pattern?: RegExp;
   }
 > = {
   email: {
     placeholder: 'hello@example.com',
-    keyboardType: 'email-address',
+    inputMode: 'email',
     icon: EnvelopeIcon,
+    pattern: new RegExp('^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$'),
   },
   url: {
     placeholder: 'https://',
-    keyboardType: 'url',
+    inputMode: 'url',
     icon: LinkIcon,
+    pattern: new RegExp(
+      'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~=]{1,2048}\\.[a-zA-Z0-9()]{1,20}\\b([-a-zA-Z0-9()@:%_+.~#?&/\\[\\]=]*)',
+    ),
   },
   text: {
     placeholder: 'Type here...',
-    keyboardType: 'default',
+    inputMode: 'none',
   },
   textarea: {
     placeholder: 'Type here...',
-    keyboardType: 'default',
+    inputMode: 'none',
   },
 };
 
@@ -74,7 +79,7 @@ export const ActionTextInput = ({
   const [isValid, setValid] = useState(!isStandalone && !required);
   const [isTouched, setTouched] = useState(false);
 
-  const regExp = pattern ? new RegExp(pattern) : null;
+  const regExp = pattern ? new RegExp(pattern) : inputVariants[type].pattern;
   const minLength = min as number;
   const maxLength = max as number;
 
@@ -141,7 +146,7 @@ export const ActionTextInput = ({
             />
           )}
           <TextInput
-            keyboardType={inputVariants[type].keyboardType}
+            inputMode={inputVariants[type].inputMode}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             style={{

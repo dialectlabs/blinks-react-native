@@ -1,6 +1,6 @@
 import { Picker } from '@react-native-picker/picker';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Platform, Pressable } from 'react-native';
+import { Platform, TouchableOpacity } from 'react-native';
 import { InputContainer, PickerModal } from '../../components';
 import { ChevronDownIcon } from '../../icons';
 import { Box, Text } from '../../index';
@@ -74,8 +74,8 @@ export const ActionSelect = ({
 
   return (
     <Box gap={3}>
-      <InputContainer borderColor={'inputStroke'}>
-        <Pressable onPress={disabled ? undefined : open}>
+      <InputContainer borderColor="inputStroke">
+        <TouchableOpacity onPress={disabled ? undefined : open}>
           <Box
             height={button ? 40 : undefined}
             pl={2}
@@ -93,13 +93,13 @@ export const ActionSelect = ({
               }
               variant="text"
             >
-              {value ?? placeholderWithRequired}
+              {value || placeholderWithRequired}
             </Text>
             <Box p={1.5}>
               <ChevronDownIcon color={theme.colors.iconPrimary} />
             </Box>
           </Box>
-        </Pressable>
+        </TouchableOpacity>
         {button && (
           <Box mt={1.5}>
             <ActionButton
@@ -117,14 +117,18 @@ export const ActionSelect = ({
       )}
       {Platform.OS === 'android' && (
         <Picker
-          style={{ height: 0 }}
+          style={{ position: 'absolute', height: 0 }}
           enabled={false}
           ref={pickerRef}
           onValueChange={extendedChange}
           selectedValue={value}
         >
           {options.map((it) => (
-            <Picker.Item label={it.label} value={it.value} />
+            <Picker.Item
+              key={`${it.value}_${it.label}`}
+              label={it.label}
+              value={it.value}
+            />
           ))}
         </Picker>
       )}

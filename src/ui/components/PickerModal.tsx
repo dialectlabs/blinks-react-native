@@ -1,28 +1,23 @@
 import { Picker } from '@react-native-picker/picker';
 import { useEffect, useState } from 'react';
-import {
-  DynamicColorIOS,
-  StyleSheet,
-  TouchableHighlight,
-  useColorScheme,
-} from 'react-native';
+import { StyleSheet, TouchableHighlight, useColorScheme } from 'react-native';
 import { Box, Text } from '../index';
 import { BottomSheetModal } from './BottomSheetModal';
 
-const BACKGROUND_COLOR = DynamicColorIOS({
-  dark: '#0E0E0E',
-  light: '#FFFFFF',
-});
-
-const HIGHLIGHT_COLOR = DynamicColorIOS({
-  dark: '#444444',
-  light: '#ebebeb',
-});
-const BORDER_COLOR = DynamicColorIOS({
-  dark: '#272729',
-  light: '#d5d5d5',
-});
-
+export const COLORS = {
+  dark: {
+    backgroundColor: '#0E0E0E',
+    highlightColor: '#444444',
+    borderColor: '#272729',
+    itemColor: '#FFFFFF',
+  },
+  light: {
+    backgroundColor: '#FFFFFF',
+    highlightColor: '#ebebeb',
+    borderColor: '#d5d5d5',
+    itemColor: undefined,
+  },
+};
 export const BORDER_RADIUS = 13;
 export const BUTTON_FONT_WEIGHT = 'normal';
 export const BUTTON_FONT_COLOR = '#007ff9';
@@ -68,17 +63,23 @@ export const PickerModal = ({
     }
     setVal(v);
   };
-  const colorScheme = useColorScheme();
-  const isDarkMode = colorScheme === 'dark';
+  const scheme = useColorScheme() ?? 'light';
 
   return (
     <BottomSheetModal isVisible={isVisible} onBackdropPress={handleCancel}>
-      <Box mb={2} overflow="hidden" style={styles.container}>
+      <Box
+        mb={2}
+        overflow="hidden"
+        style={[
+          styles.container,
+          { backgroundColor: COLORS[scheme].backgroundColor },
+        ]}
+      >
         <Box mb={2}>
           <Picker selectedValue={val} onValueChange={handleChange}>
             {options.map((it) => (
               <Picker.Item
-                color={isDarkMode ? 'white' : undefined}
+                color={COLORS[scheme].itemColor}
                 key={`${it.value}_${it.label}`}
                 label={it.label}
                 value={it.value}
@@ -108,13 +109,19 @@ const CancelButton = (props: ButtonProps) => (
 );
 
 const BottomSheetButton = ({ onPress, label, standalone }: ButtonProps) => {
+  const scheme = useColorScheme() ?? 'light';
+  const colors = {
+    backgroundColor: COLORS[scheme].backgroundColor,
+    borderColor: COLORS[scheme].borderColor,
+  };
   return (
     <TouchableHighlight
       style={[
+        colors,
         styles.button,
         standalone ? styles.buttonStandalone : styles.buttonInline,
       ]}
-      underlayColor={HIGHLIGHT_COLOR}
+      underlayColor={COLORS[scheme].highlightColor}
       onPress={onPress}
     >
       <Text
@@ -132,8 +139,6 @@ const BottomSheetButton = ({ onPress, label, standalone }: ButtonProps) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: BACKGROUND_COLOR,
-    borderColor: BORDER_COLOR,
     height: 57,
     justifyContent: 'center',
   },
@@ -145,6 +150,5 @@ const styles = StyleSheet.create({
   },
   container: {
     borderRadius: BORDER_RADIUS,
-    backgroundColor: BACKGROUND_COLOR,
   },
 });

@@ -10,6 +10,7 @@ import type { InputProps } from '../types';
 import {
   buildDefaultDateDescription,
   extractDateValue,
+  getBorderColor,
   getDescriptionColor,
 } from './util';
 
@@ -78,8 +79,6 @@ export const ActionDateInput = ({
     setIsOpen(false);
   };
 
-  const borderColor = 'inputStroke';
-
   const placeholderWithRequired =
     (placeholder || 'Enter a date') + (required ? '*' : '');
   const finalDescription =
@@ -87,14 +86,14 @@ export const ActionDateInput = ({
 
   return (
     <Box gap={3}>
-      <InputContainer borderColor={borderColor}>
+      <InputContainer borderColor={getBorderColor(isValid, isTouched, isOpen)}>
         <TouchableOpacity onPress={disabled ? undefined : openPicker}>
           <Box
             pl={2}
             flexDirection="row"
             alignItems="center"
             gap={1.5}
-            height={40}
+            height={isStandalone ? 40 : undefined}
           >
             <CalendarIcon color={theme.colors.iconPrimary} />
             <Text

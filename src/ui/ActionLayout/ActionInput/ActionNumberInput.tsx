@@ -97,7 +97,7 @@ export const ActionNumberInput = ({
         <Box alignItems="center" flexDirection="row" pl={2} pr={1} gap={1.5}>
           <NumberIcon width={16} height={16} color={theme.colors.iconPrimary} />
           <TextInput
-            keyboardType="numeric"
+            inputMode="numeric"
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             style={{

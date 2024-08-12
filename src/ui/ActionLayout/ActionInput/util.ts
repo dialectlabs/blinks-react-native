@@ -75,3 +75,17 @@ export const extractDateValue = (date: Date) => {
   const day = date.getDate().toString().padStart(2, '0');
   return `${year}-${month}-${day}`;
 };
+
+export const getBorderColor = (
+  isValid: boolean,
+  isTouched: boolean,
+  isFocused: boolean,
+) => {
+  if (!isValid && isTouched) return 'inputStrokeError';
+  if (isFocused) return 'inputStrokeSelected';
+  return 'inputStroke';
+};
+
+export const getDescriptionColor = (isValid: boolean, isTouched: boolean) => {
+  return !isValid && isTouched ? 'textError' : 'textSecondary';
+};
