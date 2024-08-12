@@ -6,6 +6,7 @@ import {
   Modal,
   StyleSheet,
   TouchableWithoutFeedback,
+  useAnimatedValue,
   type ModalProps,
   type StyleProp,
 } from 'react-native';
@@ -20,23 +21,17 @@ type Props = {
   isVisible: boolean;
   contentStyle?: StyleProp<any>;
 };
-const returnAnimValue = () => {
-  console.log('new');
-  return new Animated.Value(0);
-};
 
 export const BottomSheetModal = ({
   onBackdropPress,
   isVisible,
   children,
 }: Props & ModalProps) => {
-  const animVal = returnAnimValue();
-
-  const [vis, setVis] = useState(isVisible);
+  const animVal = useAnimatedValue(0);
+  const [isShown, setIsShown] = useState(isVisible);
 
   useEffect(() => {
     if (isVisible) {
-      setVis(true);
       show();
     } else {
       hide();
@@ -44,6 +39,7 @@ export const BottomSheetModal = ({
   }, [isVisible]);
 
   const show = useCallback(() => {
+    setIsShown(true);
     Animated.timing(animVal, {
       easing: Easing.inOut(Easing.quad),
       useNativeDriver: false,
@@ -53,14 +49,13 @@ export const BottomSheetModal = ({
   }, [animVal]);
 
   const hide = useCallback(() => {
-    animVal.setValue(1);
     Animated.timing(animVal, {
       easing: Easing.inOut(Easing.quad),
       duration: MODAL_ANIM_DURATION,
       useNativeDriver: false,
       toValue: 0,
     }).start(() => {
-      setVis(false);
+      setIsShown(false);
     });
   }, [animVal]);
 
@@ -83,7 +78,7 @@ export const BottomSheetModal = ({
   };
 
   return (
-    <Modal transparent animationType="none" visible={vis} onShow={show}>
+    <Modal transparent visible={isShown}>
       <TouchableWithoutFeedback onPress={onBackdropPress}>
         <Animated.View
           style={[
@@ -93,7 +88,6 @@ export const BottomSheetModal = ({
           ]}
         />
       </TouchableWithoutFeedback>
-
       <Animated.View
         style={[styles.content, contentAnimatedStyle]}
         pointerEvents="box-none"
