@@ -7,7 +7,7 @@ import { Box, Text } from '../../index';
 import { useTheme } from '../../theme';
 import { ActionButton } from '../ActionButton';
 import type { InputProps } from '../types';
-import { getDescriptionColor } from './util';
+import { getBorderColor, getDescriptionColor } from './util';
 
 export const ActionSelect = ({
   placeholder,
@@ -64,17 +64,22 @@ export const ActionSelect = ({
   const [isVisible, setVisible] = useState(false);
 
   const open = useCallback(() => {
-    Platform.OS === 'android' ? pickerRef.current?.focus() : setVisible(true);
+    setVisible(true);
+    Platform.OS === 'android' && pickerRef.current?.focus();
   }, []);
 
   const close = useCallback(() => {
-    Platform.OS === 'android' ? pickerRef.current?.blur() : setVisible(false);
+    setVisible(false);
+    Platform.OS === 'android' && pickerRef.current?.blur();
   }, []);
+
   const theme = useTheme();
 
   return (
     <Box gap={3}>
-      <InputContainer borderColor="inputStroke">
+      <InputContainer
+        borderColor={getBorderColor(isValid, isTouched, isVisible)}
+      >
         <TouchableOpacity onPress={disabled ? undefined : open}>
           <Box
             height={button ? 40 : undefined}
@@ -122,6 +127,7 @@ export const ActionSelect = ({
           ref={pickerRef}
           onValueChange={extendedChange}
           selectedValue={value}
+          onBlur={() => setVisible(false)}
         >
           {options.map((it) => (
             <Picker.Item

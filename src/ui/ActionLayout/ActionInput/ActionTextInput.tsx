@@ -43,11 +43,11 @@ const inputVariants: Record<
   },
   text: {
     placeholder: 'Type here...',
-    inputMode: 'none',
+    inputMode: 'text',
   },
   textarea: {
     placeholder: 'Type here...',
-    inputMode: 'none',
+    inputMode: 'text',
   },
 };
 
@@ -150,6 +150,7 @@ export const ActionTextInput = ({
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             style={{
+              textAlignVertical: 'top',
               fontSize: theme.textVariants.text.fontSize,
               lineHeight: theme.textVariants.text.lineHeight,
               height: type === 'textarea' ? 66 : isStandalone ? 40 : undefined,
