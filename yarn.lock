@@ -1782,6 +1782,7 @@ __metadata:
     "@react-native-picker/picker": ^2.7.7
     "@react-native/eslint-config": ^0.74.85
     "@shopify/restyle": ^2.4.4
+    "@solana/actions-spec": ^2.2.0
     "@types/jest": ^29.5.5
     "@types/react": ^18.2.44
     del-cli: ^5.1.0
@@ -3432,6 +3433,13 @@ __metadata:
   dependencies:
     "@sinonjs/commons": ^3.0.0
   checksum: 614d30cb4d5201550c940945d44c9e0b6d64a888ff2cd5b357f95ad6721070d6b8839cd10e15b76bf5e14af0bcc1d8f9ec00d49a46318f1f669a4bec1d7f3148
+  languageName: node
+  linkType: hard
+
+"@solana/actions-spec@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "@solana/actions-spec@npm:2.2.0"
+  checksum: e252c3708068060c5caee9f562a3231312a8ca4298b545093400fa58c07c10d2afa57a4ba160cdb25d9077a14e161767f65afbc6495ddc0c4bfe3ff99a603389
   languageName: node
   linkType: hard
 
