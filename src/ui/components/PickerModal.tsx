@@ -44,7 +44,7 @@ export const PickerModal = ({
 
   useEffect(() => {
     if (isVisible) {
-      setVal(value);
+      setVal(value || (options[0]?.value ?? ''));
     }
   }, [isVisible]);
 
@@ -57,7 +57,6 @@ export const PickerModal = ({
   };
 
   const handleChange = (v: string) => {
-    console.log(v);
     if (onChange) {
       onChange(v);
     }
