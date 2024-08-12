@@ -154,7 +154,6 @@ export const ActionTextInput = ({
               fontSize: theme.textVariants.text.fontSize,
               lineHeight: theme.textVariants.text.lineHeight,
               height: type === 'textarea' ? 66 : isStandalone ? 40 : undefined,
-              width: '100%',
               paddingVertical: isStandalone ? 10 : 5,
               color: disabled
                 ? theme.colors.textInputDisabled
