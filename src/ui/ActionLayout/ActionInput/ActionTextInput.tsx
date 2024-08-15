@@ -67,9 +67,11 @@ export const ActionTextInput = ({
   type: inputType,
   description,
   required,
+  icon,
 }: InputProps & {
   onChange?: (value: string) => void;
   onValidityChange?: (state: boolean) => void;
+  icon?: (props: SvgProps) => JSX.Element;
 }) => {
   const theme = useTheme();
   const type = (TextTypes.includes(inputType) ? inputType : 'text') as TextType;
@@ -129,7 +131,7 @@ export const ActionTextInput = ({
     (placeholder ?? inputVariants[type].placeholder) + (required ? '*' : '');
 
   const [isFocused, setIsFocused] = useState(false);
-  const InputIcon = inputVariants[type].icon;
+  const InputIcon = icon ?? inputVariants[type].icon;
 
   const finalDescription =
     description ??

@@ -12,6 +12,7 @@ import type {
 } from '../../theme/types';
 import { ActionButton } from '../ActionButton';
 import type { InputProps } from '../types';
+import { ActionTextInput } from './ActionTextInput';
 import {
   buildDefaultDateDescription,
   extractDateValue,
@@ -56,7 +57,19 @@ const PickerInput = ({
   );
 };
 
-export const ActionDateTimeInput = ({
+export const ActionDateTimeInput = (
+  props: InputProps & {
+    onChange?: (value: string) => void;
+    onValidityChange?: (state: boolean) => void;
+  },
+) => {
+  if (props.pattern) {
+    return <ActionTextInput {...props} icon={CalendarIcon} />;
+  }
+  return <DateTimeInput {...props} />;
+};
+
+const DateTimeInput = ({
   placeholder,
   name,
   button,

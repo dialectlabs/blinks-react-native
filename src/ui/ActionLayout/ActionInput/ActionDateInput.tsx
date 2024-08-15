@@ -7,6 +7,7 @@ import { Box, Text } from '../../index';
 import { useTheme } from '../../theme';
 import { ActionButton } from '../ActionButton';
 import type { InputProps } from '../types';
+import { ActionTextInput } from './ActionTextInput';
 import {
   buildDefaultDateDescription,
   extractDateValue,
@@ -15,7 +16,19 @@ import {
   getInputTextColor,
 } from './util';
 
-export const ActionDateInput = ({
+export const ActionDateInput = (
+  props: InputProps & {
+    onChange?: (value: string) => void;
+    onValidityChange?: (state: boolean) => void;
+  },
+) => {
+  if (props.pattern) {
+    return <ActionTextInput {...props} icon={CalendarIcon} />;
+  }
+  return <DateInput {...props} />;
+};
+
+const DateInput = ({
   placeholder,
   name,
   button,
