@@ -12,6 +12,7 @@ import {
   extractDateValue,
   getBorderColor,
   getDescriptionColor,
+  getInputTextColor,
 } from './util';
 
 export const ActionDateInput = ({
@@ -102,7 +103,7 @@ export const ActionDateInput = ({
             <CalendarIcon color={theme.colors.iconPrimary} />
             <Text
               variant="text"
-              color={value ? 'textInput' : 'textInputPlaceholder'}
+              color={getInputTextColor(Boolean(value), disabled)}
             >
               {value
                 ? displayedDate.toLocaleDateString()

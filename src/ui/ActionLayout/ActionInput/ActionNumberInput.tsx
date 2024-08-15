@@ -49,7 +49,9 @@ export const ActionNumberInput = ({
 
   const checkValidity = useCallback(
     (text: string) => {
-      if (!text && required) return false;
+      if (!text) {
+        return !required;
+      }
       if (regExp) {
         return regExp.test(text);
       }
@@ -98,7 +100,7 @@ export const ActionNumberInput = ({
         <Box alignItems="center" flexDirection="row" pl={2} pr={1} gap={1.5}>
           <NumberIcon width={16} height={16} color={theme.colors.iconPrimary} />
           <TextInput
-            inputMode="numeric"
+            inputMode={pattern ? 'text' : 'numeric'}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             style={{

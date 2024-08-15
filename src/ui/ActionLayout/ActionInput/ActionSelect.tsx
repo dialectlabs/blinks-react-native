@@ -7,7 +7,7 @@ import { Box, Text } from '../../index';
 import { useTheme } from '../../theme';
 import { ActionButton } from '../ActionButton';
 import type { InputProps } from '../types';
-import { getBorderColor, getDescriptionColor } from './util';
+import { getBorderColor, getDescriptionColor, getInputTextColor } from './util';
 
 export const ActionSelect = ({
   placeholder,
@@ -91,13 +91,7 @@ export const ActionSelect = ({
             justifyContent="space-between"
           >
             <Text
-              color={
-                disabled
-                  ? 'textInputDisabled'
-                  : value
-                    ? 'textInput'
-                    : 'textInputPlaceholder'
-              }
+              color={getInputTextColor(Boolean(value), disabled)}
               variant="text"
             >
               {value || placeholderWithRequired}

@@ -4,6 +4,7 @@ import { StyleSheet, TouchableHighlight, useColorScheme } from 'react-native';
 import { Box, Text } from '../index';
 import { BottomSheetModal } from './BottomSheetModal';
 
+//these are ios colors
 export const COLORS = {
   dark: {
     backgroundColor: '#0E0E0E',

@@ -76,6 +76,12 @@ export const extractDateValue = (date: Date) => {
   return `${year}-${month}-${day}`;
 };
 
+export const getInputTextColor = (hasValue: boolean, disabled?: boolean) => {
+  if (disabled) return 'textInputDisabled';
+  if (hasValue) return 'textInput';
+  return 'textInputPlaceholder';
+};
+
 export const getBorderColor = (
   isValid: boolean,
   isTouched: boolean,

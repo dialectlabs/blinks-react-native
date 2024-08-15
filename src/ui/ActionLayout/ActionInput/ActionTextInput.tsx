@@ -90,7 +90,9 @@ export const ActionTextInput = ({
 
   const checkValidity = useCallback(
     (text: string) => {
-      if (!text && required) return false;
+      if (!text) {
+        return !required;
+      }
       if (minLength && text.length < minLength) {
         return false;
       }
@@ -149,7 +151,7 @@ export const ActionTextInput = ({
             />
           )}
           <TextInput
-            inputMode={inputVariants[type]?.inputMode}
+            inputMode={pattern ? 'text' : inputVariants[type]?.inputMode}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             style={{

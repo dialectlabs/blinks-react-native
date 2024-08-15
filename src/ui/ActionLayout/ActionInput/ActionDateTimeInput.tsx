@@ -18,6 +18,7 @@ import {
   extractTimeValue,
   getBorderColor,
   getDescriptionColor,
+  getInputTextColor,
 } from './util';
 
 type Mode = 'date' | 'time';
@@ -46,10 +47,7 @@ const PickerInput = ({
       <TouchableOpacity onPress={!disabled ? onPress : undefined}>
         <Box pl={2} flexDirection="row" alignItems="center" gap={3}>
           {icon}
-          <Text
-            variant="text"
-            color={isSelected ? 'textInput' : 'textInputPlaceholder'}
-          >
+          <Text variant="text" color={getInputTextColor(isSelected, disabled)}>
             {value}
           </Text>
         </Box>
@@ -219,8 +217,6 @@ export const ActionDateTimeInput = ({
       )}
       <DateTimePickerModal
         date={displayedDate}
-        // maximumDate={maxDate ?? undefined}
-        // minimumDate={minDate ?? undefined}
         isVisible={isOpen}
         mode={mode}
         onConfirm={extendedChange}
