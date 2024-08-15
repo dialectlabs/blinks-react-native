@@ -158,54 +158,61 @@ export const ActionDateTimeInput = ({
 
   const standaloneProps = isStandalone
     ? {
-        backgroundColor: 'bgSecondary' as keyof ColorVars,
-        padding: 2 as keyof SpacingVars,
-        borderRadius: 'xl' as keyof BorderRadiiVars,
+        container: {
+          backgroundColor: 'bgSecondary' as keyof ColorVars,
+          padding: 2 as keyof SpacingVars,
+          borderRadius: 'xl' as keyof BorderRadiiVars,
+        },
+        text: {
+          px: 2 as keyof SpacingVars,
+        },
       }
     : {};
 
   return (
-    <Box gap={3} {...standaloneProps}>
+    <Box gap={1} {...standaloneProps.container}>
       <Text
-        variant={isStandalone ? 'text' : 'subtext'}
+        variant="subtext"
         fontWeight="600"
         color="textPrimary"
-        p={isStandalone ? 2 : 0}
-        pb={0}
+        py={1}
+        {...standaloneProps.text}
       >
         {placeholderWithRequired}
       </Text>
-      <PickerInput
-        disabled={disabled}
-        isValid={isValid}
-        isOpen={isOpen && mode === 'date'}
-        onPress={showDatePicker}
-        icon={<CalendarIcon color={theme.colors.iconPrimary} />}
-        value={displayedDate.toLocaleDateString()}
-        isSelected={!!dateValue}
-      />
-      <PickerInput
-        disabled={disabled}
-        isValid={isValid}
-        isOpen={isOpen && mode === 'time'}
-        onPress={showTimePicker}
-        icon={<ClockIcon color={theme.colors.iconPrimary} />}
-        value={displayedDate.toLocaleTimeString()}
-        isSelected={!!timeValue}
-      />
-      {button && (
-        <ActionButton
-          {...button}
-          onClick={() => button.onClick({ [name]: value })}
-          disabled={button.disabled || value === '' || !isValid}
+      <Box gap={3}>
+        <PickerInput
+          disabled={disabled}
+          isValid={isValid}
+          isOpen={isOpen && mode === 'date'}
+          onPress={showDatePicker}
+          icon={<CalendarIcon color={theme.colors.iconPrimary} />}
+          value={displayedDate.toLocaleDateString()}
+          isSelected={!!dateValue}
         />
-      )}
+        <PickerInput
+          disabled={disabled}
+          isValid={isValid}
+          isOpen={isOpen && mode === 'time'}
+          onPress={showTimePicker}
+          icon={<ClockIcon color={theme.colors.iconPrimary} />}
+          value={displayedDate.toLocaleTimeString()}
+          isSelected={!!timeValue}
+        />
+        {button && (
+          <ActionButton
+            {...button}
+            onClick={() => button.onClick({ [name]: value })}
+            disabled={button.disabled || value === '' || !isValid}
+          />
+        )}
+      </Box>
       {finalDescription && (
         <Text
           color={getDescriptionColor(isValid, isTouched)}
           variant="caption"
-          p={isStandalone ? 2 : 0}
-          pt={0}
+          py={1}
+          {...standaloneProps.text}
         >
           {finalDescription}
         </Text>

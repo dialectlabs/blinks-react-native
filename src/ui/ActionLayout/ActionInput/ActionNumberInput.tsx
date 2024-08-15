@@ -89,7 +89,7 @@ export const ActionNumberInput = ({
   const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <Box flexDirection="column" gap={3}>
+    <Box flexDirection="column" gap={1}>
       <InputContainer
         standalone={isStandalone}
         disabled={disabled}
@@ -102,6 +102,7 @@ export const ActionNumberInput = ({
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             style={{
+              flex: 1,
               fontSize: theme.textVariants.text.fontSize,
               lineHeight: theme.textVariants.text.lineHeight,
               height: isStandalone ? 40 : undefined,
@@ -128,7 +129,11 @@ export const ActionNumberInput = ({
         )}
       </InputContainer>
       {finalDescription && (
-        <Text color={getDescriptionColor(isValid, isTouched)} variant="caption">
+        <Text
+          color={getDescriptionColor(isValid, isTouched)}
+          variant="caption"
+          py={1}
+        >
           {finalDescription}
         </Text>
       )}

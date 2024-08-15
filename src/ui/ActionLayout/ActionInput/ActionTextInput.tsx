@@ -51,6 +51,7 @@ const inputVariants: Record<
   },
 };
 
+const TextTypes = ['text', 'email', 'url', 'textarea'];
 type TextType = 'text' | 'email' | 'url' | 'textarea';
 
 export const ActionTextInput = ({
@@ -63,15 +64,15 @@ export const ActionTextInput = ({
   pattern,
   min,
   max,
-  type,
+  type: inputType,
   description,
   required,
-}: Omit<InputProps, 'type'> & {
-  type: TextType;
+}: InputProps & {
   onChange?: (value: string) => void;
   onValidityChange?: (state: boolean) => void;
 }) => {
   const theme = useTheme();
+  const type = (TextTypes.includes(inputType) ? inputType : 'text') as TextType;
 
   const isStandalone = !!button;
   const [value, setValue] = useState('');
@@ -127,7 +128,7 @@ export const ActionTextInput = ({
     buildDefaultTextDescription({ min: minLength, max: maxLength });
 
   return (
-    <Box flexDirection="column" gap={3}>
+    <Box flexDirection="column" gap={1}>
       <InputContainer
         disabled={disabled}
         standalone={isStandalone}
@@ -148,10 +149,11 @@ export const ActionTextInput = ({
             />
           )}
           <TextInput
-            inputMode={inputVariants[type].inputMode}
+            inputMode={inputVariants[type]?.inputMode}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             style={{
+              flex: 1,
               textAlignVertical: 'top',
               fontSize: theme.textVariants.text.fontSize,
               lineHeight: theme.textVariants.text.lineHeight,
@@ -180,7 +182,11 @@ export const ActionTextInput = ({
         )}
       </InputContainer>
       {finalDescription && (
-        <Text color={getDescriptionColor(isValid, isTouched)} variant="caption">
+        <Text
+          color={getDescriptionColor(isValid, isTouched)}
+          variant="caption"
+          py={1}
+        >
           {finalDescription}
         </Text>
       )}

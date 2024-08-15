@@ -76,7 +76,7 @@ export const ActionSelect = ({
   const theme = useTheme();
 
   return (
-    <Box gap={3}>
+    <Box gap={1}>
       <InputContainer
         disabled={disabled}
         standalone={isStandalone}
@@ -118,7 +118,11 @@ export const ActionSelect = ({
         )}
       </InputContainer>
       {description && (
-        <Text color={getDescriptionColor(isValid, isTouched)} variant="caption">
+        <Text
+          color={getDescriptionColor(isValid, isTouched)}
+          variant="caption"
+          py={1}
+        >
           {description}
         </Text>
       )}

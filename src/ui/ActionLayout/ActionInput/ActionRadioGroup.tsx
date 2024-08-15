@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { InputContainer } from '../../components';
 import { Box, Text } from '../../index';
 import type {
   BorderRadiiVars,
@@ -10,7 +9,19 @@ import type {
 import { ActionButton } from '../ActionButton';
 import type { InputProps } from '../types';
 
-const RadioButton = ({ selected }: { selected?: boolean }) => {
+const RadioButton = ({
+  selected,
+  disabled,
+}: {
+  selected?: boolean;
+  disabled?: boolean;
+}) => {
+  const getBgColor = () => {
+    if (!selected) return 'inputBg';
+    if (disabled) return 'inputStrokeDisabled';
+    return 'inputBgSelected';
+  };
+
   return (
     <Box
       width={16}
@@ -18,8 +29,8 @@ const RadioButton = ({ selected }: { selected?: boolean }) => {
       p={1}
       borderRadius="full"
       borderWidth={selected ? 0 : 1}
-      borderColor="inputStroke"
-      backgroundColor={selected ? 'inputBgSelected' : 'inputBg'}
+      borderColor={disabled ? 'inputStrokeDisabled' : 'inputStroke'}
+      backgroundColor={getBgColor()}
     >
       {selected && (
         <Box
@@ -71,43 +82,53 @@ export const ActionRadioGroup = ({
 
   const standaloneProps = isStandalone
     ? {
-        backgroundColor: 'bgSecondary' as keyof ColorVars,
-        padding: 2 as keyof SpacingVars,
-        borderRadius: 'xl' as keyof BorderRadiiVars,
+        container: {
+          backgroundColor: 'bgSecondary' as keyof ColorVars,
+          padding: 2 as keyof SpacingVars,
+          borderRadius: 'xl' as keyof BorderRadiiVars,
+        },
+        text: {
+          py: 1 as keyof SpacingVars,
+          px: 2 as keyof SpacingVars,
+        },
       }
     : {};
+
   return (
-    <Box flexDirection="column" gap={3} {...standaloneProps}>
+    <Box flexDirection="column" gap={1} {...standaloneProps.container}>
       {label && (
         <Text
-          variant={isStandalone ? 'text' : 'subtext'}
+          variant="subtext"
           fontWeight="600"
           color="textPrimary"
-          p={isStandalone ? 2 : 0}
-          pb={0}
+          {...standaloneProps.text}
         >
           {label}
           {required ? '*' : ''}
         </Text>
       )}
-      {options.map((it) => (
-        <InputContainer
-          key={it.value}
-          borderColor="inputStroke"
-          disabled={disabled}
-        >
+      <Box>
+        {options.map((it) => (
           <TouchableOpacity
+            key={it.value}
             onPress={disabled ? undefined : () => extendedChange(it.value)}
           >
-            <Box pl={2} flexDirection="row" alignItems="center" gap={3}>
-              <RadioButton selected={it.value === value} />
+            <Box
+              flexDirection="row"
+              alignItems="center"
+              gap={3}
+              height={40}
+              py={1.5}
+              pl={isStandalone ? 2 : 0}
+            >
+              <RadioButton selected={it.value === value} disabled={disabled} />
               <Text variant="text" color="textInput">
                 {it.label}
               </Text>
             </Box>
           </TouchableOpacity>
-        </InputContainer>
-      ))}
+        ))}
+      </Box>
       {button && (
         <ActionButton
           {...button}
@@ -119,8 +140,7 @@ export const ActionRadioGroup = ({
         <Text
           color={!isValid ? 'textError' : 'textSecondary'}
           variant="caption"
-          p={isStandalone ? 2 : 0}
-          pt={0}
+          {...standaloneProps.text}
         >
           {description}
         </Text>

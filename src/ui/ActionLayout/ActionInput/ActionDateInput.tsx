@@ -85,7 +85,7 @@ export const ActionDateInput = ({
     description ?? buildDefaultDateDescription({ minDate, maxDate });
 
   return (
-    <Box gap={3}>
+    <Box gap={1}>
       <InputContainer
         standalone={isStandalone}
         disabled={disabled}
@@ -121,7 +121,11 @@ export const ActionDateInput = ({
         )}
       </InputContainer>
       {finalDescription && (
-        <Text color={getDescriptionColor(isValid, isTouched)} variant="caption">
+        <Text
+          color={getDescriptionColor(isValid, isTouched)}
+          py={1}
+          variant="caption"
+        >
           {finalDescription}
         </Text>
       )}

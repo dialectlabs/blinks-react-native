@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { InputContainer } from '../../components';
 import { CheckBoxIcon } from '../../icons';
 import { Box, Text } from '../../index';
 import { useTheme } from '../../theme';
@@ -16,8 +15,20 @@ import {
   getDescriptionColor,
 } from './util';
 
-const Checkbox = ({ selected }: { selected?: boolean }) => {
+const Checkbox = ({
+  selected,
+  disabled,
+}: {
+  selected?: boolean;
+  disabled?: boolean;
+}) => {
   const theme = useTheme();
+  const getBgColor = () => {
+    if (!selected) return 'inputBg';
+    if (disabled) return 'inputStrokeDisabled';
+    return 'inputBgSelected';
+  };
+
   return (
     <Box
       width={16}
@@ -26,8 +37,8 @@ const Checkbox = ({ selected }: { selected?: boolean }) => {
       justifyContent="center"
       style={{ borderRadius: 3 }}
       borderWidth={selected ? 0 : 1}
-      borderColor="inputStroke"
-      backgroundColor={selected ? 'inputBgSelected' : 'inputBg'}
+      borderColor={disabled ? 'inputStrokeDisabled' : 'inputStroke'}
+      backgroundColor={getBgColor()}
     >
       {selected && <CheckBoxIcon color={theme.colors.inputBg} />}
     </Box>
@@ -136,48 +147,57 @@ export const ActionCheckboxGroup = ({
 
   const standaloneProps = isStandalone
     ? {
-        backgroundColor: 'bgSecondary' as keyof ColorVars,
-        padding: 2 as keyof SpacingVars,
-        borderRadius: 'xl' as keyof BorderRadiiVars,
+        container: {
+          backgroundColor: 'bgSecondary' as keyof ColorVars,
+          padding: 2 as keyof SpacingVars,
+          borderRadius: 'xl' as keyof BorderRadiiVars,
+        },
+        text: {
+          py: 1 as keyof SpacingVars,
+          px: 2 as keyof SpacingVars,
+        },
       }
     : {};
 
   return (
-    <Box flexDirection="column" gap={3} {...standaloneProps}>
+    <Box flexDirection="column" gap={1} {...standaloneProps.container}>
       {label && (
         <Text
-          variant={isStandalone ? 'text' : 'subtext'}
+          variant="subtext"
           fontWeight="600"
           color="textPrimary"
-          p={isStandalone ? 2 : 0}
-          pb={0}
+          {...standaloneProps.text}
         >
           {label}
           {required ? '*' : ''}
         </Text>
       )}
-      {options.map((it) => (
-        <InputContainer
-          key={it.value}
-          borderColor="inputStroke"
-          disabled={disabled}
-        >
+      <Box>
+        {options.map((it) => (
           <TouchableOpacity
+            key={it.value}
             onPress={
               disabled
                 ? undefined
                 : () => extendedChange(it.value, !state.value[it.value])
             }
           >
-            <Box pl={2} flexDirection="row" alignItems="center" gap={3}>
-              <Checkbox selected={state.value[it.value]} />
+            <Box
+              flexDirection="row"
+              alignItems="center"
+              gap={3}
+              height={40}
+              py={1.5}
+              pl={isStandalone ? 2 : 0}
+            >
+              <Checkbox selected={state.value[it.value]} disabled={disabled} />
               <Text variant="text" color="textInput">
                 {it.label}
               </Text>
             </Box>
           </TouchableOpacity>
-        </InputContainer>
-      ))}
+        ))}
+      </Box>
       {button && (
         <ActionButton
           {...button}
@@ -189,8 +209,7 @@ export const ActionCheckboxGroup = ({
         <Text
           color={getDescriptionColor(state.valid, touched)}
           variant="caption"
-          pt={0}
-          p={isStandalone ? 2 : 0}
+          {...standaloneProps.text}
         >
           {finalDescription}
         </Text>
