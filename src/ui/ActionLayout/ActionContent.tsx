@@ -34,7 +34,7 @@ export const ActionContent = ({
         </Box>
       )}
       {inputs
-        // ?.slice(0, SOFT_LIMIT_INPUTS)
+        ?.slice(0, SOFT_LIMIT_INPUTS)
         ?.map((input) => <ActionInput key={input.name} {...input} />)}
     </Box>
   );
