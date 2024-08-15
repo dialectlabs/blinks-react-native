@@ -9,7 +9,7 @@ React Native SDK for rendering blinks for Solana Actions on mobile dApps. Check 
 npm i @dialectlabs/blinks @dialectlabs/blinks-react-native
 
 #yarn
-yard add @dialectlabs/blinks @dialectlabs/blinks-react-native
+yarn add @dialectlabs/blinks @dialectlabs/blinks-react-native
 ```
 
 ## Adding the Blink Component
