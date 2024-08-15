@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { InputContainer } from '../../components';
@@ -81,18 +81,45 @@ export const ActionDateTimeInput = ({
 
   const [dateValue, setDateValue] = useState('');
   const [timeValue, setTimeValue] = useState('');
-  const [value, setValue] = useState('');
 
-  const [displayedDate, setDisplayedDate] = useState(
-    maxDate ? new Date(Math.min(Date.now(), maxDate.valueOf())) : new Date(),
+  const value = useMemo(() => {
+    if (dateValue && timeValue) {
+      return `${dateValue}T${timeValue}`;
+    }
+    return '';
+  }, [dateValue, timeValue]);
+
+  const defaultDate = maxDate
+    ? new Date(Math.min(Date.now(), maxDate.valueOf()))
+    : new Date();
+
+  const displayedDate = useMemo(
+    () => {
+      const date = new Date(defaultDate);
+      if (dateValue) {
+        const [y, m, d] = dateValue.split('-');
+        date.setFullYear(parseInt(y!, 10));
+        date.setMonth(parseInt(m!, 10) - 1);
+        date.setDate(parseInt(d!, 10));
+      }
+      if (timeValue) {
+        const [h, mm] = timeValue.split(':');
+        date.setHours(parseInt(h!, 10), parseInt(mm!, 10));
+      }
+      return date;
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [dateValue, timeValue],
   );
 
   const [mode, setMode] = useState<Mode>('date');
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    onValidityChange?.(isValid);
-  }, []);
+  useEffect(
+    () => {
+      onValidityChange?.(isValid);
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
 
   const checkValidity = (date: Date) => {
     if (minDate && date < minDate) return false;
@@ -106,35 +133,28 @@ export const ActionDateTimeInput = ({
     closePicker();
     if (mode === 'date') {
       setDateValue(extractDateValue(selectedDate));
-      displayedDate.setFullYear(selectedDate.getFullYear());
-      displayedDate.setDate(selectedDate.getDate());
-      displayedDate.setMonth(selectedDate.getMonth());
     } else {
       setTimeValue(extractTimeValue(selectedDate));
-      displayedDate.setHours(
-        selectedDate.getHours(),
-        selectedDate.getMinutes(),
-      );
     }
-    setDisplayedDate(displayedDate);
   };
 
-  useEffect(() => {
-    if (dateValue && timeValue) {
-      const value = `${dateValue}T${timeValue}`;
-      const validity = checkValidity(new Date(value));
+  useEffect(
+    () => {
+      if (value) {
+        const validity = checkValidity(new Date(value));
 
-      setValue(value);
-      setValid(validity);
+        setValid(validity);
 
-      onChange?.(value);
-      onValidityChange?.(validity);
-    }
-  }, [dateValue, timeValue]);
+        onChange?.(value);
+        onValidityChange?.(validity);
+      }
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [value],
+  );
 
-  const openPicker = (mode: Mode) => {
+  const openPicker = (pickerMode: Mode) => {
     setIsOpen(true);
-    setMode(mode);
+    setMode(pickerMode);
   };
 
   const showDatePicker = () => {

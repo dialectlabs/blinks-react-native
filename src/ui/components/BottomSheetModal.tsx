@@ -30,13 +30,16 @@ export const BottomSheetModal = ({
   const animVal = useAnimatedValue(0);
   const [isShown, setIsShown] = useState(isVisible);
 
-  useEffect(() => {
-    if (isVisible) {
-      show();
-    } else {
-      hide();
-    }
-  }, [isVisible]);
+  useEffect(
+    () => {
+      if (isVisible) {
+        show();
+      } else {
+        hide();
+      }
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isVisible],
+  );
 
   const show = useCallback(() => {
     setIsShown(true);

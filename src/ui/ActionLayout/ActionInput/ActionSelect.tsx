@@ -42,23 +42,23 @@ export const ActionSelect = ({
 
   const [isTouched, setTouched] = useState(false);
 
-  useEffect(() => {
-    onValidityChange?.(isValid);
-  }, []);
-
-  const extendedChange = useCallback(
-    (value: string) => {
-      setTouched(true);
-      close();
-      setSelectedOption(options.find((option) => option.value === value));
-      //it's valid as long as it's selected
-      setValid(true);
-
-      onChange?.(value);
-      onValidityChange?.(true);
-    },
-    [value],
+  useEffect(
+    () => {
+      onValidityChange?.(isValid);
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
   );
+
+  const extendedChange = (_value: string) => {
+    setTouched(true);
+    close();
+    setSelectedOption(options.find((option) => option.value === _value));
+    //it's valid as long as it's selected
+    setValid(true);
+
+    onChange?.(_value);
+    onValidityChange?.(true);
+  };
 
   const pickerRef = useRef<Picker<any>>(null);
   const [isVisible, setVisible] = useState(false);

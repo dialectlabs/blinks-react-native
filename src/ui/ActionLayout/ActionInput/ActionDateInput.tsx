@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { InputContainer } from '../../components';
@@ -39,15 +39,24 @@ export const ActionDateInput = ({
   const maxDate = max ? new Date(max as string) : null;
 
   const [value, setValue] = useState('');
-  const [displayedDate, setDisplayedDate] = useState(
-    maxDate ? new Date(Math.min(Date.now(), maxDate.valueOf())) : new Date(),
+  const displayedDate = useMemo(
+    () => {
+      if (value) return new Date(value);
+      return maxDate
+        ? new Date(Math.min(Date.now(), maxDate.valueOf()))
+        : new Date();
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [value],
   );
 
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    onValidityChange?.(isValid);
-  }, []);
+  useEffect(
+    () => {
+      onValidityChange?.(isValid);
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
 
   const checkValidity = (date: Date) => {
     const leftRange = minDate ? date >= minDate : true;
@@ -63,14 +72,13 @@ export const ActionDateInput = ({
     closePicker();
 
     const dateValue = extractDateValue(selectedDate);
-    const isValid = checkValidity(selectedDate);
+    const valid = checkValidity(selectedDate);
 
     setValue(dateValue);
-    setDisplayedDate(selectedDate);
-    setValid(isValid);
+    setValid(valid);
 
     onChange?.(dateValue);
-    onValidityChange?.(isValid);
+    onValidityChange?.(valid);
   };
 
   const openPicker = () => {

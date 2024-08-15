@@ -113,13 +113,16 @@ export const ActionCheckboxGroup = ({
 
   const [touched, setTouched] = useState(false);
 
-  useEffect(() => {
-    onValidityChange?.(state.valid);
-  }, []);
+  useEffect(
+    () => {
+      onValidityChange?.(state.valid);
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
 
-  const extendedChange = (name: string, value: boolean) => {
+  const extendedChange = (_name: string, value: boolean) => {
     setState((prev) => {
-      const newValue = { ...prev.value, [name]: value };
+      const newValue = { ...prev.value, [_name]: value };
 
       const normalizedValue = normalizeValue(newValue);
       onChange?.(normalizedValue);

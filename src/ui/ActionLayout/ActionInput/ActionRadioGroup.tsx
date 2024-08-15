@@ -65,19 +65,22 @@ export const ActionRadioGroup = ({
   );
   const [isValid, setValid] = useState(!isStandalone || !required);
 
-  useEffect(() => {
-    onValidityChange?.(isValid);
-  }, []);
+  useEffect(
+    () => {
+      onValidityChange?.(isValid);
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
 
   const extendedChange = useCallback(
-    (value: string) => {
-      setValue(value);
+    (_value: string) => {
+      setValue(_value);
       setValid(true);
 
-      onChange?.(value);
+      onChange?.(_value);
       onValidityChange?.(true);
     },
-    [onChange],
+    [onChange, onValidityChange],
   );
 
   const standaloneProps = isStandalone

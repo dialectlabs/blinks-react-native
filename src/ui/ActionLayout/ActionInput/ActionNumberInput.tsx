@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   type NativeSyntheticEvent,
   TextInput,
@@ -39,13 +39,19 @@ export const ActionNumberInput = ({
   const [isValid, setValid] = useState(!isStandalone && !required);
   const [isTouched, setTouched] = useState(false);
 
-  const regExp = pattern ? new RegExp(pattern) : null;
+  const regExp = useMemo(
+    () => (pattern ? new RegExp(pattern) : null),
+    [pattern],
+  );
   const minNumber = min as number;
   const maxNumber = max as number;
 
-  useEffect(() => {
-    onValidityChange?.(isValid);
-  }, []);
+  useEffect(
+    () => {
+      onValidityChange?.(isValid);
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
 
   const checkValidity = useCallback(
     (text: string) => {
@@ -65,20 +71,20 @@ export const ActionNumberInput = ({
       }
       return true;
     },
-    [min, max, regExp, required],
+    [regExp, minNumber, maxNumber, required],
   );
 
   const extendedChange = (
     e: NativeSyntheticEvent<TextInputChangeEventData>,
   ) => {
     setTouched(true);
-    const value = e.nativeEvent.text;
-    const validity = checkValidity(value);
+    const _value = e.nativeEvent.text;
+    const validity = checkValidity(_value);
 
-    setValue(value);
+    setValue(_value);
     setValid(validity);
 
-    onChange?.(value);
+    onChange?.(_value);
     onValidityChange?.(validity);
   };
 

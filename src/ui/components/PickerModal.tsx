@@ -43,11 +43,14 @@ export const PickerModal = ({
 }: Props) => {
   const [val, setVal] = useState(value);
 
-  useEffect(() => {
-    if (isVisible) {
-      setVal(value || (options[0]?.value ?? ''));
-    }
-  }, [isVisible]);
+  useEffect(
+    () => {
+      if (isVisible) {
+        setVal(value || (options[0]?.value ?? ''));
+      }
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isVisible],
+  );
 
   const handleCancel = () => {
     onCancel();
