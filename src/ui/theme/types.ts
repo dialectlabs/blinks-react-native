@@ -3,6 +3,7 @@ import { textVariants } from './textVariants';
 
 export interface ThemeVars {
   '--blink-bg-primary': string;
+  '--blink-bg-secondary': string;
   '--blink-button': string;
   '--blink-button-disabled': string;
   '--blink-button-success': string;
@@ -10,6 +11,8 @@ export interface ThemeVars {
   '--blink-icon-primary': string;
   '--blink-icon-warning': string;
   '--blink-input-bg': string;
+  '--blink-input-bg-selected': string;
+  '--blink-input-bg-disabled': string;
   '--blink-input-stroke': string;
   '--blink-input-stroke-disabled': string;
   '--blink-input-stroke-error': string;
@@ -40,10 +43,12 @@ export interface ThemeVars {
   '--blink-border-radius-rounded-2xl': number;
   '--blink-border-radius-rounded-button': number;
   '--blink-border-radius-rounded-input': number;
+  '--blink-border-radius-rounded-input-standalone': number;
 }
 
 export type ColorVars = {
   bgPrimary: string;
+  bgSecondary: string;
   button: string;
   buttonDisabled: string;
   buttonSuccess: string;
@@ -51,6 +56,8 @@ export type ColorVars = {
   iconPrimary: string;
   iconWarning: string;
   inputBg: string;
+  inputBgSelected: string;
+  inputBgDisabled: string;
   inputStroke: string;
   inputStrokeDisabled: string;
   inputStrokeError: string;
@@ -82,6 +89,7 @@ export type BorderRadiiVars = {
   '2xl': number;
   button: number;
   input: number;
+  inputStandalone: number;
   full: number;
 };
 

@@ -11,7 +11,7 @@ interface Props {
 export const Snackbar = ({ variant = 'warning', children }: Props) => {
   return (
     <Box
-      borderRadius="lg"
+      borderRadius="xl"
       borderWidth={1}
       p={3}
       backgroundColor={

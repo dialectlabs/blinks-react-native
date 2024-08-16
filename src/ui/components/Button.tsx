@@ -20,7 +20,7 @@ export const Button = ({
   return (
     <TouchableOpacity activeOpacity={0.7} disabled={disabled} onPress={onClick}>
       <Box
-        style={{ paddingVertical: 11 }}
+        height={40}
         px={4}
         width="100%"
         flexDirection="row"

@@ -1,3 +1,8 @@
+import {
+  type ActionParameterSelectable,
+  type ActionParameterType,
+} from '@dialectlabs/blinks';
+
 export type ActionType = 'trusted' | 'malicious' | 'unknown';
 
 export type StylePreset = 'default' | 'x-dark' | 'x-light' | 'custom';
@@ -23,15 +28,25 @@ export interface ButtonProps {
   loading?: boolean;
   variant?: 'default' | 'success' | 'error';
   disabled?: boolean;
-  onClick: (params?: Record<string, string>) => void;
+  onClick: (params?: Record<string, string | string[]>) => void;
 }
 
+type InputType = ActionParameterType;
+
 export interface InputProps {
+  type: InputType;
   placeholder?: string;
   name: string;
   disabled: boolean;
   required?: boolean;
+  min?: number | string;
+  max?: number | string;
+  pattern?: string;
+  description?: string;
   button?: ButtonProps;
+  options?: ActionParameterSelectable<
+    'select' | 'radio' | 'checkbox'
+  >['options'];
 }
 
 export interface FormProps {
