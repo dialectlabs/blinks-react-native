@@ -1,6 +1,7 @@
 import {
   type ActionParameterSelectable,
   type ActionParameterType,
+  type ActionSupportability,
 } from '@dialectlabs/blinks';
 
 export type ActionType = 'trusted' | 'malicious' | 'unknown';
@@ -68,4 +69,5 @@ export interface LayoutProps {
   buttons?: ButtonProps[];
   inputs?: InputProps[];
   form?: FormProps;
+  supportability: ActionSupportability;
 }
