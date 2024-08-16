@@ -114,7 +114,6 @@ export const ActionNumberInput = ({
               fontSize: theme.textVariants.text.fontSize,
               lineHeight: theme.textVariants.text.lineHeight,
               height: isStandalone ? 40 : undefined,
-              paddingVertical: isStandalone ? 10 : 5,
               color: disabled
                 ? theme.colors.textInputDisabled
                 : theme.colors.textInput,

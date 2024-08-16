@@ -137,6 +137,7 @@ export const ActionTextInput = ({
     description ??
     buildDefaultTextDescription({ min: minLength, max: maxLength });
 
+  const isTextArea = type === 'textarea';
   return (
     <Box flexDirection="column" gap={1}>
       <InputContainer
@@ -144,13 +145,7 @@ export const ActionTextInput = ({
         standalone={isStandalone}
         borderColor={getBorderColor(isValid, isTouched, isFocused)}
       >
-        <Box
-          alignItems={type === 'textarea' ? 'flex-start' : 'center'}
-          flexDirection="row"
-          pl={2}
-          pr={1}
-          gap={1.5}
-        >
+        <Box alignItems="center" flexDirection="row" pl={2} pr={1} gap={1.5}>
           {InputIcon && (
             <InputIcon
               width={16}
@@ -164,11 +159,10 @@ export const ActionTextInput = ({
             onBlur={() => setIsFocused(false)}
             style={{
               flex: 1,
-              textAlignVertical: 'top',
+              verticalAlign: isTextArea ? 'top' : 'auto',
               fontSize: theme.textVariants.text.fontSize,
               lineHeight: theme.textVariants.text.lineHeight,
-              height: type === 'textarea' ? 66 : isStandalone ? 40 : undefined,
-              paddingVertical: isStandalone ? 10 : 5,
+              height: isTextArea ? 66 : isStandalone ? 40 : undefined,
               color: disabled
                 ? theme.colors.textInputDisabled
                 : theme.colors.textInput,
@@ -178,7 +172,7 @@ export const ActionTextInput = ({
             value={value}
             readOnly={disabled}
             onChange={extendedChange}
-            multiline={type === 'textarea'}
+            multiline={isTextArea}
           />
         </Box>
         {button && (
