@@ -4,6 +4,7 @@ import { ActionForm } from './ActionForm';
 import { ActionImage } from './ActionImage';
 import { DisclaimerBlock } from './DisclaimerBlock';
 import { Header } from './Header';
+import { NotSupportedBlock } from './NotSupportedBlock';
 import type { LayoutProps } from './types';
 import { DisclaimerType } from './types';
 
@@ -22,6 +23,7 @@ const ActionLayout = ({
   form,
   error,
   success,
+  supportability,
 }: LayoutProps) => {
   return (
     <Box
@@ -44,40 +46,56 @@ const ActionLayout = ({
           {description}
         </Text>
 
-        {disclaimer && (
-          <Box mb={3}>
-            <DisclaimerBlock
-              type={disclaimer.type}
-              ignorable={disclaimer.ignorable}
-              hidden={
-                disclaimer.type === DisclaimerType.BLOCKED
-                  ? disclaimer.hidden
-                  : false
-              }
-              onSkip={
-                disclaimer.type === DisclaimerType.BLOCKED
-                  ? disclaimer.onSkip
-                  : undefined
-              }
-            />
-          </Box>
-        )}
-
-        {form ? (
-          <ActionForm form={form} />
+        {!supportability.isSupported ? (
+          <NotSupportedBlock message={supportability?.message} />
         ) : (
-          <ActionContent inputs={inputs} buttons={buttons} />
-        )}
+          <>
+            {disclaimer && (
+              <Box mb={3}>
+                <DisclaimerBlock
+                  type={disclaimer.type}
+                  ignorable={disclaimer.ignorable}
+                  hidden={
+                    disclaimer.type === DisclaimerType.BLOCKED
+                      ? disclaimer.hidden
+                      : false
+                  }
+                  onSkip={
+                    disclaimer.type === DisclaimerType.BLOCKED
+                      ? disclaimer.onSkip
+                      : undefined
+                  }
+                />
+              </Box>
+            )}
 
-        {success && (
-          <Text mt={3} color="textSuccess" variant="caption" textAlign="center">
-            {success}
-          </Text>
-        )}
-        {error && !success && (
-          <Text mt={3} color="textError" variant="caption" textAlign="center">
-            {error}
-          </Text>
+            {form ? (
+              <ActionForm form={form} />
+            ) : (
+              <ActionContent inputs={inputs} buttons={buttons} />
+            )}
+
+            {success && (
+              <Text
+                mt={3}
+                color="textSuccess"
+                variant="caption"
+                textAlign="center"
+              >
+                {success}
+              </Text>
+            )}
+            {error && !success && (
+              <Text
+                mt={3}
+                color="textError"
+                variant="caption"
+                textAlign="center"
+              >
+                {error}
+              </Text>
+            )}
+          </>
         )}
       </Box>
     </Box>

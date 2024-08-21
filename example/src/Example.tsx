@@ -1,4 +1,8 @@
-import { useAction, type ActionAdapter } from '@dialectlabs/blinks';
+import {
+  BlockchainIds,
+  useAction,
+  type ActionAdapter,
+} from '@dialectlabs/blinks';
 import { Blink } from '@dialectlabs/blinks-react-native';
 import { PublicKey } from '@solana/web3.js';
 import type React from 'react';
@@ -19,6 +23,7 @@ function getWalletAdapter(): ActionAdapter {
     confirmTransaction: async (_signature, _context) => {
       console.log('confirmTransaction');
     },
+    metadata: { supportedBlockchainIds: [BlockchainIds.SOLANA_MAINNET] },
   };
 }
 
