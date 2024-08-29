@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Image, StyleSheet } from 'react-native';
+import { SvgUri } from 'react-native-svg';
 import { Link } from '../components';
 
 export const ActionImage = ({
@@ -13,19 +14,26 @@ export const ActionImage = ({
 
   useEffect(() => {
     Image.getSize(imageUrl, (width, height) => {
-      setAspectRatio(Math.max(width / height, 1));
+      if (width !== 0 && height !== 0) {
+        setAspectRatio(Math.max(width / height, 1));
+      }
     });
   }, [imageUrl]);
 
   return (
     <Link url={websiteUrl} width="100%" aspectRatio={aspectRatio}>
-      <Image
-        style={styles.image}
-        resizeMode="cover"
-        source={{
-          uri: imageUrl,
-        }}
-      />
+      {imageUrl.endsWith('svg') ? (
+        <SvgUri style={styles.image} uri={imageUrl} />
+      ) : (
+        <Image
+          style={styles.image}
+          resizeMode="cover"
+          src={imageUrl}
+          source={{
+            uri: imageUrl,
+          }}
+        />
+      )}
     </Link>
   );
 };
