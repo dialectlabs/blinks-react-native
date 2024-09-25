@@ -6,12 +6,11 @@ import {
   type TextInputChangeEventData,
 } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
-import { InputContainer } from '../../components';
+import { Box, InputContainer, Text } from '../../components';
 import { EnvelopeIcon, LinkIcon } from '../../icons';
-import { Box, Text } from '../../index';
 import { useTheme } from '../../theme';
+import type { InputProps } from '../../types';
 import { ActionButton } from '../ActionButton';
-import type { InputProps } from '../types';
 import {
   buildDefaultTextDescription,
   getBorderColor,

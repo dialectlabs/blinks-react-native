@@ -1,12 +1,12 @@
-import { Box, Text } from '../index';
+import { Box, Text } from '../components';
+import type { LayoutProps } from '../types';
+import { DisclaimerType } from '../types';
 import { ActionContent } from './ActionContent';
 import { ActionForm } from './ActionForm';
 import { ActionImage } from './ActionImage';
 import { DisclaimerBlock } from './DisclaimerBlock';
 import { Header } from './Header';
 import { NotSupportedBlock } from './NotSupportedBlock';
-import type { LayoutProps } from './types';
-import { DisclaimerType } from './types';
 
 export const SOFT_LIMIT_TITLE_LENGTH = 80;
 
@@ -16,7 +16,7 @@ const ActionLayout = ({
   image,
   websiteUrl,
   websiteText,
-  type,
+  securityState,
   disclaimer,
   buttons,
   inputs,
@@ -37,7 +37,11 @@ const ActionLayout = ({
       {image && <ActionImage imageUrl={image} websiteUrl={websiteUrl} />}
 
       <Box flexDirection="column" p={4}>
-        <Header websiteText={websiteText} websiteUrl={websiteUrl} type={type} />
+        <Header
+          websiteText={websiteText}
+          websiteUrl={websiteUrl}
+          securityState={securityState}
+        />
 
         <Text mb={0.5} variant="text" fontWeight="600" color="textPrimary">
           {title.substring(0, SOFT_LIMIT_TITLE_LENGTH)}

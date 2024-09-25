@@ -1,8 +1,9 @@
 import { Picker } from '@react-native-picker/picker';
 import { useEffect, useState } from 'react';
 import { StyleSheet, TouchableHighlight, useColorScheme } from 'react-native';
-import { Box, Text } from '../index';
 import { BottomSheetModal } from './BottomSheetModal';
+import { Box } from './Box';
+import { Text } from './Text';
 
 //these are ios colors
 export const COLORS = {

@@ -1,7 +1,6 @@
 import { Linking, Pressable } from 'react-native';
-import { Link, Snackbar } from '../components';
-import { Box, Text } from '../index';
-import { DisclaimerType } from './types';
+import { Box, Link, Snackbar, Text } from '../components';
+import { DisclaimerType } from '../types';
 
 export const DisclaimerBlock = ({
   type,

@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react';
-import { Box } from '../index';
 import type { Theme } from '../theme';
+import { Box } from './Box';
 
 export const InputContainer = ({
   children,

@@ -1,15 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
+import { Box, Text } from '../../components';
 import { CheckBoxIcon } from '../../icons';
-import { Box, Text } from '../../index';
+import type { BorderRadiiVars, ColorVars, SpacingVars } from '../../theme';
 import { useTheme } from '../../theme';
-import type {
-  BorderRadiiVars,
-  ColorVars,
-  SpacingVars,
-} from '../../theme/types';
 import { ActionButton } from '../ActionButton';
-import type { InputProps } from '../types';
+
+import type { InputProps } from '../../types';
 import {
   buildDefaultCheckboxGroupDescription,
   getDescriptionColor,

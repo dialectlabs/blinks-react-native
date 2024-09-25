@@ -1,13 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Box, Text } from '../../index';
-import type {
-  BorderRadiiVars,
-  ColorVars,
-  SpacingVars,
-} from '../../theme/types';
+import { Box, Text } from '../../components';
+import type { BorderRadiiVars, ColorVars, SpacingVars } from '../../theme';
+import type { InputProps } from '../../types';
 import { ActionButton } from '../ActionButton';
-import type { InputProps } from '../types';
 
 const RadioButton = ({
   selected,

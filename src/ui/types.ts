@@ -2,11 +2,11 @@ import {
   type ActionParameterSelectable,
   type ActionParameterType,
   type ActionSupportability,
-} from '@dialectlabs/blinks';
+  type SecurityActionState,
+} from '@dialectlabs/blinks-core';
 
-export type ActionType = 'trusted' | 'malicious' | 'unknown';
+export type SecurityState = SecurityActionState;
 
-export type StylePreset = 'default' | 'x-dark' | 'x-light' | 'custom';
 export enum DisclaimerType {
   BLOCKED = 'blocked',
   UNKNOWN = 'unknown',
@@ -56,18 +56,18 @@ export interface FormProps {
 }
 
 export interface LayoutProps {
-  stylePreset?: StylePreset;
   image?: string;
   error?: string | null;
   success?: string | null;
   websiteUrl?: string | null;
   websiteText?: string | null;
   disclaimer?: Disclaimer | null;
-  type: ActionType;
+  securityState: SecurityActionState;
   title: string;
   description: string;
   buttons?: ButtonProps[];
   inputs?: InputProps[];
   form?: FormProps;
   supportability: ActionSupportability;
+  id?: string;
 }

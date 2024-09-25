@@ -1708,6 +1708,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.25.0":
+  version: 7.25.6
+  resolution: "@babel/runtime@npm:7.25.6"
+  dependencies:
+    regenerator-runtime: ^0.14.0
+  checksum: ee1a69d3ac7802803f5ee6a96e652b78b8addc28c6a38c725a4ad7d61a059d9e6cb9f6550ed2f63cce67a1bd82e0b1ef66a1079d895be6bfb536a5cfbd9ccc32
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.0.0, @babel/template@npm:^7.24.7, @babel/template@npm:^7.3.3":
   version: 7.24.7
   resolution: "@babel/template@npm:7.24.7"
@@ -1755,6 +1764,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@dialectlabs/blinks-core@npm:^0.11.1":
+  version: 0.11.1
+  resolution: "@dialectlabs/blinks-core@npm:0.11.1"
+  dependencies:
+    "@solana/web3.js": ^1.95.1
+    nanoid: ^5.0.7
+  peerDependencies:
+    react: ">=18"
+  checksum: 13a1e9cec68e5c680b47b9e95268bc12ea28e3208d803fa494117d0590ec2a1e27e3592e3ac5dc3728d294cb52b5357d1ecf05e67389044ecd12a6a242d8d6f2
+  languageName: node
+  linkType: hard
+
 "@dialectlabs/blinks-react-native-example@workspace:example":
   version: 0.0.0-use.local
   resolution: "@dialectlabs/blinks-react-native-example@workspace:example"
@@ -1777,7 +1798,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@dialectlabs/blinks-react-native@workspace:."
   dependencies:
-    "@dialectlabs/blinks": ^0.9.3
+    "@dialectlabs/blinks-core": ^0.11.1
     "@react-native-community/datetimepicker": ^8.2.0
     "@react-native-picker/picker": ^2.7.7
     "@react-native/eslint-config": ^0.74.85
@@ -1806,21 +1827,6 @@ __metadata:
     react-native-svg: "*"
   languageName: unknown
   linkType: soft
-
-"@dialectlabs/blinks@npm:^0.9.3":
-  version: 0.9.3
-  resolution: "@dialectlabs/blinks@npm:0.9.3"
-  dependencies:
-    clsx: ^2.1.1
-  peerDependencies:
-    "@solana/wallet-adapter-react": ^0.15.0
-    "@solana/wallet-adapter-react-ui": ^0.9.0
-    "@solana/web3.js": ^1.95.1
-    react: ">=18"
-    react-dom: ">=18"
-  checksum: ffe62cf8fc8262b587f766278dcb38a28fab4d45c78fb1311fde34dd23e896ff96e76b0c82fdf5002c777194f0d20104c03889f3ccb833ed824c4a78d178b910
-  languageName: node
-  linkType: hard
 
 "@eslint-community/eslint-utils@npm:^4.2.0, @eslint-community/eslint-utils@npm:^4.4.0":
   version: 4.4.0
@@ -3445,9 +3451,9 @@ __metadata:
   linkType: hard
 
 "@solana/actions-spec@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "@solana/actions-spec@npm:2.2.0"
-  checksum: e252c3708068060c5caee9f562a3231312a8ca4298b545093400fa58c07c10d2afa57a4ba160cdb25d9077a14e161767f65afbc6495ddc0c4bfe3ff99a603389
+  version: 2.2.2
+  resolution: "@solana/actions-spec@npm:2.2.2"
+  checksum: 4091faaba30f4d1d753dbd4eea6308ebad73bdd7d9b6a887dedad04cbdad8ae914f4dcba7dc56d5f8a757182129ed400ba07e3b969cac63e59a6384d6802a62b
   languageName: node
   linkType: hard
 
@@ -3457,6 +3463,29 @@ __metadata:
   dependencies:
     buffer: ~6.0.3
   checksum: bf846888e813187243d4008a7a9f58b49d16cbd995b9d7f1b72898aa510ed77b1ce5e8468e7b2fd26dd81e557a4e74a666e21fccb95f123c1f740d41138bbacd
+  languageName: node
+  linkType: hard
+
+"@solana/web3.js@npm:^1.95.1":
+  version: 1.95.3
+  resolution: "@solana/web3.js@npm:1.95.3"
+  dependencies:
+    "@babel/runtime": ^7.25.0
+    "@noble/curves": ^1.4.2
+    "@noble/hashes": ^1.4.0
+    "@solana/buffer-layout": ^4.0.1
+    agentkeepalive: ^4.5.0
+    bigint-buffer: ^1.1.5
+    bn.js: ^5.2.1
+    borsh: ^0.7.0
+    bs58: ^4.0.1
+    buffer: 6.0.3
+    fast-stable-stringify: ^1.0.0
+    jayson: ^4.1.1
+    node-fetch: ^2.7.0
+    rpc-websockets: ^9.0.2
+    superstruct: ^2.0.2
+  checksum: 6951eb12275de09ef9422fc65982b7496f3d11253b4cd1b09694dd2135d92aa272a04a7adf50ef0136a459b08ea40e07f6e7cbf1970cae44d6193d93fe6acc1f
   languageName: node
   linkType: hard
 
@@ -5254,13 +5283,6 @@ __metadata:
   version: 2.1.2
   resolution: "clone@npm:2.1.2"
   checksum: aaf106e9bc025b21333e2f4c12da539b568db4925c0501a1bf4070836c9e848c892fa22c35548ce0d1132b08bbbfa17a00144fe58fccdab6fa900fec4250f67d
-  languageName: node
-  linkType: hard
-
-"clsx@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "clsx@npm:2.1.1"
-  checksum: acd3e1ab9d8a433ecb3cc2f6a05ab95fe50b4a3cfc5ba47abb6cbf3754585fcb87b84e90c822a1f256c4198e3b41c7f6c391577ffc8678ad587fc0976b24fd57
   languageName: node
   linkType: hard
 
@@ -10827,6 +10849,15 @@ __metadata:
   bin:
     nanoid: bin/nanoid.cjs
   checksum: d36c427e530713e4ac6567d488b489a36582ef89da1d6d4e3b87eded11eb10d7042a877958c6f104929809b2ab0bafa17652b076cdf84324aa75b30b722204f2
+  languageName: node
+  linkType: hard
+
+"nanoid@npm:^5.0.7":
+  version: 5.0.7
+  resolution: "nanoid@npm:5.0.7"
+  bin:
+    nanoid: bin/nanoid.js
+  checksum: 25ab0b0cf9082ae6747f0f55cec930e6c1cc5975103aa3a5fda44be5720eff57d9b25a8a9850274bfdde8def964b49bf03def71c6aa7ad1cba32787819b79f60
   languageName: node
   linkType: hard
 

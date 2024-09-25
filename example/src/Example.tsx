@@ -1,9 +1,9 @@
 import {
+  Blink,
   BlockchainIds,
   useAction,
   type ActionAdapter,
-} from '@dialectlabs/blinks';
-import { Blink } from '@dialectlabs/blinks-react-native';
+} from '@dialectlabs/blinks-react-native';
 import { PublicKey } from '@solana/web3.js';
 import type React from 'react';
 import { ActivityIndicator } from 'react-native';

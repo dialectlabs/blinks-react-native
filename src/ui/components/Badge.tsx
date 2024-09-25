@@ -1,7 +1,7 @@
-import type { TextProps } from '@shopify/restyle';
 import type { ReactNode } from 'react';
-import { Box, type BoxProps, Text } from '../index';
 import type { Theme } from '../theme';
+import { Box, type BoxProps } from './Box';
+import { Text, type TextProps } from './Text';
 
 type BadgeVariant = 'warning' | 'error' | 'default';
 
