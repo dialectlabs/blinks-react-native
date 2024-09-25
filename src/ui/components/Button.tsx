@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Box } from '../index';
+import { Box } from './Box';
 
 export const Button = ({
   onClick,

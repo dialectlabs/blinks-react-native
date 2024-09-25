@@ -4,12 +4,11 @@ import {
   TextInput,
   type TextInputChangeEventData,
 } from 'react-native';
-import { InputContainer } from '../../components';
+import { Box, InputContainer, Text } from '../../components';
 import NumberIcon from '../../icons/NumberIcon';
-import { Box, Text } from '../../index';
 import { useTheme } from '../../theme';
+import type { InputProps } from '../../types';
 import { ActionButton } from '../ActionButton';
-import type { InputProps } from '../types';
 import {
   buildDefaultNumberDescription,
   getBorderColor,

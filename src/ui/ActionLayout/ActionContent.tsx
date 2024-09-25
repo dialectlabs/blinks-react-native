@@ -1,12 +1,9 @@
 import { useState } from 'react';
 import { Dimensions } from 'react-native';
-import { Box } from '../index';
+import { Box } from '../components';
+import { type LayoutProps } from '../types';
 import { ActionButton } from './ActionButton';
 import { ActionInput } from './ActionInput';
-import { type LayoutProps } from './types';
-
-export const SOFT_LIMIT_BUTTONS = 10;
-export const SOFT_LIMIT_INPUTS = 3;
 
 export const ActionContent = ({
   inputs,
@@ -26,16 +23,14 @@ export const ActionContent = ({
           gap={2}
           onLayout={(it) => setMaxWidth(it.nativeEvent.layout.width / 3 - 8)}
         >
-          {buttons?.slice(0, SOFT_LIMIT_BUTTONS).map((it, index) => (
+          {buttons?.map((it, index) => (
             <Box key={index} flexGrow={1} flexBasis={maxWidth}>
               <ActionButton {...it} />
             </Box>
           ))}
         </Box>
       )}
-      {inputs
-        ?.slice(0, SOFT_LIMIT_INPUTS)
-        ?.map((input) => <ActionInput key={input.name} {...input} />)}
+      {inputs?.map((input) => <ActionInput key={input.name} {...input} />)}
     </Box>
   );
 };

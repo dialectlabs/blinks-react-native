@@ -11,7 +11,4 @@ export const textVariants = {
     fontSize: 11,
     lineHeight: 14,
   },
-  defaults: {
-    // We can define a default text variant here.
-  },
 };

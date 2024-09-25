@@ -1,4 +1,4 @@
-import type { InputProps } from '../types';
+import type { InputProps } from '../../types';
 
 import { ActionCheckboxGroup } from './ActionCheckboxGroup';
 import { ActionDateInput } from './ActionDateInput';

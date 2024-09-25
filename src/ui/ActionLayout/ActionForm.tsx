@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { Box } from '../index';
+import { Box } from '../components';
+import type { FormProps, InputProps } from '../types';
 import { ActionButton } from './ActionButton';
 import { ActionInput } from './ActionInput';
-import type { FormProps, InputProps } from './types';
-
-export const SOFT_LIMIT_FORM_INPUTS = 10;
 
 const buildDefaultValue = (i: InputProps) => {
   if (i.type === 'checkbox') {
@@ -21,7 +19,6 @@ const buildDefaultFormValues = (inputs: InputProps[]) => {
 };
 
 export const ActionForm = ({ form }: { form: FormProps }) => {
-  const inputs = form.inputs.slice(0, SOFT_LIMIT_FORM_INPUTS);
   const [values, setValues] = useState<Record<string, string | string[]>>(
     buildDefaultFormValues(form.inputs),
   );
@@ -41,12 +38,12 @@ export const ActionForm = ({ form }: { form: FormProps }) => {
 
   return (
     <Box flexDirection="column" gap={3}>
-      {inputs.map((input) => (
+      {form.inputs.map((input) => (
         <ActionInput
           key={input.name}
           {...input}
-          onChange={(v) => onChange(input.name, v)}
-          onValidityChange={(v) => onValidityChange(input.name, v)}
+          onChange={(v: string | string[]) => onChange(input.name, v)}
+          onValidityChange={(v: boolean) => onValidityChange(input.name, v)}
         />
       ))}
       <ActionButton

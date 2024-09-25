@@ -1,15 +1,15 @@
 import { createTheme, useTheme as useRestyleTheme } from '@shopify/restyle';
-import { dialLight } from './theme/dialLight';
-import { spacing } from './theme/spacing';
-import { textVariants } from './theme/textVariants';
+import { dialLight } from './dialLight';
+import { spacing } from './spacing';
+import { textVariants } from './textVariants';
 import type {
   BorderRadiiVars,
   ColorVars,
   SpacingVars,
   TextVariantsVars,
   ThemeVars,
-} from './theme/types';
-import { toThemeVars } from './theme/util';
+} from './types';
+import { toThemeVars } from './util';
 
 const defaultVars = dialLight;
 
@@ -32,4 +32,12 @@ export type Theme = {
   textVariants: TextVariantsVars;
   borderRadii: BorderRadiiVars;
 };
+
 export const useTheme = () => useRestyleTheme<Theme>();
+export type {
+  BorderRadiiVars,
+  ColorVars,
+  SpacingVars,
+  TextVariantsVars,
+  ThemeVars,
+};

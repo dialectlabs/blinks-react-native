@@ -1,9 +1,9 @@
 import { ActivityIndicator } from 'react-native';
-import { Button } from '../components';
+import { Box, Button, Text } from '../components';
 import { CheckIcon } from '../icons';
-import { Box, Text } from '../index';
+
 import { useTheme } from '../theme';
-import type { ButtonProps } from './types';
+import type { ButtonProps } from '../types';
 
 const ButtonContent = ({
   text,

@@ -1,17 +1,16 @@
-import { Badge, Link } from '../components';
+import { Badge, Box, Link, Text } from '../components';
 import { ExclamationShieldIcon, InfoShieldIcon, LinkIcon } from '../icons';
-import { Box, Text } from '../index';
 import { useTheme } from '../theme';
-import type { ActionType } from './types';
+import type { SecurityState } from '../types';
 
 export const Header = ({
   websiteUrl,
   websiteText,
-  type,
+  securityState,
 }: {
   websiteUrl: string | null | undefined;
   websiteText: string | null | undefined;
-  type: ActionType;
+  securityState: SecurityState;
 }) => {
   const theme = useTheme();
   return (
@@ -41,7 +40,7 @@ export const Header = ({
         alignItems="center"
         url="https://docs.dialect.to/documentation/actions/security"
       >
-        {type === 'malicious' && (
+        {securityState === 'malicious' && (
           <Badge
             variant="error"
             icon={
@@ -55,7 +54,7 @@ export const Header = ({
             Blocked
           </Badge>
         )}
-        {type === 'trusted' && (
+        {securityState === 'trusted' && (
           <Badge
             variant="default"
             icon={
@@ -67,7 +66,7 @@ export const Header = ({
             }
           />
         )}
-        {type === 'unknown' && (
+        {securityState === 'unknown' && (
           <Badge
             variant="warning"
             icon={

@@ -1,12 +1,11 @@
 import { Picker } from '@react-native-picker/picker';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Platform, TouchableOpacity } from 'react-native';
-import { InputContainer, PickerModal } from '../../components';
+import { Box, InputContainer, PickerModal, Text } from '../../components';
 import { ChevronDownIcon } from '../../icons';
-import { Box, Text } from '../../index';
 import { useTheme } from '../../theme';
+import type { InputProps } from '../../types';
 import { ActionButton } from '../ActionButton';
-import type { InputProps } from '../types';
 import { getBorderColor, getDescriptionColor, getInputTextColor } from './util';
 
 export const ActionSelect = ({

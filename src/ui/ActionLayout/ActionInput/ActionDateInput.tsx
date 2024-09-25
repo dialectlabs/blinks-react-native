@@ -1,12 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { InputContainer } from '../../components';
+import { Box, InputContainer, Text } from '../../components';
 import { CalendarIcon } from '../../icons';
-import { Box, Text } from '../../index';
 import { useTheme } from '../../theme';
+import type { InputProps } from '../../types';
 import { ActionButton } from '../ActionButton';
-import type { InputProps } from '../types';
 import { ActionTextInput } from './ActionTextInput';
 import {
   buildDefaultDateDescription,

@@ -1,5 +1,5 @@
+import { Box, Text } from '../components';
 import { GearsIcon } from '../icons';
-import { Box, Text } from '../index';
 import { useTheme } from '../theme';
 
 export const NotSupportedBlock = ({ message }: { message: string }) => {
