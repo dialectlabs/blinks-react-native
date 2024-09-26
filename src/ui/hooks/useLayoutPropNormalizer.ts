@@ -49,7 +49,7 @@ export const useLayoutPropNormalizer = ({
         .filter((it) => it instanceof ButtonActionComponent)
         .map((it) => it as ButtonActionComponent)
         .filter((it) => (executingAction ? executingAction === it : true))
-        .toSpliced(SOFT_LIMIT_BUTTONS) ?? [],
+        .slice(0, SOFT_LIMIT_BUTTONS) ?? [],
     [action, executingAction],
   );
   const inputs = useMemo(
@@ -66,7 +66,7 @@ export const useLayoutPropNormalizer = ({
             : (it as MultiValueActionComponent),
         )
         .filter((it) => (executingAction ? executingAction === it : true))
-        .toSpliced(SOFT_LIMIT_INPUTS) ?? [],
+        .slice(0, SOFT_LIMIT_INPUTS) ?? [],
     [action, executingAction],
   );
   const form = useMemo(() => {
@@ -133,7 +133,7 @@ export const useLayoutPropNormalizer = ({
   const asFormProps = (it: FormActionComponent) => {
     return {
       button: asButtonProps(it.toButtonActionComponent()),
-      inputs: it.parameters.toSpliced(SOFT_LIMIT_FORM_INPUTS).map((parameter) =>
+      inputs: it.parameters.slice(0, SOFT_LIMIT_FORM_INPUTS).map((parameter) =>
         asInputProps(it.toInputActionComponent(parameter.name), {
           placement: 'form',
         }),
