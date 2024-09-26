@@ -81,7 +81,10 @@ export const ActionSelect = ({
         standalone={isStandalone}
         borderColor={getBorderColor(isValid, isTouched, isVisible)}
       >
-        <TouchableOpacity onPress={disabled ? undefined : open}>
+        <TouchableOpacity
+          disabled={disabled}
+          onPress={disabled ? undefined : open}
+        >
           <Box
             height={button ? 40 : undefined}
             pl={2}

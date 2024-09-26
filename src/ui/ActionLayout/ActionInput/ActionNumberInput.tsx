@@ -117,7 +117,11 @@ export const ActionNumberInput = ({
                 ? theme.colors.textInputDisabled
                 : theme.colors.textInput,
             }}
-            placeholderTextColor={theme.colors.textInputPlaceholder}
+            placeholderTextColor={
+              disabled
+                ? theme.colors.textInputDisabled
+                : theme.colors.textInputPlaceholder
+            }
             placeholder={placeholderWithRequired}
             value={value}
             readOnly={disabled}

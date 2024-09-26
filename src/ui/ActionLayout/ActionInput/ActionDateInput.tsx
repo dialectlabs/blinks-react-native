@@ -112,7 +112,10 @@ const DateInput = ({
         disabled={disabled}
         borderColor={getBorderColor(isValid, isTouched, isOpen)}
       >
-        <TouchableOpacity onPress={disabled ? undefined : openPicker}>
+        <TouchableOpacity
+          disabled={disabled}
+          onPress={disabled ? undefined : openPicker}
+        >
           <Box
             pl={2}
             flexDirection="row"

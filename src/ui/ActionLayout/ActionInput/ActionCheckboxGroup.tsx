@@ -175,6 +175,7 @@ export const ActionCheckboxGroup = ({
       <Box>
         {options.map((it) => (
           <TouchableOpacity
+            disabled={disabled}
             key={it.value}
             onPress={
               disabled

@@ -40,7 +40,10 @@ const PickerInput = ({
       disabled={disabled}
       borderColor={getBorderColor(isValid, isSelected, isOpen)}
     >
-      <TouchableOpacity onPress={!disabled ? onPress : undefined}>
+      <TouchableOpacity
+        disabled={disabled}
+        onPress={!disabled ? onPress : undefined}
+      >
         <Box pl={2} flexDirection="row" alignItems="center" gap={1.5}>
           {icon}
           <Text variant="text" color={getInputTextColor(isSelected, disabled)}>

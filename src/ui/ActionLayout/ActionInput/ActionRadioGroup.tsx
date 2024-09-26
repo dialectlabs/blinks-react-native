@@ -109,6 +109,7 @@ export const ActionRadioGroup = ({
       <Box>
         {options.map((it) => (
           <TouchableOpacity
+            disabled={disabled}
             key={it.value}
             onPress={disabled ? undefined : () => extendedChange(it.value)}
           >

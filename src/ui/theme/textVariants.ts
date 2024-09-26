@@ -11,4 +11,5 @@ export const textVariants = {
     fontSize: 11,
     lineHeight: 14,
   },
+  defaults: {},
 };
