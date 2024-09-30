@@ -41,6 +41,7 @@ export const useLayoutPropNormalizer = ({
   executionStatus,
   executingAction,
   action,
+  caption,
   ...props
 }: BaseBlinkLayoutProps): LayoutProps => {
   const buttons = useMemo(
@@ -141,6 +142,26 @@ export const useLayoutPropNormalizer = ({
     };
   };
 
+  const normalizedCaption = useMemo(() => {
+    if (!caption) {
+      return {};
+    }
+
+    if (caption.type === 'success') {
+      return {
+        success: caption.text,
+      };
+    }
+
+    if (caption.type === 'error') {
+      return {
+        error: caption.text,
+      };
+    }
+
+    return {};
+  }, [caption]);
+
   return {
     ...props,
     title: action.title,
@@ -149,5 +170,6 @@ export const useLayoutPropNormalizer = ({
     buttons: buttons.map(asButtonProps),
     inputs: inputs.map((i) => asInputProps(i)),
     form: form ? asFormProps(form) : undefined,
+    ...normalizedCaption,
   };
 };
