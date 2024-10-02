@@ -9,6 +9,7 @@ import {
   SingleValueActionComponent,
 } from '@dialectlabs/blinks-core';
 import { useMemo } from 'react';
+import { Alert, Linking } from 'react-native';
 import type { LayoutProps } from '../types';
 
 const buttonVariantMap: Record<
@@ -93,8 +94,40 @@ export const useLayoutPropNormalizer = ({
         buttonVariantMap[
           action.type === 'completed' ? 'success' : executionStatus
         ],
-      onClick: (params?: Record<string, string | string[]>) =>
-        executeFn(it.parentComponent ?? it, params),
+      ctaType:
+        it.type === 'external-link' &&
+        (executionStatus === 'idle' || executionStatus === 'blocked')
+          ? ('link' as const)
+          : ('button' as const),
+      onClick: async (params?: Record<string, string | string[]>) => {
+        const extra = await executeFn(it.parentComponent ?? it, params);
+
+        if (!extra) {
+          return;
+        }
+
+        if (extra.type === 'external-link') {
+          Alert.alert(
+            'External Link',
+            `This action redirects to the website: ${extra.data.externalLink}, the link will open in your browser`,
+            [
+              {
+                text: 'Cancel',
+                style: 'cancel',
+                onPress: () => extra.onCancel?.(),
+              },
+              {
+                text: 'OK',
+                isPreferred: true,
+                onPress: () => {
+                  Linking.openURL(extra.data.externalLink);
+                  extra.onNext();
+                },
+              },
+            ],
+          );
+        }
+      },
     };
   };
 

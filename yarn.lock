@@ -1764,15 +1764,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dialectlabs/blinks-core@npm:^0.11.2":
-  version: 0.11.2
-  resolution: "@dialectlabs/blinks-core@npm:0.11.2"
+"@dialectlabs/blinks-core@npm:^0.12.1":
+  version: 0.12.1
+  resolution: "@dialectlabs/blinks-core@npm:0.12.1"
   dependencies:
     "@solana/web3.js": ^1.95.1
     nanoid: ^5.0.7
   peerDependencies:
     react: ">=18"
-  checksum: 7b5c8ffef3c8eac5a7f41d28d8e8f7e307afe7d5a241bc2aef093af6b47e6f8b2cda90358ef89b26a08ba69fe43cd65a88ef05268647bbbb6ac2a3dd7c671820
+  checksum: 298c88d3ad3c73ac99f1b263c1b5be59f88174bc3563e72f08ac22a01caebad07d2490fac2bb6b6125617c64cd6450326a480b14e861e2b1827a1bf1ee041022
   languageName: node
   linkType: hard
 
@@ -1798,12 +1798,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@dialectlabs/blinks-react-native@workspace:."
   dependencies:
-    "@dialectlabs/blinks-core": ^0.11.2
+    "@dialectlabs/blinks-core": ^0.12.1
     "@react-native-community/datetimepicker": ^8.2.0
     "@react-native-picker/picker": ^2.7.7
     "@react-native/eslint-config": ^0.74.85
     "@shopify/restyle": ^2.4.4
-    "@solana/actions-spec": ^2.2.0
+    "@solana/actions-spec": ~2.3.0
     "@types/jest": ^29.5.5
     "@types/react": ^18.2.44
     del-cli: ^5.1.0
@@ -3450,10 +3450,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@solana/actions-spec@npm:^2.2.0":
-  version: 2.2.2
-  resolution: "@solana/actions-spec@npm:2.2.2"
-  checksum: 4091faaba30f4d1d753dbd4eea6308ebad73bdd7d9b6a887dedad04cbdad8ae914f4dcba7dc56d5f8a757182129ed400ba07e3b969cac63e59a6384d6802a62b
+"@solana/actions-spec@npm:~2.3.0":
+  version: 2.3.0
+  resolution: "@solana/actions-spec@npm:2.3.0"
+  checksum: e2a32a2932f404331a9f5336cc2c45fa2ce0c6ed6c5ae31f8c3e6568dcc845a2d3af412ae5cb5d1ba77cd0268ef68773dc3d2444a34b1ebee7c23fca99457e2b
   languageName: node
   linkType: hard
 

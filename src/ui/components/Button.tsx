@@ -1,35 +1,67 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
+import { DeepLinkIcon } from '../icons';
+import { useTheme } from '../theme';
+import type { ButtonProps } from '../types';
 import { Box } from './Box';
+
+export interface ContentProps {
+  text: string | null;
+  color: string;
+  isLoading?: boolean;
+  isSuccess?: boolean;
+}
 
 export const Button = ({
   onClick,
   disabled,
   variant = 'default',
-  children,
-}: {
+  ctaType = 'button',
+  text,
+  loading,
+  Content,
+}: Omit<ButtonProps, 'onClick'> & {
   onClick: () => void;
-  disabled?: boolean;
-  variant?: 'success' | 'error' | 'default';
-} & React.PropsWithChildren) => {
-  function getBgColor() {
+  Content: (props: ContentProps) => React.ReactElement;
+}) => {
+  const theme = useTheme();
+  const getBgColor = () => {
     if (variant === 'success') return 'buttonSuccess';
     if (disabled) return 'buttonDisabled';
     return 'button';
-  }
+  };
+  const getTextColor = () => {
+    if (variant === 'success') return theme.colors.textButtonSuccess;
+    if (disabled) return theme.colors.textButtonDisabled;
+    return theme.colors.textButton;
+  };
+
+  const bgColor = getBgColor();
+  const textColor = getTextColor();
+
   return (
     <TouchableOpacity activeOpacity={0.7} disabled={disabled} onPress={onClick}>
       <Box
         height={40}
-        px={4}
+        px={5}
         width="100%"
         flexDirection="row"
         alignItems="center"
         justifyContent="center"
         borderRadius="button"
-        backgroundColor={getBgColor()}
+        backgroundColor={bgColor}
       >
-        {children}
+        <Content
+          text={text}
+          color={textColor}
+          isLoading={loading}
+          isSuccess={variant === 'success'}
+        />
+        {ctaType === 'link' && (
+          <Box position="absolute" top={8} right={8}>
+            <DeepLinkIcon height={10} width={10} color={textColor} />
+          </Box>
+        )}
       </Box>
     </TouchableOpacity>
   );

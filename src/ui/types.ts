@@ -29,6 +29,7 @@ export interface ButtonProps {
   loading?: boolean;
   variant?: 'default' | 'success' | 'error';
   disabled?: boolean;
+  ctaType: 'button' | 'link';
   onClick: (params?: Record<string, string | string[]>) => void;
 }
 
