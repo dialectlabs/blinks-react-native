@@ -15,7 +15,7 @@ yarn add @dialectlabs/blinks @dialectlabs/blinks-react-native
 ## Adding the Blink Component
 
 The following imports need to be made to simplify the blink integration:
-- `useAction` hook and `ActionAdapter` type from `@dialectlabs/blinks-core`
+- `useAction` hook and `ActionAdapter` type from `@dialectlabs/blinks-react-native`
 - `Blink` component from `@dialectlabs/blinks-react-native`
 
 A `getWalletAdapter` function has to be defined to generate an adapter of type `ActionAdapter` for interactions with user wallets like wallet connect and signing transactions through the React Native dApp.
@@ -33,52 +33,59 @@ An [example](/example/src/Example.tsx) of this is:
       Blink,
       BlockchainIds,
       useAction,
+      createSignMessageText,
       type ActionAdapter,
     } from '@dialectlabs/blinks-react-native';
     import { PublicKey } from '@solana/web3.js';
     import type React from 'react';
 
     function getWalletAdapter(): ActionAdapter {
-    return {
+      return {
         connect: async (_context) => {
-        console.log('connect');
-        return PublicKey.default.toString();
+          console.log('connect');
+          return PublicKey.default.toString();
         },
         signTransaction: async (_tx, _context) => {
-        console.log('signTransaction');
-        return {
+          console.log('signTransaction');
+          return {
             signature: 'signature',
-        };
+          };
         },
         confirmTransaction: async (_signature, _context) => {
-        console.log('confirmTransaction');
+          console.log('confirmTransaction');
+        },
+        signMessage: async (message: string | SignMessageData, _context) => {
+          const messageToSign =
+            typeof message === 'string' ? message : createSignMessageText(message);
+          console.log('signMessage', messageToSign);
+          return { signature: 'signature' };
         },
         metadata: { supportedBlockchainIds: [BlockchainIds.SOLANA_MAINNET] },
-    };
+      };
     }
 
     export const BlinkInTheWalletIntegrationExample: React.FC<{
-    url: string; // could be action api or website url
+      url: string; // could be action api or website url
     }> = ({ url }) => {
-    const adapter = getWalletAdapter();
-    const { action } = useAction({ url, adapter });
+      const adapter = getWalletAdapter();
+      const { action } = useAction({ url, adapter });
 
-    if (!action) {
+      if (!action) {
         // return placeholder component
-    }
-    const actionUrl = new URL(url);
-    return (
-        <Blink
-        theme={{
-            '--blink-button': '#1D9BF0',
-            '--blink-border-radius-rounded-button': 9999,
-            // and any other custom styles
-        }}
-        action={action}
-        websiteUrl={actionUrl.href}
-        websiteText={actionUrl.hostname}
-        />
-    );
+      }
+      const actionUrl = new URL(url);
+      return (
+          <Blink
+          theme={{
+              '--blink-button': '#1D9BF0',
+              '--blink-border-radius-rounded-button': 9999,
+              // and any other custom styles
+          }}
+          action={action}
+          websiteUrl={actionUrl.href}
+          websiteText={actionUrl.hostname}
+          />
+      );
     };
 ```
 

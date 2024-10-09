@@ -1,9 +1,11 @@
 import {
   Blink,
   BlockchainIds,
+  createSignMessageText,
   Miniblink,
   useAction,
   type ActionAdapter,
+  type SignMessageData,
 } from '@dialectlabs/blinks-react-native';
 import { PublicKey } from '@solana/web3.js';
 import type React from 'react';
@@ -20,6 +22,12 @@ function getWalletAdapter(): ActionAdapter {
       return {
         signature: 'signature',
       };
+    },
+    signMessage: async (message: string | SignMessageData, _context) => {
+      const messageToSign =
+        typeof message === 'string' ? message : createSignMessageText(message);
+      console.log('signMessage', messageToSign);
+      return { signature: 'signature' };
     },
     confirmTransaction: async (_signature, _context) => {
       console.log('confirmTransaction');
