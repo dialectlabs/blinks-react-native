@@ -1,6 +1,7 @@
 import {
   Blink,
   BlockchainIds,
+  Miniblink,
   useAction,
   type ActionAdapter,
 } from '@dialectlabs/blinks-react-native';
@@ -27,7 +28,7 @@ function getWalletAdapter(): ActionAdapter {
   };
 }
 
-export const BlinkInTheWalletIntegrationExample: React.FC<{
+export const BlinkExample: React.FC<{
   url: string; // could be action api or website url
 }> = ({ url }) => {
   const adapter = getWalletAdapter();
@@ -46,6 +47,26 @@ export const BlinkInTheWalletIntegrationExample: React.FC<{
       action={action}
       websiteUrl={actionUrl.href}
       websiteText={actionUrl.hostname}
+    />
+  );
+};
+
+export const MiniblinkExample: React.FC<{
+  url: string; // could be action api or website url
+}> = ({ url }) => {
+  const adapter = getWalletAdapter();
+  const { action } = useAction({ url, adapter });
+
+  if (!action) {
+    return <ActivityIndicator />;
+  }
+
+  return (
+    <Miniblink
+      action={action}
+      selector={(currentAction) =>
+        currentAction.actions.find((a) => a.label === 'Donate')!
+      }
     />
   );
 };

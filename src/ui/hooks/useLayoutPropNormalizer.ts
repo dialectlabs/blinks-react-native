@@ -1,7 +1,6 @@
 import {
   type BaseBlinkLayoutProps,
   ButtonActionComponent,
-  type ExecutionStatus,
   FormActionComponent,
   isParameterSelectable,
   isPatternAllowed,
@@ -11,27 +10,7 @@ import {
 import { useMemo } from 'react';
 import { Alert, Linking } from 'react-native';
 import type { LayoutProps } from '../types';
-
-const buttonVariantMap: Record<
-  ExecutionStatus,
-  'default' | 'error' | 'success'
-> = {
-  'checking-supportability': 'default',
-  blocked: 'default',
-  idle: 'default',
-  executing: 'default',
-  success: 'success',
-  error: 'error',
-};
-
-const buttonLabelMap: Record<ExecutionStatus, string | null> = {
-  'checking-supportability': 'Loading',
-  blocked: null,
-  idle: null,
-  executing: 'Executing',
-  success: 'Completed',
-  error: 'Failed',
-};
+import { buttonLabelMap, buttonVariantMap } from './ui-mappers';
 
 const SOFT_LIMIT_BUTTONS = 10;
 const SOFT_LIMIT_INPUTS = 3;

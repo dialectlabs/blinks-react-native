@@ -7,7 +7,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { BlinkInTheWalletIntegrationExample } from './Example';
+import { BlinkExample } from './Example';
 
 const actionUrl = 'https://dial.to/donate';
 
@@ -20,7 +20,8 @@ export default function App() {
       >
         <ScrollView contentContainerStyle={styles.container}>
           <View style={styles.box}>
-            <BlinkInTheWalletIntegrationExample url={actionUrl} />
+            <BlinkExample url={actionUrl} />
+            {/*<MiniblinkExample url={actionUrl} />*/}
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -46,6 +47,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   box: {
+    width: '100%',
     maxWidth: 400,
   },
 });

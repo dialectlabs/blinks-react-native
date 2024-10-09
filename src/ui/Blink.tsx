@@ -6,8 +6,8 @@ import {
 
 import { ThemeProvider } from '@shopify/restyle';
 
-import ActionLayout from './ActionLayout';
 import { useLayoutPropNormalizer } from './hooks/useLayoutPropNormalizer';
+import { BlinkLayout } from './layout';
 import { getTheme, type ThemeVars } from './theme';
 
 export type BlinkProps = Omit<BlinkContainerProps, 'Layout' | 'selector'> & {
@@ -16,7 +16,7 @@ export type BlinkProps = Omit<BlinkContainerProps, 'Layout' | 'selector'> & {
 
 const Layout = (props: BaseBlinkLayoutProps) => {
   const normalizedProps = useLayoutPropNormalizer(props);
-  return <ActionLayout {...normalizedProps} />;
+  return <BlinkLayout {...normalizedProps} />;
 };
 
 export const Blink = (props: BlinkProps) => {

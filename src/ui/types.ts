@@ -72,3 +72,24 @@ export interface LayoutProps {
   supportability: ActionSupportability;
   id?: string;
 }
+
+export type IsolatedLayoutProps = {
+  error?: string | null;
+  success?: string | null;
+  websiteUrl?: string | null;
+  websiteText?: string | null;
+  id?: string;
+} & (
+  | {
+      elementType: 'form';
+      element: FormProps;
+    }
+  | {
+      elementType: 'button';
+      element: ButtonProps;
+    }
+  | {
+      elementType: 'input';
+      element: InputProps;
+    }
+);

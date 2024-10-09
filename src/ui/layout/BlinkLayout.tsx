@@ -10,7 +10,7 @@ import { NotSupportedBlock } from './NotSupportedBlock';
 
 export const SOFT_LIMIT_TITLE_LENGTH = 80;
 
-const ActionLayout = ({
+export const BlinkLayout = ({
   title,
   description,
   image,
@@ -105,5 +105,3 @@ const ActionLayout = ({
     </Box>
   );
 };
-
-export default ActionLayout;
