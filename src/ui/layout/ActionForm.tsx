@@ -37,7 +37,7 @@ export const ActionForm = ({ form }: { form: FormProps }) => {
   const disabled = Object.values(validity).some((v) => !v);
 
   return (
-    <Box flexDirection="column" gap={3}>
+    <Box flexDirection="column" gap="betweenInputs">
       {form.inputs.map((input) => (
         <ActionInput
           key={input.name}

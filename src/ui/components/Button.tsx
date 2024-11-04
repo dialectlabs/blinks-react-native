@@ -38,11 +38,12 @@ export const Button = ({
 
   const bgColor = getBgColor();
   const textColor = getTextColor();
+  const height = theme.spacing.inputHeight;
 
   return (
     <TouchableOpacity activeOpacity={0.7} disabled={disabled} onPress={onClick}>
       <Box
-        height={40}
+        height={height}
         px={5}
         width="100%"
         flexDirection="row"

@@ -104,7 +104,7 @@ const DateInput = ({
     (placeholder || 'Enter a date') + (required ? '*' : '');
   const finalDescription =
     description ?? buildDefaultDateDescription({ minDate, maxDate });
-
+  const height = theme.spacing.inputHeight;
   return (
     <Box gap={1}>
       <InputContainer
@@ -121,7 +121,7 @@ const DateInput = ({
             flexDirection="row"
             alignItems="center"
             gap={1.5}
-            height={isStandalone ? 40 : undefined}
+            height={isStandalone ? height : undefined}
           >
             <CalendarIcon color={theme.colors.iconPrimary} />
             <Text

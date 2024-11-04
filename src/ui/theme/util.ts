@@ -47,5 +47,12 @@ export function toThemeVars(vars: ThemeVars) {
       input: vars['--blink-border-radius-rounded-input'],
       inputStandalone: vars['--blink-border-radius-rounded-input-standalone'],
     },
+    spacing: {
+      margin: vars['--blink-spacing-margin'],
+      padding: vars['--blink-spacing-padding'],
+      betweenButtons: vars['--blink-spacing-btwn-buttons'],
+      betweenInputs: vars['--blink-spacing-btwn-inputs'],
+      inputHeight: vars['--blink-spacing-input-height'],
+    },
   };
 }

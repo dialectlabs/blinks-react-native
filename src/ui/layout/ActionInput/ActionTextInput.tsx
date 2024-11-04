@@ -137,6 +137,8 @@ export const ActionTextInput = ({
     buildDefaultTextDescription({ min: minLength, max: maxLength });
 
   const isTextArea = type === 'textarea';
+  const height = theme.spacing.inputHeight;
+
   return (
     <Box flexDirection="column" gap={1}>
       <InputContainer
@@ -161,7 +163,7 @@ export const ActionTextInput = ({
               verticalAlign: isTextArea ? 'top' : 'auto',
               fontSize: theme.textVariants.text.fontSize,
               lineHeight: theme.textVariants.text.lineHeight,
-              height: isTextArea ? 66 : isStandalone ? 40 : undefined,
+              height: isTextArea ? 72 : isStandalone ? height : undefined,
               color: disabled
                 ? theme.colors.textInputDisabled
                 : theme.colors.textInput,

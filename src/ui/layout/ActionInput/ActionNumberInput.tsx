@@ -94,7 +94,7 @@ export const ActionNumberInput = ({
     buildDefaultNumberDescription({ min: minNumber, max: maxNumber });
 
   const [isFocused, setIsFocused] = useState(false);
-
+  const height = theme.spacing.inputHeight;
   return (
     <Box flexDirection="column" gap={1}>
       <InputContainer
@@ -112,7 +112,7 @@ export const ActionNumberInput = ({
               flex: 1,
               fontSize: theme.textVariants.text.fontSize,
               lineHeight: theme.textVariants.text.lineHeight,
-              height: isStandalone ? 40 : undefined,
+              height: isStandalone ? height : undefined,
               color: disabled
                 ? theme.colors.textInputDisabled
                 : theme.colors.textInput,

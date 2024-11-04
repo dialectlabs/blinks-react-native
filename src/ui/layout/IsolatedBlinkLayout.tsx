@@ -33,12 +33,22 @@ export const IsolatedBlinkLayout = ({
         <ActionContent inputs={element.inputs} buttons={element.buttons} />
       )}
       {success && (
-        <Text mt={3} color="textSuccess" variant="caption" textAlign="center">
+        <Text
+          mt="padding"
+          color="textSuccess"
+          variant="caption"
+          textAlign="center"
+        >
           {success}
         </Text>
       )}
       {error && !success && (
-        <Text mt={3} color="textError" variant="caption" textAlign="center">
+        <Text
+          mt="padding"
+          color="textError"
+          variant="caption"
+          textAlign="center"
+        >
           {error}
         </Text>
       )}

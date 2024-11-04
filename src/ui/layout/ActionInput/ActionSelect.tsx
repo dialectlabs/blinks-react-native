@@ -73,6 +73,7 @@ export const ActionSelect = ({
   }, []);
 
   const theme = useTheme();
+  const height = theme.spacing.inputHeight;
 
   return (
     <Box gap={1}>
@@ -86,7 +87,7 @@ export const ActionSelect = ({
           onPress={disabled ? undefined : open}
         >
           <Box
-            height={button ? 40 : undefined}
+            height={button ? height : undefined}
             pl={2}
             flexDirection="row"
             alignItems="center"

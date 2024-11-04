@@ -5,6 +5,7 @@ import { textVariants } from './textVariants';
 import type {
   BorderRadiiVars,
   ColorVars,
+  DefaultSpacingVars,
   SpacingVars,
   TextVariantsVars,
   ThemeVars,
@@ -21,14 +22,14 @@ export const getTheme = (vars?: Partial<ThemeVars>) => {
       ...themeVars.borderRadii,
       full: 9999,
     },
-    spacing: spacing,
+    spacing: { ...themeVars.spacing, ...spacing },
     textVariants: textVariants,
   });
 };
 
 export type Theme = {
   colors: ColorVars;
-  spacing: SpacingVars;
+  spacing: SpacingVars & DefaultSpacingVars;
   textVariants: TextVariantsVars;
   borderRadii: BorderRadiiVars;
 };
@@ -37,6 +38,7 @@ export const useTheme = () => useRestyleTheme<Theme>();
 export type {
   BorderRadiiVars,
   ColorVars,
+  DefaultSpacingVars,
   SpacingVars,
   TextVariantsVars,
   ThemeVars,

@@ -2,7 +2,11 @@ import { useEffect, useMemo, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Box, Text } from '../../components';
 import { CheckBoxIcon } from '../../icons';
-import type { BorderRadiiVars, ColorVars, SpacingVars } from '../../theme';
+import type {
+  BorderRadiiVars,
+  ColorVars,
+  DefaultSpacingVars,
+} from '../../theme';
 import { useTheme } from '../../theme';
 import { ActionButton } from '../ActionButton';
 
@@ -81,6 +85,8 @@ export const ActionCheckboxGroup = ({
   onChange?: (value: string[]) => void;
   onValidityChange?: (state: boolean) => void;
 }) => {
+  const theme = useTheme();
+
   const minChoices = min as number;
   const maxChoices = max as number;
   const isStandalone = !!button;
@@ -149,15 +155,17 @@ export const ActionCheckboxGroup = ({
     ? {
         container: {
           backgroundColor: 'bgSecondary' as keyof ColorVars,
-          padding: 2 as keyof SpacingVars,
+          padding: 2 as keyof DefaultSpacingVars,
           borderRadius: 'xl' as keyof BorderRadiiVars,
         },
         text: {
-          py: 1 as keyof SpacingVars,
-          px: 2 as keyof SpacingVars,
+          py: 1 as keyof DefaultSpacingVars,
+          px: 2 as keyof DefaultSpacingVars,
         },
       }
     : {};
+
+  const height = theme.spacing.inputHeight;
 
   return (
     <Box flexDirection="column" gap={1} {...standaloneProps.container}>
@@ -187,14 +195,16 @@ export const ActionCheckboxGroup = ({
               flexDirection="row"
               alignItems="center"
               gap={3}
-              height={40}
+              minHeight={height}
               py={1.5}
               pl={isStandalone ? 2 : 0}
             >
               <Checkbox selected={state.value[it.value]} disabled={disabled} />
-              <Text variant="text" color="textInput">
-                {it.label}
-              </Text>
+              <Box flex={1}>
+                <Text variant="text" color="textInput">
+                  {it.label}
+                </Text>
+              </Box>
             </Box>
           </TouchableOpacity>
         ))}

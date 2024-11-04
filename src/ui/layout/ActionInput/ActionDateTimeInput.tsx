@@ -3,7 +3,11 @@ import { TouchableOpacity } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { Box, InputContainer, Text } from '../../components';
 import { CalendarIcon, ClockIcon } from '../../icons';
-import type { BorderRadiiVars, ColorVars, SpacingVars } from '../../theme';
+import type {
+  BorderRadiiVars,
+  ColorVars,
+  DefaultSpacingVars,
+} from '../../theme';
 import { useTheme } from '../../theme';
 import type { InputProps } from '../../types';
 import { ActionButton } from '../ActionButton';
@@ -189,11 +193,11 @@ const DateTimeInput = ({
     ? {
         container: {
           backgroundColor: 'bgSecondary' as keyof ColorVars,
-          padding: 2 as keyof SpacingVars,
+          padding: 2 as keyof DefaultSpacingVars,
           borderRadius: 'xl' as keyof BorderRadiiVars,
         },
         text: {
-          px: 2 as keyof SpacingVars,
+          px: 2 as keyof DefaultSpacingVars,
         },
       }
     : {};

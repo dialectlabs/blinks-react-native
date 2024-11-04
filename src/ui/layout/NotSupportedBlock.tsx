@@ -13,7 +13,7 @@ export const NotSupportedBlock = ({ message }: { message: string }) => {
       gap={2}
     >
       <GearsIcon color={theme.colors.iconPrimary} />
-      <Box>
+      <Box flexDirection="column" flex={1} gap={1}>
         <Text variant="subtext" color="textSecondary" fontWeight="600">
           This action is not supported
         </Text>

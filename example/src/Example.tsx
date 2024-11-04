@@ -51,6 +51,7 @@ export const BlinkExample: React.FC<{
       theme={{
         '--blink-button': '#1D9BF0',
         '--blink-border-radius-rounded-button': 9999,
+        '--blink-spacing-input-height': 44,
       }}
       action={action}
       adapter={adapter}

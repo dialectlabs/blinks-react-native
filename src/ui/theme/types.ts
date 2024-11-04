@@ -44,6 +44,12 @@ export interface ThemeVars {
   '--blink-border-radius-rounded-button': number;
   '--blink-border-radius-rounded-input': number;
   '--blink-border-radius-rounded-input-standalone': number;
+
+  '--blink-spacing-margin': number;
+  '--blink-spacing-padding': number;
+  '--blink-spacing-btwn-buttons': number;
+  '--blink-spacing-btwn-inputs': number;
+  '--blink-spacing-input-height': number;
 }
 
 export type ColorVars = {
@@ -93,5 +99,14 @@ export type BorderRadiiVars = {
   full: number;
 };
 
-export type SpacingVars = typeof spacing;
+export type SpacingVars = {
+  margin: number;
+  padding: number;
+  betweenButtons: number;
+  betweenInputs: number;
+  inputHeight: number;
+};
+
+export type DefaultSpacingVars = typeof spacing;
+
 export type TextVariantsVars = typeof textVariants;
