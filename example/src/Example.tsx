@@ -40,7 +40,7 @@ export const BlinkExample: React.FC<{
   url: string; // could be action api or website url
 }> = ({ url }) => {
   const adapter = getWalletAdapter();
-  const { action } = useAction({ url, adapter });
+  const { action } = useAction({ url });
 
   if (!action) {
     return <ActivityIndicator />;
@@ -53,6 +53,7 @@ export const BlinkExample: React.FC<{
         '--blink-border-radius-rounded-button': 9999,
       }}
       action={action}
+      adapter={adapter}
       websiteUrl={actionUrl.href}
       websiteText={actionUrl.hostname}
     />
@@ -63,7 +64,7 @@ export const MiniblinkExample: React.FC<{
   url: string; // could be action api or website url
 }> = ({ url }) => {
   const adapter = getWalletAdapter();
-  const { action } = useAction({ url, adapter });
+  const { action } = useAction({ url });
 
   if (!action) {
     return <ActivityIndicator />;
@@ -72,6 +73,7 @@ export const MiniblinkExample: React.FC<{
   return (
     <Miniblink
       action={action}
+      adapter={adapter}
       selector={(currentAction) =>
         currentAction.actions.find((a) => a.label === 'Donate')!
       }
