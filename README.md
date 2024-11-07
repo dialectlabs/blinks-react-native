@@ -5,11 +5,11 @@ React Native SDK for rendering blinks for Solana Actions on mobile dApps. Check 
 ## Installation
 
 ```console
-# npm 
-npm i @dialectlabs/blinks @dialectlabs/blinks-react-native
+# npm
+npm i @dialectlabs/blinks-react-native
 
 #yarn
-yarn add @dialectlabs/blinks @dialectlabs/blinks-react-native
+yarn add @dialectlabs/blinks-react-native
 ```
 
 ## Adding the Blink Component
@@ -68,7 +68,7 @@ An [example](/example/src/Example.tsx) of this is:
       url: string; // could be action api or website url
     }> = ({ url }) => {
       const adapter = getWalletAdapter();
-      const { action } = useAction({ url, adapter });
+      const { action } = useAction({ url });
 
       if (!action) {
         // return placeholder component
@@ -81,6 +81,7 @@ An [example](/example/src/Example.tsx) of this is:
               '--blink-border-radius-rounded-button': 9999,
               // and any other custom styles
           }}
+          adapter={adapter}
           action={action}
           websiteUrl={actionUrl.href}
           websiteText={actionUrl.hostname}

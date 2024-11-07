@@ -33,6 +33,8 @@
   ],
   "scripts": {
     "example": "yarn workspace @dialectlabs/blinks-react-native-example",
+    "example:ios": "yarn run example ios",
+    "example:android": "yarn run example android",
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
@@ -153,7 +155,7 @@
     "version": "0.38.2"
   },
   "dependencies": {
-    "@dialectlabs/blinks-core": "^0.13.1",
+    "@dialectlabs/blinks-core": "^0.14.1",
     "@react-native-community/datetimepicker": "^8.2.0",
     "@react-native-picker/picker": "^2.7.7",
     "@shopify/restyle": "^2.4.4",
