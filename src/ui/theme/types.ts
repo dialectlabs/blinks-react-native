@@ -45,8 +45,8 @@ export interface ThemeVars {
   '--blink-border-radius-rounded-input': number;
   '--blink-border-radius-rounded-input-standalone': number;
 
-  '--blink-spacing-margin': number;
   '--blink-spacing-padding': number;
+  '--blink-spacing-gap': number;
   '--blink-spacing-btwn-buttons': number;
   '--blink-spacing-btwn-inputs': number;
   '--blink-spacing-input-height': number;
@@ -100,8 +100,8 @@ export type BorderRadiiVars = {
 };
 
 export type SpacingVars = {
-  margin: number;
   padding: number;
+  gap: number;
   betweenButtons: number;
   betweenInputs: number;
   inputHeight: number;

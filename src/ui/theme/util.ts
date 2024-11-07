@@ -48,8 +48,8 @@ export function toThemeVars(vars: ThemeVars) {
       inputStandalone: vars['--blink-border-radius-rounded-input-standalone'],
     },
     spacing: {
-      margin: vars['--blink-spacing-margin'],
       padding: vars['--blink-spacing-padding'],
+      gap: vars['--blink-spacing-gap'],
       betweenButtons: vars['--blink-spacing-btwn-buttons'],
       betweenInputs: vars['--blink-spacing-btwn-inputs'],
       inputHeight: vars['--blink-spacing-input-height'],

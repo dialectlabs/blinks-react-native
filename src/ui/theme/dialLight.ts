@@ -50,8 +50,8 @@ export const dialLight = {
   '--blink-border-radius-rounded-input': 8,
   '--blink-border-radius-rounded-input-standalone': 8,
 
-  '--blink-spacing-margin': 16,
   '--blink-spacing-padding': 16,
+  '--blink-spacing-gap': 16,
   '--blink-spacing-btwn-buttons': 8,
   '--blink-spacing-btwn-inputs': 12,
   '--blink-spacing-input-height': 40,

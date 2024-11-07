@@ -36,7 +36,7 @@ export const BlinkLayout = ({
     >
       {image && <ActionImage imageUrl={image} websiteUrl={websiteUrl} />}
 
-      <Box flexDirection="column" p="margin">
+      <Box flexDirection="column" p="padding">
         <Header
           websiteText={websiteText}
           websiteUrl={websiteUrl}
@@ -46,7 +46,7 @@ export const BlinkLayout = ({
         <Text mb={0.5} variant="h3" fontWeight="600" color="textPrimary">
           {title.substring(0, SOFT_LIMIT_TITLE_LENGTH)}
         </Text>
-        <Text mb="padding" variant="text" color="textSecondary">
+        <Text mb="gap" variant="text" color="textSecondary">
           {description}
         </Text>
 
@@ -55,7 +55,7 @@ export const BlinkLayout = ({
         ) : (
           <>
             {disclaimer && (
-              <Box mb="padding">
+              <Box mb="gap">
                 <DisclaimerBlock
                   type={disclaimer.type}
                   ignorable={disclaimer.ignorable}
@@ -81,7 +81,7 @@ export const BlinkLayout = ({
 
             {success && (
               <Text
-                mt="padding"
+                mt="gap"
                 color="textSuccess"
                 variant="caption"
                 textAlign="center"
@@ -91,7 +91,7 @@ export const BlinkLayout = ({
             )}
             {error && !success && (
               <Text
-                mt="padding"
+                mt="gap"
                 color="textError"
                 variant="caption"
                 textAlign="center"
