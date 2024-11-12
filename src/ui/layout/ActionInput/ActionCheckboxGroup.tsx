@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Box, Text } from '../../components';
+import { Box, SimpleMarkdown, Text } from '../../components';
 import { CheckBoxIcon } from '../../icons';
 import type {
   BorderRadiiVars,
@@ -222,7 +222,7 @@ export const ActionCheckboxGroup = ({
           variant="caption"
           {...standaloneProps.text}
         >
-          {finalDescription}
+          <SimpleMarkdown text={finalDescription} baseTextVariant="caption" />
         </Text>
       )}
     </Box>

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Box, Text } from '../../components';
+import { Box, SimpleMarkdown, Text } from '../../components';
 import {
   type BorderRadiiVars,
   type ColorVars,
@@ -152,7 +152,7 @@ export const ActionRadioGroup = ({
           variant="caption"
           {...standaloneProps.text}
         >
-          {description}
+          <SimpleMarkdown text={description} baseTextVariant="caption" />
         </Text>
       )}
     </Box>

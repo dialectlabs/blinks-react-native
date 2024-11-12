@@ -4,7 +4,7 @@ import {
   TextInput,
   type TextInputChangeEventData,
 } from 'react-native';
-import { Box, InputContainer, Text } from '../../components';
+import { Box, InputContainer, SimpleMarkdown, Text } from '../../components';
 import NumberIcon from '../../icons/NumberIcon';
 import { useTheme } from '../../theme';
 import type { InputProps } from '../../types';
@@ -144,7 +144,7 @@ export const ActionNumberInput = ({
           variant="caption"
           py={1}
         >
-          {finalDescription}
+          <SimpleMarkdown text={finalDescription} baseTextVariant="caption" />
         </Text>
       )}
     </Box>

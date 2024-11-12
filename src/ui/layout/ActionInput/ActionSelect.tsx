@@ -1,7 +1,13 @@
 import { Picker } from '@react-native-picker/picker';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Platform, TouchableOpacity } from 'react-native';
-import { Box, InputContainer, PickerModal, Text } from '../../components';
+import {
+  Box,
+  InputContainer,
+  PickerModal,
+  SimpleMarkdown,
+  Text,
+} from '../../components';
 import { ChevronDownIcon } from '../../icons';
 import { useTheme } from '../../theme';
 import type { InputProps } from '../../types';
@@ -120,7 +126,7 @@ export const ActionSelect = ({
           variant="caption"
           py={1}
         >
-          {description}
+          <SimpleMarkdown text={description} baseTextVariant="caption" />
         </Text>
       )}
       {Platform.OS === 'android' && (

@@ -6,7 +6,7 @@ import {
   type TextInputChangeEventData,
 } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
-import { Box, InputContainer, Text } from '../../components';
+import { Box, InputContainer, SimpleMarkdown, Text } from '../../components';
 import { EnvelopeIcon, LinkIcon } from '../../icons';
 import { useTheme } from '../../theme';
 import type { InputProps } from '../../types';
@@ -196,7 +196,7 @@ export const ActionTextInput = ({
           variant="caption"
           py={1}
         >
-          {finalDescription}
+          <SimpleMarkdown text={finalDescription} baseTextVariant="caption" />
         </Text>
       )}
     </Box>
