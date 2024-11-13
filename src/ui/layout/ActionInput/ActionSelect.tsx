@@ -121,13 +121,13 @@ export const ActionSelect = ({
         )}
       </InputContainer>
       {description && (
-        <Text
-          color={getDescriptionColor(isValid, isTouched)}
-          variant="caption"
-          py={1}
-        >
-          <SimpleMarkdown text={description} baseTextVariant="caption" />
-        </Text>
+        <Box py={1}>
+          <SimpleMarkdown
+            text={description}
+            baseTextVariant="caption"
+            baseColor={getDescriptionColor(isValid, isTouched)}
+          />
+        </Box>
       )}
       {Platform.OS === 'android' && (
         <Picker

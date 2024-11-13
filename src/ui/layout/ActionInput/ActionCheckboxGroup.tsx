@@ -217,13 +217,13 @@ export const ActionCheckboxGroup = ({
         />
       )}
       {finalDescription && (
-        <Text
-          color={getDescriptionColor(state.valid, touched)}
-          variant="caption"
-          {...standaloneProps.text}
-        >
-          <SimpleMarkdown text={finalDescription} baseTextVariant="caption" />
-        </Text>
+        <Box {...standaloneProps.text}>
+          <SimpleMarkdown
+            text={finalDescription}
+            baseTextVariant="caption"
+            baseColor={getDescriptionColor(state.valid, touched)}
+          />
+        </Box>
       )}
     </Box>
   );

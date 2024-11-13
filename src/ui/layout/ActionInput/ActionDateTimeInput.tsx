@@ -241,14 +241,13 @@ const DateTimeInput = ({
         )}
       </Box>
       {finalDescription && (
-        <Text
-          color={getDescriptionColor(isValid, isTouched)}
-          variant="caption"
-          py={1}
-          {...standaloneProps.text}
-        >
-          <SimpleMarkdown text={finalDescription} baseTextVariant="caption" />
-        </Text>
+        <Box py={1} {...standaloneProps.text}>
+          <SimpleMarkdown
+            text={finalDescription}
+            baseTextVariant="caption"
+            baseColor={getDescriptionColor(isValid, isTouched)}
+          />
+        </Box>
       )}
       <DateTimePickerModal
         date={displayedDate}

@@ -147,13 +147,13 @@ export const ActionRadioGroup = ({
         />
       )}
       {description && (
-        <Text
-          color={!isValid ? 'textError' : 'textSecondary'}
-          variant="caption"
-          {...standaloneProps.text}
-        >
-          <SimpleMarkdown text={description} baseTextVariant="caption" />
-        </Text>
+        <Box {...standaloneProps.text}>
+          <SimpleMarkdown
+            text={description}
+            baseTextVariant="caption"
+            baseColor={!isValid ? 'textError' : 'textSecondary'}
+          />
+        </Box>
       )}
     </Box>
   );

@@ -4,13 +4,14 @@ import Markdown, {
   MarkdownIt,
   type RenderRules,
 } from 'react-native-markdown-display';
-import { useTheme } from '../theme';
+import { type ColorVars, useTheme } from '../theme';
 import { confirmLinkTransition } from '../utils';
 import { Text } from './Text';
 
 interface Props {
   text: string;
   baseTextVariant?: 'caption' | 'text';
+  baseColor?: keyof ColorVars;
 }
 
 const LinkWithConfirm = ({
@@ -54,16 +55,25 @@ const rules: RenderRules = {
   },
 };
 
-export const SimpleMarkdown = ({ text, baseTextVariant = 'text' }: Props) => {
+export const SimpleMarkdown = ({
+  text,
+  baseTextVariant = 'text',
+  baseColor = 'textPrimary',
+}: Props) => {
   const theme = useTheme();
-  const commonHeadingParagraphStyle = {
+  const baseTextStyles = {
     ...theme.textVariants[baseTextVariant],
+    color: theme.colors[baseColor],
+  };
+
+  const commonHeadingParagraphStyle = {
+    ...baseTextStyles,
     marginTop: 0,
     marginBottom: theme.spacing['1'],
   };
 
   const commonCodeBlockStyle = {
-    ...theme.textVariants[baseTextVariant],
+    ...baseTextStyles,
     borderWidth: 0,
     backgroundColor: 'transparent',
     marginLeft: 0,
@@ -73,16 +83,13 @@ export const SimpleMarkdown = ({ text, baseTextVariant = 'text' }: Props) => {
 
   return (
     <Markdown
-      debugPrintTree={true}
       rules={rules}
       markdownit={MarkdownIt({
         typographer: true,
         linkify: true,
       })}
       style={{
-        text: {
-          ...theme.textVariants[baseTextVariant],
-        },
+        text: baseTextStyles,
         heading1: commonHeadingParagraphStyle,
         heading2: commonHeadingParagraphStyle,
         heading3: commonHeadingParagraphStyle,
@@ -117,9 +124,7 @@ export const SimpleMarkdown = ({ text, baseTextVariant = 'text' }: Props) => {
         tr: {
           borderBottomWidth: 0,
         },
-        ordered_list_icon: {
-          ...theme.textVariants[baseTextVariant],
-        },
+        ordered_list_icon: baseTextStyles,
         hr: {
           marginVertical: theme.spacing['1'],
         },

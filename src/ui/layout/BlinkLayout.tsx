@@ -46,9 +46,11 @@ export const BlinkLayout = ({
         <Text mb={1.5} variant="h3" fontWeight="600" color="textPrimary">
           {title.substring(0, SOFT_LIMIT_TITLE_LENGTH)}
         </Text>
-        <Text mb="gap" variant="text" color="textSecondary">
-          {description && <SimpleMarkdown text={description} />}
-        </Text>
+        <Box mb="gap">
+          {description && (
+            <SimpleMarkdown text={description} baseColor="textSecondary" />
+          )}
+        </Box>
 
         {!supportability.isSupported ? (
           <NotSupportedBlock message={supportability?.message} />

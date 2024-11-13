@@ -4,7 +4,7 @@ import {
   TextInput,
   type TextInputChangeEventData,
 } from 'react-native';
-import { Box, InputContainer, SimpleMarkdown, Text } from '../../components';
+import { Box, InputContainer, SimpleMarkdown } from '../../components';
 import NumberIcon from '../../icons/NumberIcon';
 import { useTheme } from '../../theme';
 import type { InputProps } from '../../types';
@@ -139,13 +139,13 @@ export const ActionNumberInput = ({
         )}
       </InputContainer>
       {finalDescription && (
-        <Text
-          color={getDescriptionColor(isValid, isTouched)}
-          variant="caption"
-          py={1}
-        >
-          <SimpleMarkdown text={finalDescription} baseTextVariant="caption" />
-        </Text>
+        <Box py={1}>
+          <SimpleMarkdown
+            text={finalDescription}
+            baseTextVariant="caption"
+            baseColor={getDescriptionColor(isValid, isTouched)}
+          />
+        </Box>
       )}
     </Box>
   );

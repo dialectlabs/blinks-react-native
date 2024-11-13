@@ -145,13 +145,13 @@ const DateInput = ({
         )}
       </InputContainer>
       {finalDescription && (
-        <Text
-          color={getDescriptionColor(isValid, isTouched)}
-          py={1}
-          variant="caption"
-        >
-          <SimpleMarkdown text={finalDescription} baseTextVariant="caption" />
-        </Text>
+        <Box py={1}>
+          <SimpleMarkdown
+            text={finalDescription}
+            baseTextVariant="caption"
+            baseColor={getDescriptionColor(isValid, isTouched)}
+          />
+        </Box>
       )}
       <DateTimePickerModal
         minimumDate={minDate ?? undefined}
