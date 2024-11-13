@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { Box, InputContainer, Text } from '../../components';
+import { Box, InputContainer, SimpleMarkdown, Text } from '../../components';
 import { CalendarIcon } from '../../icons';
 import { useTheme } from '../../theme';
 import type { InputProps } from '../../types';
@@ -145,13 +145,13 @@ const DateInput = ({
         )}
       </InputContainer>
       {finalDescription && (
-        <Text
-          color={getDescriptionColor(isValid, isTouched)}
-          py={1}
-          variant="caption"
-        >
-          {finalDescription}
-        </Text>
+        <Box py={1}>
+          <SimpleMarkdown
+            text={finalDescription}
+            baseTextVariant="caption"
+            baseColor={getDescriptionColor(isValid, isTouched)}
+          />
+        </Box>
       )}
       <DateTimePickerModal
         minimumDate={minDate ?? undefined}

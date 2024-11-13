@@ -159,6 +159,7 @@
     "@react-native-community/datetimepicker": "^8.2.0",
     "@react-native-picker/picker": "^2.7.7",
     "@shopify/restyle": "^2.4.4",
+    "react-native-markdown-display": "^7.0.2",
     "react-native-modal-datetime-picker": "^17.1.0"
   }
 }

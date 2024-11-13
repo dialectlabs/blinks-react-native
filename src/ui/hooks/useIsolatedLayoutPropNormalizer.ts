@@ -8,8 +8,9 @@ import {
   SingleValueActionComponent,
 } from '@dialectlabs/blinks-core';
 import { useCallback, useMemo } from 'react';
-import { Alert, Linking } from 'react-native';
+import { Linking } from 'react-native';
 import type { IsolatedLayoutProps } from '../types';
+import { confirmLinkTransition } from '../utils';
 import { buttonLabelMap, buttonVariantMap } from './ui-mappers';
 
 const SOFT_LIMIT_FORM_INPUTS = 10;
@@ -49,25 +50,13 @@ export const useIsolatedLayoutPropNormalizer = ({
           }
 
           if (extra.type === 'external-link') {
-            Alert.alert(
-              'External Link',
-              `This action redirects to the website: ${extra.data.externalLink}, the link will open in your browser`,
-              [
-                {
-                  text: 'Cancel',
-                  style: 'cancel',
-                  onPress: () => extra.onCancel?.(),
-                },
-                {
-                  text: 'OK',
-                  isPreferred: true,
-                  onPress: () => {
-                    Linking.openURL(extra.data.externalLink);
-                    extra.onNext();
-                  },
-                },
-              ],
-            );
+            confirmLinkTransition(extra.data.externalLink, {
+              onOk: () => {
+                Linking.openURL(extra.data.externalLink);
+                extra.onNext();
+              },
+              onCancel: () => extra.onCancel?.(),
+            });
           }
         },
       };

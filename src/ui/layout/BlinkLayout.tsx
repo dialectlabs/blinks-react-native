@@ -1,4 +1,4 @@
-import { Box, Text } from '../components';
+import { Box, SimpleMarkdown, Text } from '../components';
 import type { LayoutProps } from '../types';
 import { DisclaimerType } from '../types';
 import { ActionContent } from './ActionContent';
@@ -43,12 +43,14 @@ export const BlinkLayout = ({
           securityState={securityState}
         />
 
-        <Text mb={0.5} variant="h3" fontWeight="600" color="textPrimary">
+        <Text mb={1.5} variant="h3" fontWeight="600" color="textPrimary">
           {title.substring(0, SOFT_LIMIT_TITLE_LENGTH)}
         </Text>
-        <Text mb="gap" variant="text" color="textSecondary">
-          {description}
-        </Text>
+        <Box mb="gap">
+          {description && (
+            <SimpleMarkdown text={description} baseColor="textSecondary" />
+          )}
+        </Box>
 
         {!supportability.isSupported ? (
           <NotSupportedBlock message={supportability?.message} />

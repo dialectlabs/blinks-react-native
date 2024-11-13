@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Box, Text } from '../../components';
+import { Box, SimpleMarkdown, Text } from '../../components';
 import {
   type BorderRadiiVars,
   type ColorVars,
@@ -147,13 +147,13 @@ export const ActionRadioGroup = ({
         />
       )}
       {description && (
-        <Text
-          color={!isValid ? 'textError' : 'textSecondary'}
-          variant="caption"
-          {...standaloneProps.text}
-        >
-          {description}
-        </Text>
+        <Box {...standaloneProps.text}>
+          <SimpleMarkdown
+            text={description}
+            baseTextVariant="caption"
+            baseColor={!isValid ? 'textError' : 'textSecondary'}
+          />
+        </Box>
       )}
     </Box>
   );

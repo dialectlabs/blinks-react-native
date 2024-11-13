@@ -6,7 +6,7 @@ import {
   type TextInputChangeEventData,
 } from 'react-native';
 import type { SvgProps } from 'react-native-svg';
-import { Box, InputContainer, Text } from '../../components';
+import { Box, InputContainer, SimpleMarkdown } from '../../components';
 import { EnvelopeIcon, LinkIcon } from '../../icons';
 import { useTheme } from '../../theme';
 import type { InputProps } from '../../types';
@@ -191,13 +191,13 @@ export const ActionTextInput = ({
         )}
       </InputContainer>
       {finalDescription && (
-        <Text
-          color={getDescriptionColor(isValid, isTouched)}
-          variant="caption"
-          py={1}
-        >
-          {finalDescription}
-        </Text>
+        <Box py={1}>
+          <SimpleMarkdown
+            text={finalDescription}
+            baseTextVariant="caption"
+            baseColor={getDescriptionColor(isValid, isTouched)}
+          />
+        </Box>
       )}
     </Box>
   );

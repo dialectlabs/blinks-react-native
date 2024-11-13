@@ -1,7 +1,7 @@
 import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { Box, InputContainer, Text } from '../../components';
+import { Box, InputContainer, SimpleMarkdown, Text } from '../../components';
 import { CalendarIcon, ClockIcon } from '../../icons';
 import type {
   BorderRadiiVars,
@@ -241,14 +241,13 @@ const DateTimeInput = ({
         )}
       </Box>
       {finalDescription && (
-        <Text
-          color={getDescriptionColor(isValid, isTouched)}
-          variant="caption"
-          py={1}
-          {...standaloneProps.text}
-        >
-          {finalDescription}
-        </Text>
+        <Box py={1} {...standaloneProps.text}>
+          <SimpleMarkdown
+            text={finalDescription}
+            baseTextVariant="caption"
+            baseColor={getDescriptionColor(isValid, isTouched)}
+          />
+        </Box>
       )}
       <DateTimePickerModal
         date={displayedDate}

@@ -4,5 +4,6 @@ export { Button } from './Button';
 export { InputContainer } from './InputContainer';
 export { Link } from './Link';
 export { PickerModal } from './PickerModal';
+export { SimpleMarkdown } from './SimpleMarkdown';
 export { Snackbar } from './Snackbar';
 export { Text } from './Text';
