@@ -1,23 +1,24 @@
+import type { TextProps } from '@shopify/restyle';
 import React from 'react';
 import { Pressable } from 'react-native';
 import type { Theme } from '../theme';
-import { Box, type BoxProps } from './Box';
 import { useLinking } from './LinkingProvider';
+import { Text } from './Text';
 
 interface LinkProps {
   url?: string | null;
 }
 
-export const Link = ({
+export const LinkText = ({
   url,
   children,
   ...props
-}: LinkProps & BoxProps<Theme> & React.PropsWithChildren) => {
+}: LinkProps & TextProps<Theme> & React.PropsWithChildren) => {
   const { openUrl } = useLinking();
 
   return (
     <Pressable onPress={() => url && openUrl(url)}>
-      <Box {...props}>{children}</Box>
+      <Text {...props}>{children}</Text>
     </Pressable>
   );
 };

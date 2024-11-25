@@ -1,5 +1,5 @@
-import { Linking, Pressable } from 'react-native';
-import { Box, Link, Snackbar, Text } from '../components';
+import { Pressable } from 'react-native';
+import { Box, Link, LinkText, Snackbar, Text } from '../components';
 import { DisclaimerType } from '../types';
 
 export const DisclaimerBlock = ({
@@ -20,14 +20,14 @@ export const DisclaimerBlock = ({
           This Action or it&apos;s origin has been flagged as an unsafe action,
           & has been blocked. If you believe this action has been blocked in
           error, please{' '}
-          <Text
+          <LinkText
             textDecorationLine="underline"
             variant="subtext"
             color="textError"
-            onPress={() => Linking.openURL('https://discord.gg/saydialect')}
+            url="https://discord.gg/saydialect"
           >
             submit an issue
-          </Text>
+          </LinkText>
           .
           {!ignorable &&
             ' Your action provider blocks execution of this action.'}

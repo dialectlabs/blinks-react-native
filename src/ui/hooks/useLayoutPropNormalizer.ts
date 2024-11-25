@@ -8,7 +8,7 @@ import {
   SingleValueActionComponent,
 } from '@dialectlabs/blinks-core';
 import { useMemo } from 'react';
-import { Linking } from 'react-native';
+import { useLinking } from '../components/LinkingProvider';
 import type { LayoutProps } from '../types';
 import { confirmLinkTransition } from '../utils';
 import { buttonLabelMap, buttonVariantMap } from './ui-mappers';
@@ -25,6 +25,8 @@ export const useLayoutPropNormalizer = ({
   caption,
   ...props
 }: BaseBlinkLayoutProps): LayoutProps => {
+  const { openUrl } = useLinking();
+
   const buttons = useMemo(
     () =>
       action?.actions
@@ -89,7 +91,7 @@ export const useLayoutPropNormalizer = ({
         if (extra.type === 'external-link') {
           confirmLinkTransition(extra.data.externalLink, {
             onOk: () => {
-              Linking.openURL(extra.data.externalLink);
+              openUrl(extra.data.externalLink);
               extra.onNext();
             },
             onCancel: () => extra.onCancel?.(),

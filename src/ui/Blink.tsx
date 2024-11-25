@@ -6,12 +6,14 @@ import {
 
 import { ThemeProvider } from '@shopify/restyle';
 
+import { LinkingProvider } from './components/LinkingProvider';
 import { useLayoutPropNormalizer } from './hooks/useLayoutPropNormalizer';
 import { BlinkLayout } from './layout';
 import { getTheme, type ThemeVars } from './theme';
 
 export type BlinkProps = Omit<BlinkContainerProps, 'Layout' | 'selector'> & {
   theme?: Partial<ThemeVars>;
+  openUrl?: (url: string) => void;
 };
 
 const Layout = (props: BaseBlinkLayoutProps) => {
@@ -19,11 +21,13 @@ const Layout = (props: BaseBlinkLayoutProps) => {
   return <BlinkLayout {...normalizedProps} />;
 };
 
-export const Blink = (props: BlinkProps) => {
+export const Blink = ({ openUrl, ...props }: BlinkProps) => {
   const theme = getTheme(props.theme);
   return (
     <ThemeProvider theme={theme}>
-      <BlinkContainer {...props} Layout={Layout} />
+      <LinkingProvider openUrl={openUrl}>
+        <BlinkContainer {...props} Layout={Layout} />
+      </LinkingProvider>
     </ThemeProvider>
   );
 };

@@ -3,6 +3,7 @@ export { Box } from './Box';
 export { Button } from './Button';
 export { InputContainer } from './InputContainer';
 export { Link } from './Link';
+export { LinkText } from './LinkText';
 export { PickerModal } from './PickerModal';
 export { SimpleMarkdown } from './SimpleMarkdown';
 export { Snackbar } from './Snackbar';
