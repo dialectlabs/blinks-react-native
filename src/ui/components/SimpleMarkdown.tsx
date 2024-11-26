@@ -6,6 +6,7 @@ import Markdown, {
 } from 'react-native-markdown-display';
 import { type ColorVars, useTheme } from '../theme';
 import { confirmLinkTransition } from '../utils';
+import { useLinking } from './LinkingProvider';
 import { Text } from './Text';
 
 interface Props {
@@ -19,6 +20,8 @@ const LinkWithConfirm = ({
   children,
   style,
 }: PropsWithChildren<{ href: string; style?: StyleProp<TextStyle> }>) => {
+  const { openUrl } = useLinking();
+
   return (
     <Text
       style={style}
@@ -31,7 +34,7 @@ const LinkWithConfirm = ({
 
         confirmLinkTransition(href, {
           onOk: () => {
-            Linking.openURL(href);
+            openUrl(href);
           },
           onCancel: () => {},
         });

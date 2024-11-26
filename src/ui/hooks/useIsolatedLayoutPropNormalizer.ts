@@ -8,7 +8,7 @@ import {
   SingleValueActionComponent,
 } from '@dialectlabs/blinks-core';
 import { useCallback, useMemo } from 'react';
-import { Linking } from 'react-native';
+import { useLinking } from '../components/LinkingProvider';
 import type { IsolatedLayoutProps } from '../types';
 import { confirmLinkTransition } from '../utils';
 import { buttonLabelMap, buttonVariantMap } from './ui-mappers';
@@ -24,6 +24,8 @@ export const useIsolatedLayoutPropNormalizer = ({
   caption,
   ...props
 }: BaseBlinkLayoutProps): IsolatedLayoutProps | null => {
+  const { openUrl } = useLinking();
+
   const asButtonProps = useCallback(
     (it: ButtonActionComponent) => {
       return {
@@ -52,7 +54,7 @@ export const useIsolatedLayoutPropNormalizer = ({
           if (extra.type === 'external-link') {
             confirmLinkTransition(extra.data.externalLink, {
               onOk: () => {
-                Linking.openURL(extra.data.externalLink);
+                openUrl(extra.data.externalLink);
                 extra.onNext();
               },
               onCancel: () => extra.onCancel?.(),
@@ -61,7 +63,14 @@ export const useIsolatedLayoutPropNormalizer = ({
         },
       };
     },
-    [action.disabled, action.type, executeFn, executingAction, executionStatus],
+    [
+      action.disabled,
+      action.type,
+      executeFn,
+      executingAction,
+      executionStatus,
+      openUrl,
+    ],
   );
 
   const asInputProps = useCallback(
