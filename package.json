@@ -155,7 +155,7 @@
     "version": "0.38.2"
   },
   "dependencies": {
-    "@dialectlabs/blinks-core": "^0.16.2",
+    "@dialectlabs/blinks-core": "^0.16.3",
     "@react-native-community/datetimepicker": "^8.2.0",
     "@react-native-picker/picker": "^2.7.7",
     "@shopify/restyle": "^2.4.4",

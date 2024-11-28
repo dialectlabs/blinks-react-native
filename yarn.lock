@@ -1801,15 +1801,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dialectlabs/blinks-core@npm:^0.16.2":
-  version: 0.16.2
-  resolution: "@dialectlabs/blinks-core@npm:0.16.2"
+"@dialectlabs/blinks-core@npm:^0.16.3":
+  version: 0.16.3
+  resolution: "@dialectlabs/blinks-core@npm:0.16.3"
   dependencies:
     "@solana/web3.js": ^1.95.1
     nanoid: ^5.0.7
   peerDependencies:
     react: ">=18"
-  checksum: a98869a9bd2187d0dd942fa2f6f3f2ca8ef809ba05904b7c7847e9722ce78bc7d5b49a0f61cea7f675c2bf47d3151a56db966f448611d569d50913a175a39998
+  checksum: a657878d0aa8803b19d7b5f870f13f00762a8a9a352276d3eed5824d385d4a06d51889e46b381d971d8bd1076747c370fd2f57249a863403e07ed954fa10774a
   languageName: node
   linkType: hard
 
@@ -1835,7 +1835,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@dialectlabs/blinks-react-native@workspace:."
   dependencies:
-    "@dialectlabs/blinks-core": ^0.16.2
+    "@dialectlabs/blinks-core": ^0.16.3
     "@react-native-community/datetimepicker": ^8.2.0
     "@react-native-picker/picker": ^2.7.7
     "@react-native/eslint-config": ^0.74.85
