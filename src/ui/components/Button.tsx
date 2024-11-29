@@ -40,12 +40,12 @@ export const Button = ({
   const textColor = getTextColor();
   const height = theme.spacing.inputHeight;
 
+  const isLink = ctaType === 'link';
   return (
     <TouchableOpacity activeOpacity={0.7} disabled={disabled} onPress={onClick}>
       <Box
         height={height}
-        px={5}
-        width="100%"
+        px={isLink ? 5 : 4}
         flexDirection="row"
         alignItems="center"
         justifyContent="center"
@@ -58,7 +58,7 @@ export const Button = ({
           isLoading={loading}
           isSuccess={variant === 'success'}
         />
-        {ctaType === 'link' && (
+        {isLink && (
           <Box position="absolute" top={8} right={8}>
             <DeepLinkIcon height={10} width={10} color={textColor} />
           </Box>
