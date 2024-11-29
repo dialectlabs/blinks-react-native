@@ -1,4 +1,6 @@
-import { Box, SimpleMarkdown, Text } from '../components';
+import { Box, Link, SimpleMarkdown, Text } from '../components';
+import { DialectLogo } from '../icons';
+import { useTheme } from '../theme';
 import type { LayoutProps } from '../types';
 import { DisclaimerType } from '../types';
 import { ActionContent } from './ActionContent';
@@ -25,6 +27,7 @@ export const BlinkLayout = ({
   success,
   supportability,
 }: LayoutProps) => {
+  const theme = useTheme();
   return (
     <Box
       overflow="hidden"
@@ -83,7 +86,7 @@ export const BlinkLayout = ({
 
             {success && (
               <Text
-                mt="gap"
+                mt={3}
                 color="textSuccess"
                 variant="caption"
                 textAlign="center"
@@ -93,7 +96,7 @@ export const BlinkLayout = ({
             )}
             {error && !success && (
               <Text
-                mt="gap"
+                mt={3}
                 color="textError"
                 variant="caption"
                 textAlign="center"
@@ -103,6 +106,19 @@ export const BlinkLayout = ({
             )}
           </>
         )}
+        <Box mt="gap" flex={1} alignItems="center">
+          <Link
+            gap={1}
+            flexDirection="row"
+            alignItems="center"
+            url={'https://dialect.to'}
+          >
+            <Text variant="subtext" color="textLink">
+              powered by
+            </Text>
+            <DialectLogo color={theme.colors.textLink} />
+          </Link>
+        </Box>
       </Box>
     </Box>
   );
