@@ -67,7 +67,9 @@ export const useLayoutPropNormalizer = ({
   const asButtonProps = (it: ButtonActionComponent) => {
     return {
       text: buttonLabelMap[executionStatus] ?? it.label,
-      loading: executionStatus === 'executing' && it === executingAction,
+      loading:
+        executionStatus === 'executing' &&
+        (it === executingAction || it.parentComponent === executingAction),
       disabled:
         action.disabled ||
         action.type === 'completed' ||

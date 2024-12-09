@@ -26,6 +26,7 @@ export const BlinkLayout = ({
   error,
   success,
   supportability,
+  id,
 }: LayoutProps) => {
   const theme = useTheme();
   return (
@@ -79,9 +80,9 @@ export const BlinkLayout = ({
             )}
 
             {form ? (
-              <ActionForm form={form} />
+              <ActionForm key={id} form={form} />
             ) : (
-              <ActionContent inputs={inputs} buttons={buttons} />
+              <ActionContent key={id} inputs={inputs} buttons={buttons} />
             )}
 
             {success && (

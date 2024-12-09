@@ -7,6 +7,7 @@ import { ActionForm } from './ActionForm';
 export const IsolatedBlinkLayout = ({
   success,
   error,
+  id,
   ...props
 }: IsolatedLayoutProps) => {
   const element = useMemo(() => {
@@ -28,9 +29,13 @@ export const IsolatedBlinkLayout = ({
   return (
     <Box width="100%">
       {element.form ? (
-        <ActionForm form={element.form} />
+        <ActionForm key={id} form={element.form} />
       ) : (
-        <ActionContent inputs={element.inputs} buttons={element.buttons} />
+        <ActionContent
+          key={id}
+          inputs={element.inputs}
+          buttons={element.buttons}
+        />
       )}
       {success && (
         <Text mt={3} color="textSuccess" variant="caption" textAlign="center">
