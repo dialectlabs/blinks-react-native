@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Image, StyleSheet } from 'react-native';
 import { SvgUri } from 'react-native-svg';
 import { Link } from '../components';
@@ -10,15 +10,8 @@ export const ActionImage = ({
   imageUrl: string;
   websiteUrl?: string | null;
 }) => {
-  const [aspectRatio, setAspectRatio] = useState(1);
-
-  useEffect(() => {
-    Image.getSize(imageUrl, (width, height) => {
-      if (width !== 0 && height !== 0) {
-        setAspectRatio(Math.max(width / height, 1));
-      }
-    });
-  }, [imageUrl]);
+  //TODO what should initial aspect ratio be?
+  const [aspectRatio, setAspectRatio] = useState(16 / 9);
 
   return (
     <Link url={websiteUrl} width="100%" aspectRatio={aspectRatio}>
@@ -26,6 +19,9 @@ export const ActionImage = ({
         <SvgUri style={styles.image} uri={imageUrl} />
       ) : (
         <Image
+          onLoad={({ nativeEvent: { source } }) =>
+            setAspectRatio(Math.max(source.width / source.height, 1))
+          }
           style={styles.image}
           resizeMode="cover"
           src={imageUrl}
