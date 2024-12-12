@@ -107,14 +107,14 @@ export const BlinkLayout = ({
             )}
           </>
         )}
-        <Box mt="gap" flex={1} alignItems="center">
+        <Box mt="gap" width="100%" alignItems="center">
           <Link
             gap={1}
             flexDirection="row"
             alignItems="center"
             url={'https://dialect.to'}
           >
-            <Text variant="subtext" color="textLink">
+            <Text variant="subtext" color="textLink" textAlign="center">
               powered by
             </Text>
             <DialectLogo color={theme.colors.textLink} />
